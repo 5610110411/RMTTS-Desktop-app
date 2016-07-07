@@ -1,0 +1,14 @@
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\bin\Debug\MaterialSkin.dll
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\bin\Debug\MaterialSkin.pdb
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\obj\Debug\MaterialSkin.csprojResolveAssemblyReference.cache
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\obj\Debug\MaterialSkin.Properties.Resources.resources
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.Cache
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\obj\Debug\MaterialSkin.dll
+C:\Users\NEXT Speed\Desktop\MaterialSkin-master\MaterialSkin\obj\Debug\MaterialSkin.pdb
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\bin\Debug\MaterialSkin.dll
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\bin\Debug\MaterialSkin.pdb
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.csprojResolveAssemblyReference.cache
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.Properties.Resources.resources
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.Cache
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.dll
+C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.pdb

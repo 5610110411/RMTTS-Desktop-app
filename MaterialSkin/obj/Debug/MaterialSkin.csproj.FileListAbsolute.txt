@@ -12,3 +12,10 @@ C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSk
 C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.Cache
 C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.dll
 C:\Users\NEXT Speed\Desktop\RMTTS MaterialSkin\MaterialSkin\obj\Debug\MaterialSkin.pdb
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\bin\Debug\MaterialSkin.dll
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\bin\Debug\MaterialSkin.pdb
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\obj\Debug\MaterialSkin.csprojResolveAssemblyReference.cache
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\obj\Debug\MaterialSkin.Properties.Resources.resources
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\obj\Debug\MaterialSkin.csproj.GenerateResource.Cache
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\obj\Debug\MaterialSkin.dll
+D:\JitHub\RMTTS-Desktop-app\MaterialSkin\obj\Debug\MaterialSkin.pdb

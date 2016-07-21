@@ -473,9 +473,7 @@ namespace MaterialSkinExample
         {
 
         }
-
-
-
+        
         string HexStringToString(string hexString)
         {
             if (hexString == null || (hexString.Length & 1) == 1)
@@ -491,16 +489,11 @@ namespace MaterialSkinExample
             return sb.ToString();
         }
 
-
         private void bt_toHex_Click(object sender, EventArgs e)
         {
-            string HexString = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
-
-            string textString = HexStringToString(HexString, Encoding.UTF8);
-
-            //string textString = HexStringToString(HexString);
-            lb_statusNow.Text = textString;
-
+            string textString = "ตลก555";
+            string textHex = StringToHexString(textString, Encoding.UTF8);
+            lb_statusNow.Text = textHex;
         }
 
         private string toHex(string inp)
@@ -519,13 +512,9 @@ namespace MaterialSkinExample
         //จริงๆ แปลง string to hex
         private void bt_toSting_Click(object sender, EventArgs e)
         {
-            string textString = "ตลก555";
-   
-            string textHex = StringToHexString(textString, Encoding.UTF8);
-           
-
-            lb_statusNow.Text = textHex;
-            
+            string HexString = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
+            string textString = HexStringToString(HexString, Encoding.UTF8);
+            lb_statusNow.Text = textString;
         }
 
         private string StringToHexString(string s, Encoding encode)
@@ -552,29 +541,5 @@ namespace MaterialSkinExample
             //According to the specified byte array into a string encoding
             return encode.GetString(b);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public static byte[] StringToByteArray(String hex)
-        {
-            int NumberChars = hex.Length;
-            byte[] bytes = new byte[NumberChars / 2];
-            for (int i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
-        }
-
-
     }
 }

@@ -944,7 +944,7 @@ namespace MaterialSkinExample
             this.bt_toString.Primary = true;
             this.bt_toString.Size = new System.Drawing.Size(135, 47);
             this.bt_toString.TabIndex = 24;
-            this.bt_toString.Text = "to String";
+            this.bt_toString.Text = "to Hex";
             this.bt_toString.UseVisualStyleBackColor = true;
             this.bt_toString.Click += new System.EventHandler(this.bt_toHex_Click);
             // 
@@ -957,7 +957,7 @@ namespace MaterialSkinExample
             this.bt_toSting.Primary = true;
             this.bt_toSting.Size = new System.Drawing.Size(136, 47);
             this.bt_toSting.TabIndex = 25;
-            this.bt_toSting.Text = "To String2";
+            this.bt_toSting.Text = "To String";
             this.bt_toSting.UseVisualStyleBackColor = true;
             this.bt_toSting.Click += new System.EventHandler(this.bt_toSting_Click);
             // 

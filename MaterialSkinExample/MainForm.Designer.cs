@@ -94,6 +94,7 @@ namespace MaterialSkinExample
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_transportsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_transportsTableAdapter();
             this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -196,6 +197,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.bt_toSting);
             this.tabPage2.Controls.Add(this.bt_toString);
             this.tabPage2.Controls.Add(this.bt_saveData);
             this.tabPage2.Controls.Add(this.textResponse);
@@ -909,7 +911,7 @@ namespace MaterialSkinExample
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(491, 523);
+            this.label5.Location = new System.Drawing.Point(266, 523);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 28);
             this.label5.TabIndex = 3;
@@ -922,7 +924,7 @@ namespace MaterialSkinExample
             this.lb_statusNow.AutoSize = true;
             this.lb_statusNow.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_statusNow.ForeColor = System.Drawing.Color.Red;
-            this.lb_statusNow.Location = new System.Drawing.Point(566, 523);
+            this.lb_statusNow.Location = new System.Drawing.Point(341, 523);
             this.lb_statusNow.Name = "lb_statusNow";
             this.lb_statusNow.Size = new System.Drawing.Size(158, 28);
             this.lb_statusNow.TabIndex = 3;
@@ -945,6 +947,19 @@ namespace MaterialSkinExample
             this.bt_toString.Text = "to String";
             this.bt_toString.UseVisualStyleBackColor = true;
             this.bt_toString.Click += new System.EventHandler(this.bt_toHex_Click);
+            // 
+            // bt_toSting
+            // 
+            this.bt_toSting.Depth = 0;
+            this.bt_toSting.Location = new System.Drawing.Point(587, 285);
+            this.bt_toSting.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_toSting.Name = "bt_toSting";
+            this.bt_toSting.Primary = true;
+            this.bt_toSting.Size = new System.Drawing.Size(136, 47);
+            this.bt_toSting.TabIndex = 25;
+            this.bt_toSting.Text = "To String2";
+            this.bt_toSting.UseVisualStyleBackColor = true;
+            this.bt_toSting.Click += new System.EventHandler(this.bt_toSting_Click);
             // 
             // MainForm
             // 
@@ -1043,5 +1058,6 @@ namespace MaterialSkinExample
         private BindingSource tbtransportsBindingSource;
         private RMTTSDataSetTableAdapters.tb_transportsTableAdapter tb_transportsTableAdapter;
         private MaterialRaisedButton bt_toString;
+        private MaterialRaisedButton bt_toSting;
     }
 }

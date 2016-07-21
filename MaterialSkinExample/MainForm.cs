@@ -11,6 +11,7 @@ using System.Data.SqlClient;  // for access ms sql
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;   //For delay function
 using System.Text;
+using System.Globalization;
 
 namespace MaterialSkinExample
 {
@@ -24,8 +25,8 @@ namespace MaterialSkinExample
             // Initialize MaterialSkinManager
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
-			materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-			materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         //DataSet ds = new DataSet(); // create ds
@@ -85,7 +86,7 @@ namespace MaterialSkinExample
 
         private void materialLabel1_Click(object sender, EventArgs e)
         {
-                    }
+        }
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
@@ -120,7 +121,7 @@ namespace MaterialSkinExample
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-         
+
         }
 
         private void materialTabSelector1_Click(object sender, EventArgs e)
@@ -425,7 +426,7 @@ namespace MaterialSkinExample
                 showData("CardNumber: ", snr, 0, 4);
                 showData("Data: ", buffer, 0, 16 * num_blk);
 
-                
+
             }
         }
 
@@ -448,14 +449,14 @@ namespace MaterialSkinExample
                 await Task.Delay(5000);         //set for doing something
                 lb_statusNow.ForeColor = System.Drawing.Color.Red;
                 lb_statusNow.Text = "ไม่พบการทำรายการ";
-                
+
 
             }
             catch
             {
                 MessageBox.Show("การบันทึกข้อมูลผิดพลาด กรุณาลองใหม่อีกครั้ง");
             }
-    
+
         }
         private void insertData()
         {
@@ -473,8 +474,8 @@ namespace MaterialSkinExample
 
         }
 
-     
-        
+
+
         string HexStringToString(string hexString)
         {
             if (hexString == null || (hexString.Length & 1) == 1)
@@ -493,12 +494,87 @@ namespace MaterialSkinExample
 
         private void bt_toHex_Click(object sender, EventArgs e)
         {
-            string HexString = "48656c6c6f20776f726c64";
-           
-            string textString = HexStringToString(HexString);
+            string HexString = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
+
+            string textString = HexStringToString(HexString, Encoding.UTF8);
+
+            //string textString = HexStringToString(HexString);
             lb_statusNow.Text = textString;
+
+        }
+
+        private string toHex(string inp)
+        {
+            string outp = string.Empty;
+            char[] value = inp.ToCharArray();
+            foreach (char L in value)
+            {
+                int V = Convert.ToInt32(L);
+                outp += string.Format("{0:x}", V);
+            }
+            return outp;
+
+        }
+
+        //จริงๆ แปลง string to hex
+        private void bt_toSting_Click(object sender, EventArgs e)
+        {
+            string textString = "ตลก555";
+   
+            string textHex = StringToHexString(textString, Encoding.UTF8);
+           
+
+            lb_statusNow.Text = textHex;
             
         }
-     
+
+        private string StringToHexString(string s, Encoding encode)
+        {
+            byte[] b = encode.GetBytes(s);//According to the specified code string programming byte array
+            string result = string.Empty;
+            for (int i = 0; i < b.Length; i++)//The byte by byte to 16 hexadecimal characters, separated in%
+            {
+                result += " " + Convert.ToString(b[i], 16);//เว้นด้วยช่องว่าง
+            }
+            return result;
         }
+
+        private string HexStringToString(string hs, Encoding encode)
+        {
+            //By division of the string, and remove the null character
+            string[] chars = hs.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);//เว้นด้วยช่องว่าง
+            byte[] b = new byte[chars.Length];
+            //Characters one by one to 16 hexadecimal byte data
+            for (int i = 0; i < chars.Length; i++)
+            {
+                b[i] = Convert.ToByte(chars[i], 16);
+            }
+            //According to the specified byte array into a string encoding
+            return encode.GetString(b);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+
+    }
 }

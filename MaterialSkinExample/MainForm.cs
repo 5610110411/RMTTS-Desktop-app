@@ -9,6 +9,8 @@ using MaterialSkin.Controls;
 using System.Data;            // for access ms sql
 using System.Data.SqlClient;  // for access ms sql
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;   //For delay function
+using System.Text;
 
 namespace MaterialSkinExample
 {
@@ -433,18 +435,25 @@ namespace MaterialSkinExample
         }
 
         SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
-        private void bt_saveData_Click(object sender, EventArgs e)
+        private async void bt_saveData_Click(object sender, EventArgs e)
         {
             //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
             try
             {
                 conn.Open();
                 insertData();
+                lb_statusNow.ForeColor = System.Drawing.Color.Green;
+                lb_statusNow.Text = "บันทึกสำเร็จ";
                 MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
+                await Task.Delay(5000);         //set for doing something
+                lb_statusNow.ForeColor = System.Drawing.Color.Red;
+                lb_statusNow.Text = "ไม่พบการทำรายการ";
+                
+
             }
             catch
             {
-                MessageBox.Show("การบันทึกข้อมูลผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
+                MessageBox.Show("การบันทึกข้อมูลผิดพลาด กรุณาลองใหม่อีกครั้ง");
             }
     
         }
@@ -463,5 +472,33 @@ namespace MaterialSkinExample
         {
 
         }
-    }
+
+     
+        
+        string HexStringToString(string hexString)
+        {
+            if (hexString == null || (hexString.Length & 1) == 1)
+            {
+                throw new ArgumentException();
+            }
+            var sb = new StringBuilder();
+            for (var i = 0; i < hexString.Length; i += 2)
+            {
+                var hexChar = hexString.Substring(i, 2);
+                sb.Append((char)Convert.ToByte(hexChar, 16));
+            }
+            return sb.ToString();
+        }
+
+
+        private void bt_toHex_Click(object sender, EventArgs e)
+        {
+            string HexString = "48656c6c6f20776f726c64";
+           
+            string textString = HexStringToString(HexString);
+            lb_statusNow.Text = textString;
+            
+        }
+     
+        }
 }

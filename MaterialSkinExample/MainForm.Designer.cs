@@ -91,8 +91,9 @@ namespace MaterialSkinExample
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label_setportrfid = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_transportsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_transportsTableAdapter();
+            this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -195,6 +196,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.bt_toString);
             this.tabPage2.Controls.Add(this.bt_saveData);
             this.tabPage2.Controls.Add(this.textResponse);
             this.tabPage2.Controls.Add(this.readKey);
@@ -243,6 +245,7 @@ namespace MaterialSkinExample
             // 
             // bt_saveData
             // 
+            this.bt_saveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bt_saveData.Depth = 0;
             this.bt_saveData.Location = new System.Drawing.Point(667, 40);
             this.bt_saveData.MouseState = MaterialSkin.MouseState.HOVER;
@@ -913,21 +916,35 @@ namespace MaterialSkinExample
             this.label5.Text = "สถานะ :";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // label6
+            // lb_statusNow
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(566, 523);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(158, 28);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "ไม่พบการทำรายการ";
+            this.lb_statusNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_statusNow.AutoSize = true;
+            this.lb_statusNow.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_statusNow.ForeColor = System.Drawing.Color.Red;
+            this.lb_statusNow.Location = new System.Drawing.Point(566, 523);
+            this.lb_statusNow.Name = "lb_statusNow";
+            this.lb_statusNow.Size = new System.Drawing.Size(158, 28);
+            this.lb_statusNow.TabIndex = 3;
+            this.lb_statusNow.Text = "ไม่พบการทำรายการ";
             // 
             // tb_transportsTableAdapter
             // 
             this.tb_transportsTableAdapter.ClearBeforeFill = true;
+            // 
+            // bt_toString
+            // 
+            this.bt_toString.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_toString.Depth = 0;
+            this.bt_toString.Location = new System.Drawing.Point(434, 285);
+            this.bt_toString.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_toString.Name = "bt_toString";
+            this.bt_toString.Primary = true;
+            this.bt_toString.Size = new System.Drawing.Size(135, 47);
+            this.bt_toString.TabIndex = 24;
+            this.bt_toString.Text = "to String";
+            this.bt_toString.UseVisualStyleBackColor = true;
+            this.bt_toString.Click += new System.EventHandler(this.bt_toHex_Click);
             // 
             // MainForm
             // 
@@ -935,7 +952,7 @@ namespace MaterialSkinExample
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(833, 564);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lb_statusNow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl1);
@@ -984,7 +1001,7 @@ namespace MaterialSkinExample
         private Label label_name;
         private Label label3;
         private Label label5;
-        private Label label6;
+        private Label lb_statusNow;
         private Label label4;
         private MaterialSingleLineTextField materialSingleLineTextField3;
         private MaterialSingleLineTextField txt_tp_station;
@@ -1025,5 +1042,6 @@ namespace MaterialSkinExample
         private RMTTSDataSet rMTTSDataSet;
         private BindingSource tbtransportsBindingSource;
         private RMTTSDataSetTableAdapters.tb_transportsTableAdapter tb_transportsTableAdapter;
+        private MaterialRaisedButton bt_toString;
     }
 }

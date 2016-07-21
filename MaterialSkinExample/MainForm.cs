@@ -28,8 +28,9 @@ namespace MaterialSkinExample
 
         //DataSet ds = new DataSet(); // create ds
         //string cn = "Data Source =.; Initial Catalog = RMTTS; User ID = Nineza; Password = 1234";
-        SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
-
+        //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
+        //good//SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
+        //Data Source = NEXT - GCDLTNPKUF\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine
 
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
@@ -39,6 +40,9 @@ namespace MaterialSkinExample
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'rMTTSDataSet.tb_transports' table. You can move, or remove it, as needed.
+            this.tb_transportsTableAdapter.Fill(this.rMTTSDataSet.tb_transports);
+            /*
             try
             {
                 conn.Open();
@@ -48,6 +52,7 @@ namespace MaterialSkinExample
             {
                 MessageBox.Show("Error");
             }
+            */
         }
 
         private void Showdata()
@@ -420,6 +425,43 @@ namespace MaterialSkinExample
 
                 
             }
+        }
+
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
+        private void bt_saveData_Click(object sender, EventArgs e)
+        {
+            //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
+            try
+            {
+                conn.Open();
+                insertData();
+                MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
+            }
+            catch
+            {
+                MessageBox.Show("การบันทึกข้อมูลผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
+            }
+    
+        }
+        private void insertData()
+        {
+
+            //string sql = "INSERT INTO tb_materials (material_id) VALUES('" + txt_tp_vehicle.Text + "')";
+            string sql = "INSERT INTO tb_transports (tp_vehicle, tp_material) VALUES('" + txt_tp_vehicle.Text + "','" + txt_tp_material.Text + "')";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
+
+        private void rMTTSDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

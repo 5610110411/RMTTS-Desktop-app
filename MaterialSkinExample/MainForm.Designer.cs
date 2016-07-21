@@ -33,6 +33,7 @@ namespace MaterialSkinExample
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
@@ -40,16 +41,34 @@ namespace MaterialSkinExample
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tbtransportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
+            this.bt_saveData = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.textResponse = new System.Windows.Forms.TextBox();
+            this.readKey = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.readNum = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.readStart = new System.Windows.Forms.ComboBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.readKeyA = new System.Windows.Forms.RadioButton();
+            this.readKeyB = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.readIdle = new System.Windows.Forms.RadioButton();
+            this.readAll = new System.Windows.Forms.RadioButton();
+            this.bt_readRfid = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialSingleLineTextField11 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label10 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField9 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label8 = new System.Windows.Forms.Label();
-            this.materialSingleLineTextField8 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txt_tp_material = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label9 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField6 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label7 = new System.Windows.Forms.Label();
-            this.materialSingleLineTextField5 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.materialSingleLineTextField4 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txt_tp_station = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txt_tp_vehicle = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label3 = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -73,28 +92,18 @@ namespace MaterialSkinExample
             this.label_setportrfid = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.bt_readRfid = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.readIdle = new System.Windows.Forms.RadioButton();
-            this.readAll = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.readKeyA = new System.Windows.Forms.RadioButton();
-            this.readKeyB = new System.Windows.Forms.RadioButton();
-            this.label11 = new System.Windows.Forms.Label();
-            this.readNum = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.readStart = new System.Windows.Forms.ComboBox();
-            this.readKey = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textResponse = new System.Windows.Forms.TextBox();
+            this.tb_transportsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_transportsTableAdapter();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).BeginInit();
             this.tabPage4.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -186,6 +195,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.bt_saveData);
             this.tabPage2.Controls.Add(this.textResponse);
             this.tabPage2.Controls.Add(this.readKey);
             this.tabPage2.Controls.Add(this.label13);
@@ -200,12 +210,12 @@ namespace MaterialSkinExample
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.materialSingleLineTextField9);
             this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.materialSingleLineTextField8);
+            this.tabPage2.Controls.Add(this.txt_tp_material);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.materialSingleLineTextField6);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.materialSingleLineTextField5);
-            this.tabPage2.Controls.Add(this.materialSingleLineTextField4);
+            this.tabPage2.Controls.Add(this.txt_tp_station);
+            this.tabPage2.Controls.Add(this.txt_tp_vehicle);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label_name);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -216,11 +226,253 @@ namespace MaterialSkinExample
             this.tabPage2.Text = "ข้อมูลการขนส่ง";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // tbtransportsBindingSource
+            // 
+            this.tbtransportsBindingSource.DataMember = "tb_transports";
+            this.tbtransportsBindingSource.DataSource = this.rMTTSDataSetBindingSource;
+            // 
+            // rMTTSDataSetBindingSource
+            // 
+            this.rMTTSDataSetBindingSource.DataSource = this.rMTTSDataSet;
+            this.rMTTSDataSetBindingSource.Position = 0;
+            // 
+            // rMTTSDataSet
+            // 
+            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
+            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // bt_saveData
+            // 
+            this.bt_saveData.Depth = 0;
+            this.bt_saveData.Location = new System.Drawing.Point(667, 40);
+            this.bt_saveData.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_saveData.Name = "bt_saveData";
+            this.bt_saveData.Primary = true;
+            this.bt_saveData.Size = new System.Drawing.Size(108, 34);
+            this.bt_saveData.TabIndex = 23;
+            this.bt_saveData.Text = "SAVE";
+            this.bt_saveData.UseVisualStyleBackColor = true;
+            this.bt_saveData.Click += new System.EventHandler(this.bt_saveData_Click);
+            // 
+            // textResponse
+            // 
+            this.textResponse.Location = new System.Drawing.Point(484, 134);
+            this.textResponse.Multiline = true;
+            this.textResponse.Name = "textResponse";
+            this.textResponse.Size = new System.Drawing.Size(302, 75);
+            this.textResponse.TabIndex = 22;
+            // 
+            // readKey
+            // 
+            this.readKey.FormattingEnabled = true;
+            this.readKey.Items.AddRange(new object[] {
+            "A0 A1 A2 A3 A4 A5",
+            "B0 B1 B2 B3 B4 B5",
+            "FF FF FF FF FF FF"});
+            this.readKey.Location = new System.Drawing.Point(484, 108);
+            this.readKey.Name = "readKey";
+            this.readKey.Size = new System.Drawing.Size(152, 21);
+            this.readKey.TabIndex = 21;
+            this.readKey.Text = "FF FF FF FF FF FF";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(642, 111);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(115, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "The 6 Bytes Block Key";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(684, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(91, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Number of Blocks";
+            // 
+            // readNum
+            // 
+            this.readNum.FormattingEnabled = true;
+            this.readNum.Items.AddRange(new object[] {
+            "01",
+            "02",
+            "03",
+            "04"});
+            this.readNum.Location = new System.Drawing.Point(638, 74);
+            this.readNum.Name = "readNum";
+            this.readNum.Size = new System.Drawing.Size(40, 21);
+            this.readNum.TabIndex = 18;
+            this.readNum.Text = "01";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(531, 77);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(73, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Starting Block";
+            // 
+            // readStart
+            // 
+            this.readStart.FormattingEnabled = true;
+            this.readStart.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "0A",
+            "0B",
+            "0C",
+            "0D",
+            "0E",
+            "0F",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "1A",
+            "1B",
+            "1C",
+            "1D",
+            "1E",
+            "1F",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "2A",
+            "2B",
+            "2C",
+            "2D",
+            "2E",
+            "2F",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "3A",
+            "3B",
+            "3C",
+            "3D",
+            "3E",
+            "3F"});
+            this.readStart.Location = new System.Drawing.Point(485, 74);
+            this.readStart.Name = "readStart";
+            this.readStart.Size = new System.Drawing.Size(40, 21);
+            this.readStart.TabIndex = 16;
+            this.readStart.Text = "10";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.readKeyA);
+            this.groupBox5.Controls.Add(this.readKeyB);
+            this.groupBox5.Location = new System.Drawing.Point(486, 35);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(112, 34);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            // 
+            // readKeyA
+            // 
+            this.readKeyA.AutoSize = true;
+            this.readKeyA.Checked = true;
+            this.readKeyA.Location = new System.Drawing.Point(6, 12);
+            this.readKeyA.Name = "readKeyA";
+            this.readKeyA.Size = new System.Drawing.Size(50, 17);
+            this.readKeyA.TabIndex = 0;
+            this.readKeyA.TabStop = true;
+            this.readKeyA.Text = "KeyA";
+            this.readKeyA.UseVisualStyleBackColor = true;
+            // 
+            // readKeyB
+            // 
+            this.readKeyB.AutoSize = true;
+            this.readKeyB.Location = new System.Drawing.Point(59, 12);
+            this.readKeyB.Name = "readKeyB";
+            this.readKeyB.Size = new System.Drawing.Size(50, 17);
+            this.readKeyB.TabIndex = 1;
+            this.readKeyB.Text = "KeyB";
+            this.readKeyB.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.readIdle);
+            this.groupBox4.Controls.Add(this.readAll);
+            this.groupBox4.Location = new System.Drawing.Point(486, 1);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(106, 34);
+            this.groupBox4.TabIndex = 14;
+            this.groupBox4.TabStop = false;
+            // 
+            // readIdle
+            // 
+            this.readIdle.AutoSize = true;
+            this.readIdle.Checked = true;
+            this.readIdle.Location = new System.Drawing.Point(6, 12);
+            this.readIdle.Name = "readIdle";
+            this.readIdle.Size = new System.Drawing.Size(42, 17);
+            this.readIdle.TabIndex = 0;
+            this.readIdle.TabStop = true;
+            this.readIdle.Text = "Idle";
+            this.readIdle.UseVisualStyleBackColor = true;
+            // 
+            // readAll
+            // 
+            this.readAll.AutoSize = true;
+            this.readAll.Location = new System.Drawing.Point(59, 12);
+            this.readAll.Name = "readAll";
+            this.readAll.Size = new System.Drawing.Size(36, 17);
+            this.readAll.TabIndex = 1;
+            this.readAll.Text = "All";
+            this.readAll.UseVisualStyleBackColor = true;
+            this.readAll.Visible = false;
+            // 
+            // bt_readRfid
+            // 
+            this.bt_readRfid.Depth = 0;
+            this.bt_readRfid.Location = new System.Drawing.Point(667, 3);
+            this.bt_readRfid.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_readRfid.Name = "bt_readRfid";
+            this.bt_readRfid.Primary = true;
+            this.bt_readRfid.Size = new System.Drawing.Size(108, 32);
+            this.bt_readRfid.TabIndex = 13;
+            this.bt_readRfid.Text = "read RFID";
+            this.bt_readRfid.UseVisualStyleBackColor = true;
+            this.bt_readRfid.Click += new System.EventHandler(this.bt_readRfid_Click);
+            // 
             // materialSingleLineTextField11
             // 
             this.materialSingleLineTextField11.Depth = 0;
             this.materialSingleLineTextField11.Hint = "";
-            this.materialSingleLineTextField11.Location = new System.Drawing.Point(199, 160);
+            this.materialSingleLineTextField11.Location = new System.Drawing.Point(199, 113);
             this.materialSingleLineTextField11.MaxLength = 32767;
             this.materialSingleLineTextField11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField11.Name = "materialSingleLineTextField11";
@@ -237,7 +489,7 @@ namespace MaterialSkinExample
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 154);
+            this.label10.Location = new System.Drawing.Point(6, 107);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(141, 32);
             this.label10.TabIndex = 10;
@@ -247,7 +499,7 @@ namespace MaterialSkinExample
             // 
             this.materialSingleLineTextField9.Depth = 0;
             this.materialSingleLineTextField9.Hint = "";
-            this.materialSingleLineTextField9.Location = new System.Drawing.Point(199, 259);
+            this.materialSingleLineTextField9.Location = new System.Drawing.Point(199, 186);
             this.materialSingleLineTextField9.MaxLength = 32767;
             this.materialSingleLineTextField9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField9.Name = "materialSingleLineTextField9";
@@ -265,35 +517,35 @@ namespace MaterialSkinExample
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 250);
+            this.label8.Location = new System.Drawing.Point(6, 177);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(186, 32);
             this.label8.TabIndex = 8;
             this.label8.Text = "สถานะการขนส่งใหม่";
             // 
-            // materialSingleLineTextField8
+            // txt_tp_material
             // 
-            this.materialSingleLineTextField8.Depth = 0;
-            this.materialSingleLineTextField8.Hint = "";
-            this.materialSingleLineTextField8.Location = new System.Drawing.Point(198, 58);
-            this.materialSingleLineTextField8.MaxLength = 32767;
-            this.materialSingleLineTextField8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField8.Name = "materialSingleLineTextField8";
-            this.materialSingleLineTextField8.PasswordChar = '\0';
-            this.materialSingleLineTextField8.SelectedText = "";
-            this.materialSingleLineTextField8.SelectionLength = 0;
-            this.materialSingleLineTextField8.SelectionStart = 0;
-            this.materialSingleLineTextField8.Size = new System.Drawing.Size(262, 23);
-            this.materialSingleLineTextField8.TabIndex = 7;
-            this.materialSingleLineTextField8.TabStop = false;
-            this.materialSingleLineTextField8.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField8.Click += new System.EventHandler(this.materialSingleLineTextField8_Click);
+            this.txt_tp_material.Depth = 0;
+            this.txt_tp_material.Hint = "";
+            this.txt_tp_material.Location = new System.Drawing.Point(198, 44);
+            this.txt_tp_material.MaxLength = 32767;
+            this.txt_tp_material.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txt_tp_material.Name = "txt_tp_material";
+            this.txt_tp_material.PasswordChar = '\0';
+            this.txt_tp_material.SelectedText = "";
+            this.txt_tp_material.SelectionLength = 0;
+            this.txt_tp_material.SelectionStart = 0;
+            this.txt_tp_material.Size = new System.Drawing.Size(262, 23);
+            this.txt_tp_material.TabIndex = 7;
+            this.txt_tp_material.TabStop = false;
+            this.txt_tp_material.UseSystemPasswordChar = false;
+            this.txt_tp_material.Click += new System.EventHandler(this.materialSingleLineTextField8_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 53);
+            this.label9.Location = new System.Drawing.Point(6, 39);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(151, 32);
             this.label9.TabIndex = 6;
@@ -304,7 +556,7 @@ namespace MaterialSkinExample
             // 
             this.materialSingleLineTextField6.Depth = 0;
             this.materialSingleLineTextField6.Hint = "";
-            this.materialSingleLineTextField6.Location = new System.Drawing.Point(199, 210);
+            this.materialSingleLineTextField6.Location = new System.Drawing.Point(199, 147);
             this.materialSingleLineTextField6.MaxLength = 32767;
             this.materialSingleLineTextField6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField6.Name = "materialSingleLineTextField6";
@@ -322,54 +574,54 @@ namespace MaterialSkinExample
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 201);
+            this.label7.Location = new System.Drawing.Point(6, 138);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(186, 32);
             this.label7.TabIndex = 4;
             this.label7.Text = "สถานะการขนส่งเดิม";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // materialSingleLineTextField5
+            // txt_tp_station
             // 
-            this.materialSingleLineTextField5.Depth = 0;
-            this.materialSingleLineTextField5.Hint = "";
-            this.materialSingleLineTextField5.Location = new System.Drawing.Point(199, 111);
-            this.materialSingleLineTextField5.MaxLength = 32767;
-            this.materialSingleLineTextField5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField5.Name = "materialSingleLineTextField5";
-            this.materialSingleLineTextField5.PasswordChar = '\0';
-            this.materialSingleLineTextField5.SelectedText = "";
-            this.materialSingleLineTextField5.SelectionLength = 0;
-            this.materialSingleLineTextField5.SelectionStart = 0;
-            this.materialSingleLineTextField5.Size = new System.Drawing.Size(262, 23);
-            this.materialSingleLineTextField5.TabIndex = 3;
-            this.materialSingleLineTextField5.TabStop = false;
-            this.materialSingleLineTextField5.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField5.Click += new System.EventHandler(this.materialSingleLineTextField5_Click);
+            this.txt_tp_station.Depth = 0;
+            this.txt_tp_station.Hint = "";
+            this.txt_tp_station.Location = new System.Drawing.Point(199, 79);
+            this.txt_tp_station.MaxLength = 32767;
+            this.txt_tp_station.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txt_tp_station.Name = "txt_tp_station";
+            this.txt_tp_station.PasswordChar = '\0';
+            this.txt_tp_station.SelectedText = "";
+            this.txt_tp_station.SelectionLength = 0;
+            this.txt_tp_station.SelectionStart = 0;
+            this.txt_tp_station.Size = new System.Drawing.Size(262, 23);
+            this.txt_tp_station.TabIndex = 3;
+            this.txt_tp_station.TabStop = false;
+            this.txt_tp_station.UseSystemPasswordChar = false;
+            this.txt_tp_station.Click += new System.EventHandler(this.materialSingleLineTextField5_Click);
             // 
-            // materialSingleLineTextField4
+            // txt_tp_vehicle
             // 
-            this.materialSingleLineTextField4.Depth = 0;
-            this.materialSingleLineTextField4.Hint = "";
-            this.materialSingleLineTextField4.Location = new System.Drawing.Point(198, 12);
-            this.materialSingleLineTextField4.MaxLength = 32767;
-            this.materialSingleLineTextField4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField4.Name = "materialSingleLineTextField4";
-            this.materialSingleLineTextField4.PasswordChar = '\0';
-            this.materialSingleLineTextField4.SelectedText = "";
-            this.materialSingleLineTextField4.SelectionLength = 0;
-            this.materialSingleLineTextField4.SelectionStart = 0;
-            this.materialSingleLineTextField4.Size = new System.Drawing.Size(262, 23);
-            this.materialSingleLineTextField4.TabIndex = 2;
-            this.materialSingleLineTextField4.TabStop = false;
-            this.materialSingleLineTextField4.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField4.Click += new System.EventHandler(this.materialSingleLineTextField4_Click);
+            this.txt_tp_vehicle.Depth = 0;
+            this.txt_tp_vehicle.Hint = "";
+            this.txt_tp_vehicle.Location = new System.Drawing.Point(198, 12);
+            this.txt_tp_vehicle.MaxLength = 32767;
+            this.txt_tp_vehicle.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txt_tp_vehicle.Name = "txt_tp_vehicle";
+            this.txt_tp_vehicle.PasswordChar = '\0';
+            this.txt_tp_vehicle.SelectedText = "";
+            this.txt_tp_vehicle.SelectionLength = 0;
+            this.txt_tp_vehicle.SelectionStart = 0;
+            this.txt_tp_vehicle.Size = new System.Drawing.Size(262, 23);
+            this.txt_tp_vehicle.TabIndex = 2;
+            this.txt_tp_vehicle.TabStop = false;
+            this.txt_tp_vehicle.UseSystemPasswordChar = false;
+            this.txt_tp_vehicle.Click += new System.EventHandler(this.materialSingleLineTextField4_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 102);
+            this.label3.Location = new System.Drawing.Point(6, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 32);
             this.label3.TabIndex = 1;
@@ -654,11 +906,11 @@ namespace MaterialSkinExample
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(427, 523);
+            this.label5.Location = new System.Drawing.Point(491, 523);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 28);
+            this.label5.Size = new System.Drawing.Size(69, 28);
             this.label5.TabIndex = 3;
-            this.label5.Text = "สถานะการบันทึกข้อมูล :";
+            this.label5.Text = "สถานะ :";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
@@ -667,224 +919,15 @@ namespace MaterialSkinExample
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(601, 523);
+            this.label6.Location = new System.Drawing.Point(566, 523);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(158, 28);
             this.label6.TabIndex = 3;
             this.label6.Text = "ไม่พบการทำรายการ";
             // 
-            // bt_readRfid
+            // tb_transportsTableAdapter
             // 
-            this.bt_readRfid.Depth = 0;
-            this.bt_readRfid.Location = new System.Drawing.Point(667, 6);
-            this.bt_readRfid.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bt_readRfid.Name = "bt_readRfid";
-            this.bt_readRfid.Primary = true;
-            this.bt_readRfid.Size = new System.Drawing.Size(108, 54);
-            this.bt_readRfid.TabIndex = 13;
-            this.bt_readRfid.Text = "read RFID";
-            this.bt_readRfid.UseVisualStyleBackColor = true;
-            this.bt_readRfid.Click += new System.EventHandler(this.bt_readRfid_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.readIdle);
-            this.groupBox4.Controls.Add(this.readAll);
-            this.groupBox4.Location = new System.Drawing.Point(486, 47);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(106, 34);
-            this.groupBox4.TabIndex = 14;
-            this.groupBox4.TabStop = false;
-            // 
-            // readIdle
-            // 
-            this.readIdle.AutoSize = true;
-            this.readIdle.Checked = true;
-            this.readIdle.Location = new System.Drawing.Point(6, 12);
-            this.readIdle.Name = "readIdle";
-            this.readIdle.Size = new System.Drawing.Size(42, 17);
-            this.readIdle.TabIndex = 0;
-            this.readIdle.TabStop = true;
-            this.readIdle.Text = "Idle";
-            this.readIdle.UseVisualStyleBackColor = true;
-            // 
-            // readAll
-            // 
-            this.readAll.AutoSize = true;
-            this.readAll.Location = new System.Drawing.Point(59, 12);
-            this.readAll.Name = "readAll";
-            this.readAll.Size = new System.Drawing.Size(36, 17);
-            this.readAll.TabIndex = 1;
-            this.readAll.Text = "All";
-            this.readAll.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.readKeyA);
-            this.groupBox5.Controls.Add(this.readKeyB);
-            this.groupBox5.Location = new System.Drawing.Point(486, 100);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(112, 34);
-            this.groupBox5.TabIndex = 15;
-            this.groupBox5.TabStop = false;
-            // 
-            // readKeyA
-            // 
-            this.readKeyA.AutoSize = true;
-            this.readKeyA.Checked = true;
-            this.readKeyA.Location = new System.Drawing.Point(6, 12);
-            this.readKeyA.Name = "readKeyA";
-            this.readKeyA.Size = new System.Drawing.Size(50, 17);
-            this.readKeyA.TabIndex = 0;
-            this.readKeyA.TabStop = true;
-            this.readKeyA.Text = "KeyA";
-            this.readKeyA.UseVisualStyleBackColor = true;
-            // 
-            // readKeyB
-            // 
-            this.readKeyB.AutoSize = true;
-            this.readKeyB.Location = new System.Drawing.Point(59, 12);
-            this.readKeyB.Name = "readKeyB";
-            this.readKeyB.Size = new System.Drawing.Size(50, 17);
-            this.readKeyB.TabIndex = 1;
-            this.readKeyB.Text = "KeyB";
-            this.readKeyB.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(684, 155);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(91, 13);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "Number of Blocks";
-            // 
-            // readNum
-            // 
-            this.readNum.FormattingEnabled = true;
-            this.readNum.Items.AddRange(new object[] {
-            "01",
-            "02",
-            "03",
-            "04"});
-            this.readNum.Location = new System.Drawing.Point(638, 152);
-            this.readNum.Name = "readNum";
-            this.readNum.Size = new System.Drawing.Size(40, 21);
-            this.readNum.TabIndex = 18;
-            this.readNum.Text = "01";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(531, 155);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 13);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Starting Block";
-            // 
-            // readStart
-            // 
-            this.readStart.FormattingEnabled = true;
-            this.readStart.Items.AddRange(new object[] {
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "0A",
-            "0B",
-            "0C",
-            "0D",
-            "0E",
-            "0F",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "1A",
-            "1B",
-            "1C",
-            "1D",
-            "1E",
-            "1F",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "2A",
-            "2B",
-            "2C",
-            "2D",
-            "2E",
-            "2F",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "3A",
-            "3B",
-            "3C",
-            "3D",
-            "3E",
-            "3F"});
-            this.readStart.Location = new System.Drawing.Point(485, 152);
-            this.readStart.Name = "readStart";
-            this.readStart.Size = new System.Drawing.Size(40, 21);
-            this.readStart.TabIndex = 16;
-            this.readStart.Text = "10";
-            // 
-            // readKey
-            // 
-            this.readKey.FormattingEnabled = true;
-            this.readKey.Items.AddRange(new object[] {
-            "A0 A1 A2 A3 A4 A5",
-            "B0 B1 B2 B3 B4 B5",
-            "FF FF FF FF FF FF"});
-            this.readKey.Location = new System.Drawing.Point(484, 186);
-            this.readKey.Name = "readKey";
-            this.readKey.Size = new System.Drawing.Size(152, 21);
-            this.readKey.TabIndex = 21;
-            this.readKey.Text = "FF FF FF FF FF FF";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(642, 189);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(115, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "The 6 Bytes Block Key";
-            // 
-            // textResponse
-            // 
-            this.textResponse.Location = new System.Drawing.Point(484, 222);
-            this.textResponse.Multiline = true;
-            this.textResponse.Name = "textResponse";
-            this.textResponse.Size = new System.Drawing.Size(302, 136);
-            this.textResponse.TabIndex = 22;
+            this.tb_transportsTableAdapter.ClearBeforeFill = true;
             // 
             // MainForm
             // 
@@ -905,15 +948,18 @@ namespace MaterialSkinExample
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -941,10 +987,10 @@ namespace MaterialSkinExample
         private Label label6;
         private Label label4;
         private MaterialSingleLineTextField materialSingleLineTextField3;
-        private MaterialSingleLineTextField materialSingleLineTextField5;
-        private MaterialSingleLineTextField materialSingleLineTextField4;
+        private MaterialSingleLineTextField txt_tp_station;
+        private MaterialSingleLineTextField txt_tp_vehicle;
         private MaterialSingleLineTextField materialSingleLineTextField6;
-        private MaterialSingleLineTextField materialSingleLineTextField8;
+        private MaterialSingleLineTextField txt_tp_material;
         private Label label9;
         private MaterialRaisedButton materialRaisedButton1;
         private MaterialLabel materialLabel3;
@@ -974,5 +1020,10 @@ namespace MaterialSkinExample
         private ComboBox readKey;
         private Label label13;
         private TextBox textResponse;
+        private MaterialRaisedButton bt_saveData;
+        private BindingSource rMTTSDataSetBindingSource;
+        private RMTTSDataSet rMTTSDataSet;
+        private BindingSource tbtransportsBindingSource;
+        private RMTTSDataSetTableAdapters.tb_transportsTableAdapter tb_transportsTableAdapter;
     }
 }

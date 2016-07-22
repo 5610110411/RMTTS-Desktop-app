@@ -44,8 +44,9 @@ namespace MaterialSkinExample
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'rMTTSDataSet.tb_transports' table. You can move, or remove it, as needed.
-            this.tb_transportsTableAdapter.Fill(this.rMTTSDataSet.tb_transports);
+            // TODO: This line of code loads data into the 'rMTTSDataSet.tb_stations' table. You can move, or remove it, as needed.
+            this.tb_stationsTableAdapter.Fill(this.rMTTSDataSet.tb_stations);
+
             /*
             try
             {
@@ -340,10 +341,10 @@ namespace MaterialSkinExample
         }
 
         //แสดงข้อมูล
-        
+
         private void showData(string text, byte[] data, int s, int e)
         {
-            
+
             //Clear value in label
             textResponse.Text = "";
             /*for (int i = 0; i < e; i++)
@@ -458,38 +459,93 @@ namespace MaterialSkinExample
                 //showData("CardNumber: ", snr, 0, 4);
                 showData("Data: ", buffer, 0, 12 * num_blk);
 
-                ////
-                SqlCommand cmdDate = new SqlCommand("select getdate()", conn);
-                conn.Open();
-                DataSet ds = new DataSet();
-                DateTime strDatetime = (DateTime)cmdDate.ExecuteScalar();
-
-                //get year month day
-                int thaiYear = new ThaiBuddhistCalendar().GetYear(strDatetime);
-                int thaiMonth = new ThaiBuddhistCalendar().GetMonth(strDatetime);
-                int thaiDay = new ThaiBuddhistCalendar().GetDayOfMonth(strDatetime);
-                int thaiHour = new ThaiBuddhistCalendar().GetHour(strDatetime);
-                int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
-                int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
-                
-                //convert yesr
-                thaiYear -= 543*2;
-                /*
-                MessageBox.Show(thaiYear.ToString());
-                MessageBox.Show(thaiMonth.ToString());
-                MessageBox.Show(thaiDay.ToString());
-                */
-                DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
-                //MessageBox.Show(thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                lb_dateTime.Text = thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-                conn.Close();
+                //Display current time
+                currTime();
+                //Display current station
+                currStation();
 
             }
-
-            
         }
 
-        /*
+        //Display current station
+        private void currStation()
+        {
+            lb_curStation.Text = comboBox_station.Text;
+        }
+
+        //Display current time
+        private void currTime()
+        {
+            SqlCommand cmdDate = new SqlCommand("select getdate()", conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            DateTime strDatetime = (DateTime)cmdDate.ExecuteScalar();
+
+            //get year month day
+            int thaiYear = new ThaiBuddhistCalendar().GetYear(strDatetime);
+            int thaiMonth = new ThaiBuddhistCalendar().GetMonth(strDatetime);
+            int thaiDay = new ThaiBuddhistCalendar().GetDayOfMonth(strDatetime);
+            int thaiHour = new ThaiBuddhistCalendar().GetHour(strDatetime);
+            int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
+            int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
+
+            //convert year
+            thaiYear -= 543 * 2;
+            /*
+            MessageBox.Show(thaiYear.ToString());
+            MessageBox.Show(thaiMonth.ToString());
+            MessageBox.Show(thaiDay.ToString());
+            */
+            DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
+            //MessageBox.Show(thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            lb_dateTime.Text = thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            conn.Close();
+        }
+
+        /*MF_Write_Func*/
+        /* private void btn_MF_Write_Click(object sender, EventArgs e)
+         {
+             byte mode1 = (writeKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+             byte mode2 = (writeAll.Checked) ? (byte)0x01 : (byte)0x00;
+             byte mode = (byte)((mode1 << 1) | mode2);
+             byte blk_add = Convert.ToByte(writeStart.Text, 16);
+             byte num_blk = Convert.ToByte(writeNum.Text, 16);
+
+             byte[] snr = new byte[6];
+             snr = convertSNR(writeKey.Text, 16);
+             if (snr == null)
+             {
+                 MessageBox.Show("Invalid Serial Number!", "ERROR");
+                 return;
+             }
+
+             byte[] buffer = new byte[16 * num_blk];
+             string bufferStr = formatStr(writeData.Text, num_blk);
+             if (bufferStr == null)
+             {
+                 MessageBox.Show("Invalid Serial Number!", "ERROR");
+                 return;
+             }
+             convertStr(buffer, bufferStr, 16 * num_blk);
+
+             int nRet = Reader.MF_Write(mode, blk_add, num_blk, snr, buffer);
+             //string strErrorCode;
+
+             showStatue(nRet);
+             if (nRet != 0)
+             {
+                 //strErrorCode = FormatErrorCode(buffer);
+                 //WriteLog("Failed:", nRet, strErrorCode);
+                 showStatue(buffer[0]);
+             }
+             else
+             {
+                 showData("CardNumber:", snr, 0, 4);
+             }
+         }
+         */
+
+        /*get time from web
         public static DateTime GetNistTime()
         {
             var myHttpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.google.co.th");
@@ -499,7 +555,7 @@ namespace MaterialSkinExample
             return dateTime;
         }
         */
-        
+
 
 
 
@@ -610,6 +666,11 @@ namespace MaterialSkinExample
         private void lb_tp_vehicle_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bt_checkDropDown_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(comboBox_station.SelectedValue.ToString());
         }
     }
 }

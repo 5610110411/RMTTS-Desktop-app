@@ -91,12 +91,14 @@ namespace MaterialSkinExample
             this.label_setdatabase = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label_setportrfid = new System.Windows.Forms.Label();
-            this.tbtransportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rMTTSDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
-            this.tb_transportsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_transportsTableAdapter();
+            this.comboBox_station = new System.Windows.Forms.ComboBox();
+            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
+            this.tbstationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
+            this.bt_checkDropDown = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.lb_curStation = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -105,9 +107,8 @@ namespace MaterialSkinExample
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -199,6 +200,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.lb_curStation);
             this.tabPage2.Controls.Add(this.lb_timeTag);
             this.tabPage2.Controls.Add(this.lb_dateTime);
             this.tabPage2.Controls.Add(this.lb_tp_vehicle);
@@ -270,11 +272,11 @@ namespace MaterialSkinExample
             // bt_toSting
             // 
             this.bt_toSting.Depth = 0;
-            this.bt_toSting.Location = new System.Drawing.Point(587, 285);
+            this.bt_toSting.Location = new System.Drawing.Point(695, 219);
             this.bt_toSting.MouseState = MaterialSkin.MouseState.HOVER;
             this.bt_toSting.Name = "bt_toSting";
             this.bt_toSting.Primary = true;
-            this.bt_toSting.Size = new System.Drawing.Size(136, 47);
+            this.bt_toSting.Size = new System.Drawing.Size(80, 32);
             this.bt_toSting.TabIndex = 25;
             this.bt_toSting.Text = "To String";
             this.bt_toSting.UseVisualStyleBackColor = true;
@@ -284,11 +286,11 @@ namespace MaterialSkinExample
             // 
             this.bt_toString.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bt_toString.Depth = 0;
-            this.bt_toString.Location = new System.Drawing.Point(434, 285);
+            this.bt_toString.Location = new System.Drawing.Point(695, 257);
             this.bt_toString.MouseState = MaterialSkin.MouseState.HOVER;
             this.bt_toString.Name = "bt_toString";
             this.bt_toString.Primary = true;
-            this.bt_toString.Size = new System.Drawing.Size(135, 47);
+            this.bt_toString.Size = new System.Drawing.Size(81, 28);
             this.bt_toString.TabIndex = 24;
             this.bt_toString.Text = "to Hex";
             this.bt_toString.UseVisualStyleBackColor = true;
@@ -581,7 +583,7 @@ namespace MaterialSkinExample
             // 
             this.txt_tp_material.Depth = 0;
             this.txt_tp_material.Hint = "";
-            this.txt_tp_material.Location = new System.Drawing.Point(198, 44);
+            this.txt_tp_material.Location = new System.Drawing.Point(193, 265);
             this.txt_tp_material.MaxLength = 32767;
             this.txt_tp_material.MouseState = MaterialSkin.MouseState.HOVER;
             this.txt_tp_material.Name = "txt_tp_material";
@@ -639,7 +641,7 @@ namespace MaterialSkinExample
             // 
             this.txt_tp_station.Depth = 0;
             this.txt_tp_station.Hint = "";
-            this.txt_tp_station.Location = new System.Drawing.Point(199, 79);
+            this.txt_tp_station.Location = new System.Drawing.Point(193, 294);
             this.txt_tp_station.MaxLength = 32767;
             this.txt_tp_station.MouseState = MaterialSkin.MouseState.HOVER;
             this.txt_tp_station.Name = "txt_tp_station";
@@ -844,6 +846,8 @@ namespace MaterialSkinExample
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.Controls.Add(this.bt_checkDropDown);
+            this.tabPage4.Controls.Add(this.comboBox_station);
             this.tabPage4.Controls.Add(this.materialSingleLineTextField3);
             this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.materialSingleLineTextField2);
@@ -862,7 +866,7 @@ namespace MaterialSkinExample
             // 
             this.materialSingleLineTextField3.Depth = 0;
             this.materialSingleLineTextField3.Hint = "Station name";
-            this.materialSingleLineTextField3.Location = new System.Drawing.Point(176, 109);
+            this.materialSingleLineTextField3.Location = new System.Drawing.Point(176, 183);
             this.materialSingleLineTextField3.MaxLength = 32767;
             this.materialSingleLineTextField3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField3.Name = "materialSingleLineTextField3";
@@ -937,21 +941,6 @@ namespace MaterialSkinExample
             this.label_setportrfid.Text = "พอร์ต RFID";
             this.label_setportrfid.Click += new System.EventHandler(this.label3_Click);
             // 
-            // tbtransportsBindingSource
-            // 
-            this.tbtransportsBindingSource.DataMember = "tb_transports";
-            this.tbtransportsBindingSource.DataSource = this.rMTTSDataSetBindingSource;
-            // 
-            // rMTTSDataSetBindingSource
-            // 
-            this.rMTTSDataSetBindingSource.DataSource = this.rMTTSDataSet;
-            this.rMTTSDataSetBindingSource.Position = 0;
-            // 
-            // rMTTSDataSet
-            // 
-            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
-            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -976,9 +965,55 @@ namespace MaterialSkinExample
             this.lb_statusNow.TabIndex = 3;
             this.lb_statusNow.Text = "ไม่พบการทำรายการ";
             // 
-            // tb_transportsTableAdapter
+            // comboBox_station
             // 
-            this.tb_transportsTableAdapter.ClearBeforeFill = true;
+            this.comboBox_station.DataSource = this.tbstationsBindingSource;
+            this.comboBox_station.DisplayMember = "station_name";
+            this.comboBox_station.FormattingEnabled = true;
+            this.comboBox_station.Location = new System.Drawing.Point(176, 111);
+            this.comboBox_station.Name = "comboBox_station";
+            this.comboBox_station.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_station.TabIndex = 6;
+            this.comboBox_station.Text = "เหมืองดินเหลือง";
+            this.comboBox_station.ValueMember = "station_id";
+            // 
+            // rMTTSDataSet
+            // 
+            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
+            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tbstationsBindingSource
+            // 
+            this.tbstationsBindingSource.DataMember = "tb_stations";
+            this.tbstationsBindingSource.DataSource = this.rMTTSDataSet;
+            // 
+            // tb_stationsTableAdapter
+            // 
+            this.tb_stationsTableAdapter.ClearBeforeFill = true;
+            // 
+            // bt_checkDropDown
+            // 
+            this.bt_checkDropDown.Depth = 0;
+            this.bt_checkDropDown.Location = new System.Drawing.Point(467, 151);
+            this.bt_checkDropDown.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_checkDropDown.Name = "bt_checkDropDown";
+            this.bt_checkDropDown.Primary = true;
+            this.bt_checkDropDown.Size = new System.Drawing.Size(157, 38);
+            this.bt_checkDropDown.TabIndex = 7;
+            this.bt_checkDropDown.Text = "Check DropDown";
+            this.bt_checkDropDown.UseVisualStyleBackColor = true;
+            this.bt_checkDropDown.Click += new System.EventHandler(this.bt_checkDropDown_Click);
+            // 
+            // lb_curStation
+            // 
+            this.lb_curStation.AutoSize = true;
+            this.lb_curStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_curStation.ForeColor = System.Drawing.Color.Silver;
+            this.lb_curStation.Location = new System.Drawing.Point(194, 73);
+            this.lb_curStation.Name = "lb_curStation";
+            this.lb_curStation.Size = new System.Drawing.Size(152, 28);
+            this.lb_curStation.TabIndex = 29;
+            this.lb_curStation.Text = "Current station";
             // 
             // MainForm
             // 
@@ -1008,9 +1043,8 @@ namespace MaterialSkinExample
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1070,15 +1104,17 @@ namespace MaterialSkinExample
         private Label label13;
         private TextBox textResponse;
         private MaterialRaisedButton bt_saveData;
-        private BindingSource rMTTSDataSetBindingSource;
-        private RMTTSDataSet rMTTSDataSet;
-        private BindingSource tbtransportsBindingSource;
-        private RMTTSDataSetTableAdapters.tb_transportsTableAdapter tb_transportsTableAdapter;
         private MaterialRaisedButton bt_toString;
         private MaterialRaisedButton bt_toSting;
         private Label lb_tp_vehicle;
         private MaterialSingleLineTextField txt_tp_material;
         private Label lb_timeTag;
         private Label lb_dateTime;
+        private ComboBox comboBox_station;
+        private RMTTSDataSet rMTTSDataSet;
+        private BindingSource tbstationsBindingSource;
+        private RMTTSDataSetTableAdapters.tb_stationsTableAdapter tb_stationsTableAdapter;
+        private MaterialRaisedButton bt_checkDropDown;
+        private Label lb_curStation;
     }
 }

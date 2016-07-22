@@ -41,9 +41,11 @@ namespace MaterialSkinExample
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tbtransportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rMTTSDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
+            this.lb_timeTag = new System.Windows.Forms.Label();
+            this.lb_dateTime = new System.Windows.Forms.Label();
+            this.lb_tp_vehicle = new System.Windows.Forms.Label();
+            this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
             this.bt_saveData = new MaterialSkin.Controls.MaterialRaisedButton();
             this.textResponse = new System.Windows.Forms.TextBox();
             this.readKey = new System.Windows.Forms.ComboBox();
@@ -68,7 +70,6 @@ namespace MaterialSkinExample
             this.materialSingleLineTextField6 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_tp_station = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.txt_tp_vehicle = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label3 = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -90,22 +91,23 @@ namespace MaterialSkinExample
             this.label_setdatabase = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label_setportrfid = new System.Windows.Forms.Label();
+            this.tbtransportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_transportsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_transportsTableAdapter();
-            this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -197,6 +199,9 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.lb_timeTag);
+            this.tabPage2.Controls.Add(this.lb_dateTime);
+            this.tabPage2.Controls.Add(this.lb_tp_vehicle);
             this.tabPage2.Controls.Add(this.bt_toSting);
             this.tabPage2.Controls.Add(this.bt_toString);
             this.tabPage2.Controls.Add(this.bt_saveData);
@@ -219,7 +224,6 @@ namespace MaterialSkinExample
             this.tabPage2.Controls.Add(this.materialSingleLineTextField6);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.txt_tp_station);
-            this.tabPage2.Controls.Add(this.txt_tp_vehicle);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label_name);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -230,20 +234,65 @@ namespace MaterialSkinExample
             this.tabPage2.Text = "ข้อมูลการขนส่ง";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // tbtransportsBindingSource
+            // lb_timeTag
             // 
-            this.tbtransportsBindingSource.DataMember = "tb_transports";
-            this.tbtransportsBindingSource.DataSource = this.rMTTSDataSetBindingSource;
+            this.lb_timeTag.AutoSize = true;
+            this.lb_timeTag.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_timeTag.Location = new System.Drawing.Point(6, 219);
+            this.lb_timeTag.Name = "lb_timeTag";
+            this.lb_timeTag.Size = new System.Drawing.Size(142, 32);
+            this.lb_timeTag.TabIndex = 28;
+            this.lb_timeTag.Text = "เวลาทำรายการ";
             // 
-            // rMTTSDataSetBindingSource
+            // lb_dateTime
             // 
-            this.rMTTSDataSetBindingSource.DataSource = this.rMTTSDataSet;
-            this.rMTTSDataSetBindingSource.Position = 0;
+            this.lb_dateTime.AutoSize = true;
+            this.lb_dateTime.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_dateTime.ForeColor = System.Drawing.Color.Silver;
+            this.lb_dateTime.Location = new System.Drawing.Point(194, 223);
+            this.lb_dateTime.Name = "lb_dateTime";
+            this.lb_dateTime.Size = new System.Drawing.Size(103, 28);
+            this.lb_dateTime.TabIndex = 27;
+            this.lb_dateTime.Text = "Date time";
             // 
-            // rMTTSDataSet
+            // lb_tp_vehicle
             // 
-            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
-            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.lb_tp_vehicle.AutoSize = true;
+            this.lb_tp_vehicle.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_tp_vehicle.ForeColor = System.Drawing.Color.Silver;
+            this.lb_tp_vehicle.Location = new System.Drawing.Point(194, 7);
+            this.lb_tp_vehicle.Name = "lb_tp_vehicle";
+            this.lb_tp_vehicle.Size = new System.Drawing.Size(118, 28);
+            this.lb_tp_vehicle.TabIndex = 26;
+            this.lb_tp_vehicle.Text = "Car license";
+            this.lb_tp_vehicle.Click += new System.EventHandler(this.lb_tp_vehicle_Click);
+            // 
+            // bt_toSting
+            // 
+            this.bt_toSting.Depth = 0;
+            this.bt_toSting.Location = new System.Drawing.Point(587, 285);
+            this.bt_toSting.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_toSting.Name = "bt_toSting";
+            this.bt_toSting.Primary = true;
+            this.bt_toSting.Size = new System.Drawing.Size(136, 47);
+            this.bt_toSting.TabIndex = 25;
+            this.bt_toSting.Text = "To String";
+            this.bt_toSting.UseVisualStyleBackColor = true;
+            this.bt_toSting.Click += new System.EventHandler(this.bt_toSting_Click);
+            // 
+            // bt_toString
+            // 
+            this.bt_toString.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bt_toString.Depth = 0;
+            this.bt_toString.Location = new System.Drawing.Point(434, 285);
+            this.bt_toString.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_toString.Name = "bt_toString";
+            this.bt_toString.Primary = true;
+            this.bt_toString.Size = new System.Drawing.Size(135, 47);
+            this.bt_toString.TabIndex = 24;
+            this.bt_toString.Text = "to Hex";
+            this.bt_toString.UseVisualStyleBackColor = true;
+            this.bt_toString.Click += new System.EventHandler(this.bt_toHex_Click);
             // 
             // bt_saveData
             // 
@@ -604,24 +653,6 @@ namespace MaterialSkinExample
             this.txt_tp_station.UseSystemPasswordChar = false;
             this.txt_tp_station.Click += new System.EventHandler(this.materialSingleLineTextField5_Click);
             // 
-            // txt_tp_vehicle
-            // 
-            this.txt_tp_vehicle.Depth = 0;
-            this.txt_tp_vehicle.Hint = "";
-            this.txt_tp_vehicle.Location = new System.Drawing.Point(198, 12);
-            this.txt_tp_vehicle.MaxLength = 32767;
-            this.txt_tp_vehicle.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txt_tp_vehicle.Name = "txt_tp_vehicle";
-            this.txt_tp_vehicle.PasswordChar = '\0';
-            this.txt_tp_vehicle.SelectedText = "";
-            this.txt_tp_vehicle.SelectionLength = 0;
-            this.txt_tp_vehicle.SelectionStart = 0;
-            this.txt_tp_vehicle.Size = new System.Drawing.Size(262, 23);
-            this.txt_tp_vehicle.TabIndex = 2;
-            this.txt_tp_vehicle.TabStop = false;
-            this.txt_tp_vehicle.UseSystemPasswordChar = false;
-            this.txt_tp_vehicle.Click += new System.EventHandler(this.materialSingleLineTextField4_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -906,6 +937,21 @@ namespace MaterialSkinExample
             this.label_setportrfid.Text = "พอร์ต RFID";
             this.label_setportrfid.Click += new System.EventHandler(this.label3_Click);
             // 
+            // tbtransportsBindingSource
+            // 
+            this.tbtransportsBindingSource.DataMember = "tb_transports";
+            this.tbtransportsBindingSource.DataSource = this.rMTTSDataSetBindingSource;
+            // 
+            // rMTTSDataSetBindingSource
+            // 
+            this.rMTTSDataSetBindingSource.DataSource = this.rMTTSDataSet;
+            this.rMTTSDataSetBindingSource.Position = 0;
+            // 
+            // rMTTSDataSet
+            // 
+            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
+            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -934,33 +980,6 @@ namespace MaterialSkinExample
             // 
             this.tb_transportsTableAdapter.ClearBeforeFill = true;
             // 
-            // bt_toString
-            // 
-            this.bt_toString.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bt_toString.Depth = 0;
-            this.bt_toString.Location = new System.Drawing.Point(434, 285);
-            this.bt_toString.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bt_toString.Name = "bt_toString";
-            this.bt_toString.Primary = true;
-            this.bt_toString.Size = new System.Drawing.Size(135, 47);
-            this.bt_toString.TabIndex = 24;
-            this.bt_toString.Text = "to Hex";
-            this.bt_toString.UseVisualStyleBackColor = true;
-            this.bt_toString.Click += new System.EventHandler(this.bt_toHex_Click);
-            // 
-            // bt_toSting
-            // 
-            this.bt_toSting.Depth = 0;
-            this.bt_toSting.Location = new System.Drawing.Point(587, 285);
-            this.bt_toSting.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bt_toSting.Name = "bt_toSting";
-            this.bt_toSting.Primary = true;
-            this.bt_toSting.Size = new System.Drawing.Size(136, 47);
-            this.bt_toSting.TabIndex = 25;
-            this.bt_toSting.Text = "To String";
-            this.bt_toSting.UseVisualStyleBackColor = true;
-            this.bt_toSting.Click += new System.EventHandler(this.bt_toSting_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -973,16 +992,13 @@ namespace MaterialSkinExample
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.materialDivider1);
             this.Name = "MainForm";
-            this.Text = "Raw Material Transportation Tracking System";
+            this.Text = "Raw Material Tracking System";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.materialTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -992,6 +1008,9 @@ namespace MaterialSkinExample
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbtransportsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1020,9 +1039,7 @@ namespace MaterialSkinExample
         private Label label4;
         private MaterialSingleLineTextField materialSingleLineTextField3;
         private MaterialSingleLineTextField txt_tp_station;
-        private MaterialSingleLineTextField txt_tp_vehicle;
         private MaterialSingleLineTextField materialSingleLineTextField6;
-        private MaterialSingleLineTextField txt_tp_material;
         private Label label9;
         private MaterialRaisedButton materialRaisedButton1;
         private MaterialLabel materialLabel3;
@@ -1059,5 +1076,9 @@ namespace MaterialSkinExample
         private RMTTSDataSetTableAdapters.tb_transportsTableAdapter tb_transportsTableAdapter;
         private MaterialRaisedButton bt_toString;
         private MaterialRaisedButton bt_toSting;
+        private Label lb_tp_vehicle;
+        private MaterialSingleLineTextField txt_tp_material;
+        private Label lb_timeTag;
+        private Label lb_dateTime;
     }
 }

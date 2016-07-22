@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;   //For delay function
 using System.Text;
 using System.Globalization;
+using System.Net;
 
 namespace MaterialSkinExample
 {
@@ -34,7 +35,7 @@ namespace MaterialSkinExample
         //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
         //good//SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
         //Data Source = NEXT - GCDLTNPKUF\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine
-
+        //SqlConnection con = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
@@ -325,7 +326,6 @@ namespace MaterialSkinExample
             string regex = "[^a-fA-F0-9]";
             string tmpJudge = Regex.Replace(str, regex, "");
 
-            //长度不对，直接退回错误
             if (tmpJudge.Length != 12) return null;
 
             string[] tmpResult = Regex.Split(str, regex);
@@ -340,12 +340,12 @@ namespace MaterialSkinExample
         }
 
         //แสดงข้อมูล
-        //showData("CardNumber: ", snr, 0, 4);
-        //showData("Data: ", buffer, 0, 16 * num_blk);
+        
         private void showData(string text, byte[] data, int s, int e)
         {
-            //非负转换
             
+            //Clear value in label
+            textResponse.Text = "";
             /*for (int i = 0; i < e; i++)
             {
                 if (data[s + i] < 0)
@@ -366,9 +366,32 @@ namespace MaterialSkinExample
             //ใช้แสดงคำในกรอบ
             //textResponse.Text += "\r\n\r\n";
             //textResponse.Text = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
-            txt_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
+            //Display car license
+            lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
+
+            //Display dateTime
+            /*String serverTime = getDateTime().ToString();
+            lb_dateTime.Text = serverTime;
+            materialSingleLineTextField11.Text = serverTime;
+            */
 
 
+
+
+
+        }
+
+        private DateTime getDateTime()
+        {
+            SqlCommand cmd = new SqlCommand("select getdate()", conn);
+            //Open The database
+            conn.Open();
+            DataSet ds = new DataSet();
+            DateTime strDatetime;
+            strDatetime = (DateTime)cmd.ExecuteScalar();
+            //close The databse
+            conn.Close();
+            return strDatetime;
         }
 
         /*setBUZZER*/
@@ -435,9 +458,50 @@ namespace MaterialSkinExample
                 //showData("CardNumber: ", snr, 0, 4);
                 showData("Data: ", buffer, 0, 12 * num_blk);
 
+                ////
+                SqlCommand cmdDate = new SqlCommand("select getdate()", conn);
+                conn.Open();
+                DataSet ds = new DataSet();
+                DateTime strDatetime = (DateTime)cmdDate.ExecuteScalar();
+
+                //get year month day
+                int thaiYear = new ThaiBuddhistCalendar().GetYear(strDatetime);
+                int thaiMonth = new ThaiBuddhistCalendar().GetMonth(strDatetime);
+                int thaiDay = new ThaiBuddhistCalendar().GetDayOfMonth(strDatetime);
+                int thaiHour = new ThaiBuddhistCalendar().GetHour(strDatetime);
+                int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
+                int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
+                
+                //convert yesr
+                thaiYear -= 543*2;
+                /*
+                MessageBox.Show(thaiYear.ToString());
+                MessageBox.Show(thaiMonth.ToString());
+                MessageBox.Show(thaiDay.ToString());
+                */
+                DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
+                //MessageBox.Show(thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+                lb_dateTime.Text = thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                conn.Close();
 
             }
+
+            
         }
+
+        /*
+        public static DateTime GetNistTime()
+        {
+            var myHttpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.google.co.th");
+            var response = myHttpWebRequest.GetResponse();
+            string todaysDates = response.Headers["date"];
+            DateTime dateTime = DateTime.ParseExact(todaysDates, "ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture.DateTimeFormat, DateTimeStyles.AssumeUniversal);
+            return dateTime;
+        }
+        */
+        
+
+
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
@@ -450,14 +514,14 @@ namespace MaterialSkinExample
             //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
             try
             {
-                conn.Open();
+                //conn.Open();
                 insertData();
                 lb_statusNow.ForeColor = System.Drawing.Color.Green;
                 lb_statusNow.Text = "บันทึกสำเร็จ";
                 MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
                 await Task.Delay(5000);         //set for doing something
                 lb_statusNow.ForeColor = System.Drawing.Color.Red;
-                lb_statusNow.Text = "ไม่พบการทำรายการ";
+                resetRabel();
 
 
             }
@@ -467,14 +531,21 @@ namespace MaterialSkinExample
             }
 
         }
+        private void resetRabel()
+        {
+            lb_statusNow.Text = "ไม่พบการทำรายการ";
+            lb_tp_vehicle.Text = "Car license";
+            lb_dateTime.Text = "Date time";
+        }
+
         private void insertData()
         {
-
-            //string sql = "INSERT INTO tb_materials (material_id) VALUES('" + txt_tp_vehicle.Text + "')";
-            string sql = "INSERT INTO tb_transports (tp_vehicle, tp_material) VALUES('" + txt_tp_vehicle.Text + "','" + txt_tp_material.Text + "')";
+            string sql = "INSERT INTO tb_transports (tp_vehicle, tp_material, tp_time_get) VALUES('" + lb_tp_vehicle.Text + "', '" + txt_tp_material.Text + "', '" + lb_dateTime.Text + "')";
+            conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             conn.Close();
+
 
         }
 
@@ -534,6 +605,11 @@ namespace MaterialSkinExample
             }
             //According to the specified byte array into a string encoding
             return encode.GetString(b);
+        }
+
+        private void lb_tp_vehicle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

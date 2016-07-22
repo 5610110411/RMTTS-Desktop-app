@@ -340,15 +340,18 @@ namespace MaterialSkinExample
         }
 
         //แสดงข้อมูล
+        //showData("CardNumber: ", snr, 0, 4);
+        //showData("Data: ", buffer, 0, 16 * num_blk);
         private void showData(string text, byte[] data, int s, int e)
         {
             //非负转换
-            for (int i = 0; i < e; i++)
+            
+            /*for (int i = 0; i < e; i++)
             {
                 if (data[s + i] < 0)
                     data[s + i] = Convert.ToByte(Convert.ToInt32(data[s + i]) + 256);
             }
-            textResponse.Text += text;
+            textResponse.Text += text;*/
 
             //for (int i = s; i < e; i++)
             //{
@@ -360,7 +363,11 @@ namespace MaterialSkinExample
             {
                 textResponse.Text += data[s + i].ToString("X2") + " ";
             }
-            textResponse.Text += "\r\n\r\n";
+            //ใช้แสดงคำในกรอบ
+            //textResponse.Text += "\r\n\r\n";
+            //textResponse.Text = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
+            txt_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
+
 
         }
 
@@ -408,7 +415,8 @@ namespace MaterialSkinExample
             int nRet = Reader.MF_Read(mode, blk_add, num_blk, snr, buffer);
             //string strErrorCode;
 
-            showStatue(nRet);
+            //ใช้แสดงสถานะว่าอ่านสำเร็จหรือไม่
+            //showStatue(nRet);
             if (nRet != 0)
             {
                 //strErrorCode = FormatErrorCode(buffer);
@@ -418,13 +426,14 @@ namespace MaterialSkinExample
             else
             {
                 //ส่งเสียง
-                byte[] buffer_bff = new byte[1];
+                /*byte[] buffer_bff = new byte[1];
                 int nRetf = Reader.ControlBuzzer(14, 1, buffer_bff);
                 showStatue(nRet);
                 showStatue(buffer_bff[0]);
+                */
                 //แสดงผล
-                showData("CardNumber: ", snr, 0, 4);
-                showData("Data: ", buffer, 0, 16 * num_blk);
+                //showData("CardNumber: ", snr, 0, 4);
+                showData("Data: ", buffer, 0, 12 * num_blk);
 
 
             }
@@ -473,21 +482,7 @@ namespace MaterialSkinExample
         {
 
         }
-        
-        string HexStringToString(string hexString)
-        {
-            if (hexString == null || (hexString.Length & 1) == 1)
-            {
-                throw new ArgumentException();
-            }
-            var sb = new StringBuilder();
-            for (var i = 0; i < hexString.Length; i += 2)
-            {
-                var hexChar = hexString.Substring(i, 2);
-                sb.Append((char)Convert.ToByte(hexChar, 16));
-            }
-            return sb.ToString();
-        }
+       
 
         private void bt_toHex_Click(object sender, EventArgs e)
         {
@@ -509,10 +504,9 @@ namespace MaterialSkinExample
 
         }
 
-        //จริงๆ แปลง string to hex
         private void bt_toSting_Click(object sender, EventArgs e)
         {
-            string HexString = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
+            string HexString = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 ";
             string textString = HexStringToString(HexString, Encoding.UTF8);
             lb_statusNow.Text = textString;
         }

@@ -13,6 +13,7 @@ using System.Threading.Tasks;   //For delay function
 using System.Text;
 using System.Globalization;
 using System.Net;
+using System.Linq;
 
 namespace MaterialSkinExample
 {
@@ -501,7 +502,8 @@ namespace MaterialSkinExample
             conn.Close();
         }
 
-        private void autoGenKey()
+        //
+        private String autoGenKey()
         {
             SqlCommand cmdDate = new SqlCommand("select getdate()", conn);
             conn.Open();
@@ -516,10 +518,11 @@ namespace MaterialSkinExample
             int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
             int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
 
+            //append string
             String autoKey = ""+ thaiYear.ToString() + thaiMonth.ToString() + thaiDay.ToString() + thaiHour.ToString() + thaiMinute.ToString() + thaiSecond.ToString();
 
-            MessageBox.Show(autoKey);
-            //return autoKey;
+            //MessageBox.Show(autoKey);
+            return autoKey;
         }
 
         /*MF_Write_Func*/
@@ -705,6 +708,15 @@ namespace MaterialSkinExample
             }
             //According to the specified byte array into a string encoding
             return encode.GetString(b);
+        }
+
+        //Check RFID  for valid transection 
+        private bool checkValidTransaction(String textInput)
+        {
+            bool IsValid = textInput.All(char.IsDigit);
+            //MessageBox.Show(IsValid.ToString());
+
+            return IsValid;// return true or false
         }
 
         private void lb_tp_vehicle_Click(object sender, EventArgs e)

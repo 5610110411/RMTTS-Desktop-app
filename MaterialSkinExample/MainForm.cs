@@ -19,6 +19,8 @@ namespace MaterialSkinExample
 {
     public partial class MainForm : MaterialForm
     {
+        private String Hex_transectionID = "";
+        private int IsNewLoop = 0;
         private readonly MaterialSkinManager materialSkinManager;
         public MainForm()
         {
@@ -369,17 +371,6 @@ namespace MaterialSkinExample
             //textResponse.Text = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
             //Display car license
             lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
-
-            //Display dateTime
-            /*String serverTime = getDateTime().ToString();
-            lb_dateTime.Text = serverTime;
-            materialSingleLineTextField11.Text = serverTime;
-            */
-
-
-
-
-
         }
 
         private DateTime getDateTime()
@@ -425,12 +416,13 @@ namespace MaterialSkinExample
             byte mode = (byte)((mode1 << 1) | mode2);
             byte blk_add = Convert.ToByte(readStart.Text, 16);
             byte num_blk = Convert.ToByte(readNum.Text, 16);
+          
 
             byte[] snr = new byte[6];
             snr = convertSNR(readKey.Text, 6);
             if (snr == null)
             {
-                MessageBox.Show("Invalid Serial Number!", "ERROR");
+                MessageBox.Show("Invalid Serial Number! from read Rfid button", "ERROR");
                 return;
             }
 
@@ -463,8 +455,86 @@ namespace MaterialSkinExample
                 currTime();
                 //Display current station
                 currStation();
+                //เช็คว่าต้อง Update or Insert
+                setNewLoop();
+                if (IsNewLoop == 1)
+                {
+                    //Insert
+                    createTransection();
+                    IsNewLoop = 0;
+                    MessageBox.Show("set IsNewLoop =" + IsNewLoop.ToString());
+
+                }
+                else {
+                    MessageBox.Show("do else");
+                    updateTransection();
+                }
 
             }
+        }
+        private void createTransection()
+        {
+            //Write Hex into the RFID card
+            string str_autokey = autoGenKey();
+            string Hex_autokey = StringToHexString(str_autokey, Encoding.UTF8);
+            //MessageBox.Show(Hex_autokey + " FF FF");
+            writeRFID("8", "1", Hex_autokey + " FF FF");
+            //format 32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF
+            
+            //Insert String into the database
+            //card for test: e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 FF FF FF FF
+            string sql = "INSERT INTO tb_transports (tp_id, tp_vehicle, tp_time_get, tp_status, tp_from, tp_material) VALUES('" + str_autokey + "' ,'" + lb_tp_vehicle.Text + "', '" + lb_dateTime.Text + "', '1', '" + comboBox_station.SelectedValue + "', '" + comboBox_station.SelectedValue + "')";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            MessageBox.Show("Silent Insert completely");
+        }
+
+        private void updateTransection()
+        {
+
+        }
+
+        private void writeRFID(string sector, string block, string Hax_text){
+            byte mode1 = (writeKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (writeAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte(sector, 16);
+            byte num_blk = Convert.ToByte(block, 16);
+
+            byte[] snr = new byte[6];
+            snr = convertSNR(writeKey.Text, 16);
+            if (snr == null)
+            {
+                MessageBox.Show("Invalid Serial Number! in writeRFID snr", "ERROR");
+                return;
+            }
+
+            byte[] buffer = new byte[16 * num_blk];
+            string bufferStr = formatStr(Hax_text, num_blk);
+            if (bufferStr == null)
+            {
+                MessageBox.Show("Invalid Serial Number! in buffer", "ERROR");
+                return;
+            }
+            convertStr(buffer, bufferStr, 16 * num_blk);
+
+            int nRet = Reader.MF_Write(mode, blk_add, num_blk, snr, buffer);
+            //string strErrorCode;
+
+            showStatue(nRet);
+            if (nRet != 0)
+            {
+                //strErrorCode = FormatErrorCode(buffer);
+                //WriteLog("Failed:", nRet, strErrorCode);
+                showStatue(buffer[0]);
+            }
+            else
+            {
+                //showData("CardNumber:", snr, 0, 4);
+            }
+
         }
 
         //Display current station
@@ -518,10 +588,18 @@ namespace MaterialSkinExample
             int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
             int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
 
+            //Fix digit
+            thaiMonth += 10;
+            thaiDay += 10;
+            thaiHour += 10;
+            thaiMinute += 10;
+            thaiSecond += 10;
+
             //append string
             String autoKey = ""+ thaiYear.ToString() + thaiMonth.ToString() + thaiDay.ToString() + thaiHour.ToString() + thaiMinute.ToString() + thaiSecond.ToString();
 
             //MessageBox.Show(autoKey);
+            conn.Close();
             return autoKey;
         }
 
@@ -685,6 +763,7 @@ namespace MaterialSkinExample
             lb_statusNow.Text = textString;
         }
 
+
         private string StringToHexString(string s, Encoding encode)
         {
             byte[] b = encode.GetBytes(s);//According to the specified code string programming byte array
@@ -729,6 +808,63 @@ namespace MaterialSkinExample
             MessageBox.Show(comboBox_station.SelectedValue.ToString());
         }
 
+
+        //ปุ่มเช็คว่าต้องเริ่ม Transection ใหม่หรือไม่
+        private void setNewLoop()
+        {
+            byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte("8", 16);
+            byte num_blk = Convert.ToByte("1", 16);
+
+
+            byte[] snr = new byte[6];
+            snr = convertSNR(readKey.Text, 6);
+            if (snr == null)
+            {
+                MessageBox.Show("Invalid Serial Number!", "ERROR");
+                return;
+            }
+            byte[] buffer = new byte[16 * num_blk];
+            int nRet = Reader.MF_Read(mode, blk_add, num_blk, snr, buffer);
+            //ใช้แสดงสถานะว่าอ่านสำเร็จหรือไม่
+         
+            if (nRet != 0)
+            {
+                showStatue(buffer[0]);
+            }
+            else
+            {
+                //แสดงผล
+                //e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 FF FF FF FF//12
+                //32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF//14
+                for (int i = 0; i < 14 * num_blk; i++)  // 14 is the length of the key
+                {
+                    Hex_transectionID += buffer[0 + i].ToString("X2") + " ";
+                }
+                //MessageBox.Show(Hex_transectionID);
+                String String_transectionID = HexStringToString(Hex_transectionID, Encoding.UTF8);
+                materialSingleLineTextField9.Text = String_transectionID;
+                //MessageBox.Show(String_transectionID);
+                bool IsNumberTransection = checkValidTransaction(String_transectionID);
+                if (IsNumberTransection)
+                {
+                    //MessageBox.Show("It is a number");
+                    IsNewLoop = 0; // Update the database
+                }
+                else
+                {
+                    //MessageBox.Show("It is a text");
+                    IsNewLoop = 1;  // Create new transation by insert into the database
+                }
+            }
+        }
         
+
+
+
+
+
     }
 }

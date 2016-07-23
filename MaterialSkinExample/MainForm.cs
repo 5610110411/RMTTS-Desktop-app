@@ -411,7 +411,7 @@ namespace MaterialSkinExample
         }
 
         //ปุ่มกดอ่าน RFID
-        private async void bt_readRfid_Click(object sender, EventArgs e)
+        private void bt_readRfid_Click(object sender, EventArgs e)
         {
             byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
@@ -464,12 +464,7 @@ namespace MaterialSkinExample
                     //Insert data (ยังไม่มีข้อมูลในระบบ หรือ อาจจะเริ่มต้น Transaction ใหม่)
                     createTransection();
                     needToNew = 0;
-                    lb_statusNow.ForeColor = System.Drawing.Color.Green;
-                    lb_previousStation.Text = "----";
-                    lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
-                    await Task.Delay(10000);         //set for doing something
-                    lb_statusNow.ForeColor = System.Drawing.Color.Red;
-                    resetRabel();
+                    
                 }
                 else if (needToNew == 0)
                 {
@@ -478,11 +473,7 @@ namespace MaterialSkinExample
                     readPrimaryKeyFromRFID();
                     getValueFromDatabase(String_transactionID);
                     updateTransection();
-                    lb_statusNow.ForeColor = System.Drawing.Color.Green;
-                    lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
-                    await Task.Delay(10000);         //set for doing something
-                    lb_statusNow.ForeColor = System.Drawing.Color.Red;
-                    resetRabel();
+                    
                 }
                 else
                 {
@@ -501,27 +492,43 @@ namespace MaterialSkinExample
             //MessageBox.Show(Hex_autokey + " FF FF");
             writeRFID("8", "1", Hex_autokey + " FF FF");
             //format 32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF
-            
+
             //Insert String into the database
             //card for test: e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 FF FF FF FF
             string sql = "INSERT INTO tb_transports (tp_id, tp_vehicle, tp_time_get, tp_status, tp_from, tp_material) VALUES('" + str_autokey + "' ,'" + lb_tp_vehicle.Text + "', '" + lb_dateTime.Text + "', '1', '" + comboBox_station.SelectedValue + "', '" + comboBox_station.SelectedValue + "')";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
+            lb_statusNow.ForeColor = System.Drawing.Color.Green;
+            lb_previousStation.Text = "----";
+            lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
             conn.Close();
             //MessageBox.Show("Silent Insert completely");
-           
+
         }
 
 
-        private void updateTransection()
+        private async void updateTransection()
         {
             int int_transactionStatus = Int32.Parse(String_transactionStatus);
-            int_transactionStatus += 1;
-            string sql = "UPDATE tb_transports SET tp_time_get_finish = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID +"' ;";
+            if (int_transactionStatus < 4)
+            {
+                int_transactionStatus += 1;
+            }
+            else
+            {
+                createTransection();
+                return;
+            }
+
+            string sql = "UPDATE tb_transports SET tp_time_get_finish = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
+            lb_statusNow.ForeColor = System.Drawing.Color.Green;
+            lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
+            lb_curStatus.Text = translateStatus(int_transactionStatus.ToString());
+           
             String_transactionID = null;
             String_transactionStatus = null;
             conn.Close();
@@ -552,9 +559,9 @@ namespace MaterialSkinExample
             else if (OriginString == "2")
                 translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
             else if (OriginString == "3")
-                translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+                translatedStatus = "ส่งวัตถุดิบเข้า";
             else if (OriginString == "4")
-                translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+                translatedStatus = "เทวัตถุดิบเสร็จสิ้น";
             else
                 translatedStatus = "เกิดข้อผิดพลาด";
             return translatedStatus;
@@ -667,47 +674,7 @@ namespace MaterialSkinExample
             return autoKey;
         }
 
-        /*MF_Write_Func*/
-        private void bt_writeRFiD_Click(object sender, EventArgs e)
-        {
-            byte mode1 = (writeKeyB.Checked) ? (byte)0x01 : (byte)0x00;
-            byte mode2 = (writeAll.Checked) ? (byte)0x01 : (byte)0x00;
-            byte mode = (byte)((mode1 << 1) | mode2);
-            byte blk_add = Convert.ToByte(writeStart.Text, 16);
-            byte num_blk = Convert.ToByte(writeNum.Text, 16);
-
-            byte[] snr = new byte[6];
-            snr = convertSNR(writeKey.Text, 16);
-            if (snr == null)
-            {
-                MessageBox.Show("Invalid Serial Number!", "ERROR");
-                return;
-            }
-
-            byte[] buffer = new byte[16 * num_blk];
-            string bufferStr = formatStr(writeData.Text, num_blk);
-            if (bufferStr == null)
-            {
-                MessageBox.Show("Invalid Serial Number!", "ERROR");
-                return;
-            }
-            convertStr(buffer, bufferStr, 16 * num_blk);
-
-            int nRet = Reader.MF_Write(mode, blk_add, num_blk, snr, buffer);
-            //string strErrorCode;
-
-            showStatue(nRet);
-            if (nRet != 0)
-            {
-                //strErrorCode = FormatErrorCode(buffer);
-                //WriteLog("Failed:", nRet, strErrorCode);
-                showStatue(buffer[0]);
-            }
-            else
-            {
-                showData("CardNumber:", snr, 0, 4);
-            }
-        }
+       
 
         private string formatStr(string str, int num_blk)
         {
@@ -756,17 +723,15 @@ namespace MaterialSkinExample
         SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
         private async void bt_saveData_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
             try
             {
-                //conn.Open();
                 insertData();
                 lb_statusNow.ForeColor = System.Drawing.Color.Green;
                 lb_statusNow.Text = "บันทึกสำเร็จ";
                 MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
                 await Task.Delay(10000);         //set for doing something
                 lb_statusNow.ForeColor = System.Drawing.Color.Red;
-                resetRabel();
+  
 
 
             }
@@ -778,11 +743,14 @@ namespace MaterialSkinExample
         }
         private void resetRabel()
         {
+            lb_statusNow.ForeColor = System.Drawing.Color.Red;
             lb_statusNow.Text = "ไม่พบการทำรายการ";
             lb_tp_vehicle.Text = "Car license";
             lb_dateTime.Text = "Date time";
             lb_previousStatus.Text = "Previous status";
-            lb_curStation.Text = "Current Station";
+            lb_curStation.Text = "Current station";
+            lb_curStatus.Text = "Current status";
+            
         }
 
         private void insertData()
@@ -869,10 +837,7 @@ namespace MaterialSkinExample
 
         }
 
-        private void bt_checkDropDown_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(comboBox_station.SelectedValue.ToString());
-        }
+        
 
 
         private void readPrimaryKeyFromRFID()
@@ -975,6 +940,21 @@ namespace MaterialSkinExample
         }
 
         private void lb_previousStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            resetRabel();
+        }
+
+        private void textResponse_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_saveData_Click_1(object sender, EventArgs e)
         {
 
         }

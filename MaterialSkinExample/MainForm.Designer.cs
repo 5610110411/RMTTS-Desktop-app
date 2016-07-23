@@ -77,13 +77,11 @@ namespace MaterialSkinExample
             this.readIdle = new System.Windows.Forms.RadioButton();
             this.readAll = new System.Windows.Forms.RadioButton();
             this.bt_readRfid = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.materialSingleLineTextField11 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label10 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField9 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_tp_material = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label9 = new System.Windows.Forms.Label();
-            this.materialSingleLineTextField6 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
@@ -113,6 +111,8 @@ namespace MaterialSkinExample
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
+            this.lb_previousStation = new System.Windows.Forms.Label();
+            this.lb_previousStatus = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -216,6 +216,8 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.lb_previousStatus);
+            this.tabPage2.Controls.Add(this.lb_previousStation);
             this.tabPage2.Controls.Add(this.bt_writeRFiD);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.writeData);
@@ -244,13 +246,11 @@ namespace MaterialSkinExample
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.bt_readRfid);
-            this.tabPage2.Controls.Add(this.materialSingleLineTextField11);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.materialSingleLineTextField9);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.txt_tp_material);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.materialSingleLineTextField6);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label_name);
@@ -489,7 +489,7 @@ namespace MaterialSkinExample
             this.lb_curStation.AutoSize = true;
             this.lb_curStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_curStation.ForeColor = System.Drawing.Color.Silver;
-            this.lb_curStation.Location = new System.Drawing.Point(194, 73);
+            this.lb_curStation.Location = new System.Drawing.Point(194, 108);
             this.lb_curStation.Name = "lb_curStation";
             this.lb_curStation.Size = new System.Drawing.Size(152, 28);
             this.lb_curStation.TabIndex = 29;
@@ -783,28 +783,11 @@ namespace MaterialSkinExample
             this.bt_readRfid.UseVisualStyleBackColor = true;
             this.bt_readRfid.Click += new System.EventHandler(this.bt_readRfid_Click);
             // 
-            // materialSingleLineTextField11
-            // 
-            this.materialSingleLineTextField11.Depth = 0;
-            this.materialSingleLineTextField11.Hint = "";
-            this.materialSingleLineTextField11.Location = new System.Drawing.Point(199, 113);
-            this.materialSingleLineTextField11.MaxLength = 32767;
-            this.materialSingleLineTextField11.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField11.Name = "materialSingleLineTextField11";
-            this.materialSingleLineTextField11.PasswordChar = '\0';
-            this.materialSingleLineTextField11.SelectedText = "";
-            this.materialSingleLineTextField11.SelectionLength = 0;
-            this.materialSingleLineTextField11.SelectionStart = 0;
-            this.materialSingleLineTextField11.Size = new System.Drawing.Size(262, 23);
-            this.materialSingleLineTextField11.TabIndex = 12;
-            this.materialSingleLineTextField11.TabStop = false;
-            this.materialSingleLineTextField11.UseSystemPasswordChar = false;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 107);
+            this.label10.Location = new System.Drawing.Point(6, 74);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(141, 32);
             this.label10.TabIndex = 10;
@@ -867,24 +850,6 @@ namespace MaterialSkinExample
             this.label9.Text = "วัตถุดิบที่บรรทุก";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
-            // materialSingleLineTextField6
-            // 
-            this.materialSingleLineTextField6.Depth = 0;
-            this.materialSingleLineTextField6.Hint = "";
-            this.materialSingleLineTextField6.Location = new System.Drawing.Point(199, 147);
-            this.materialSingleLineTextField6.MaxLength = 32767;
-            this.materialSingleLineTextField6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField6.Name = "materialSingleLineTextField6";
-            this.materialSingleLineTextField6.PasswordChar = '\0';
-            this.materialSingleLineTextField6.SelectedText = "";
-            this.materialSingleLineTextField6.SelectionLength = 0;
-            this.materialSingleLineTextField6.SelectionStart = 0;
-            this.materialSingleLineTextField6.Size = new System.Drawing.Size(262, 23);
-            this.materialSingleLineTextField6.TabIndex = 5;
-            this.materialSingleLineTextField6.TabStop = false;
-            this.materialSingleLineTextField6.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField6.Click += new System.EventHandler(this.materialSingleLineTextField6_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -900,7 +865,7 @@ namespace MaterialSkinExample
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 70);
+            this.label3.Location = new System.Drawing.Point(8, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 32);
             this.label3.TabIndex = 1;
@@ -1244,6 +1209,30 @@ namespace MaterialSkinExample
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
+            // lb_previousStation
+            // 
+            this.lb_previousStation.AutoSize = true;
+            this.lb_previousStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_previousStation.ForeColor = System.Drawing.Color.Silver;
+            this.lb_previousStation.Location = new System.Drawing.Point(194, 77);
+            this.lb_previousStation.Name = "lb_previousStation";
+            this.lb_previousStation.Size = new System.Drawing.Size(164, 28);
+            this.lb_previousStation.TabIndex = 40;
+            this.lb_previousStation.Text = "Previous station";
+            this.lb_previousStation.Click += new System.EventHandler(this.lb_previousStation_Click);
+            // 
+            // lb_previousStatus
+            // 
+            this.lb_previousStatus.AutoSize = true;
+            this.lb_previousStatus.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_previousStatus.ForeColor = System.Drawing.Color.Silver;
+            this.lb_previousStatus.Location = new System.Drawing.Point(194, 142);
+            this.lb_previousStatus.Name = "lb_previousStatus";
+            this.lb_previousStatus.Size = new System.Drawing.Size(159, 28);
+            this.lb_previousStatus.TabIndex = 41;
+            this.lb_previousStatus.Text = "Previous status";
+            this.lb_previousStatus.Click += new System.EventHandler(this.lb_previousStatus_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1305,7 +1294,6 @@ namespace MaterialSkinExample
         private Label lb_statusNow;
         private Label label4;
         private MaterialSingleLineTextField materialSingleLineTextField3;
-        private MaterialSingleLineTextField materialSingleLineTextField6;
         private Label label9;
         private MaterialRaisedButton materialRaisedButton1;
         private MaterialLabel materialLabel3;
@@ -1319,7 +1307,6 @@ namespace MaterialSkinExample
         private MaterialSingleLineTextField materialSingleLineTextField9;
         private Label label8;
         private Label label10;
-        private MaterialSingleLineTextField materialSingleLineTextField11;
         private MaterialRaisedButton materialRaisedButton2;
         private MaterialRaisedButton bt_readRfid;
         private GroupBox groupBox5;
@@ -1363,5 +1350,7 @@ namespace MaterialSkinExample
         private Label label14;
         private MaterialRaisedButton bt_checkDropDown;
         private MaterialRaisedButton bt_writeRFiD;
+        private Label lb_previousStation;
+        private Label lb_previousStatus;
     }
 }

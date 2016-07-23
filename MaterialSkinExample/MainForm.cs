@@ -463,6 +463,7 @@ namespace MaterialSkinExample
                     createTransection();
                     needToNew = 0;
                     lb_statusNow.ForeColor = System.Drawing.Color.Green;
+                    lb_previousStation.Text = "NULL";
                     lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
                     await Task.Delay(5000);         //set for doing something
                     lb_statusNow.ForeColor = System.Drawing.Color.Red;
@@ -471,6 +472,8 @@ namespace MaterialSkinExample
                 else if (needToNew == 0)
                 {
                     //Update data (มี Transaction ที่ยังไม่เสร็จในระบบ) 
+                    
+                    getValueFromDatabase();
                     updateTransection();
                     lb_statusNow.ForeColor = System.Drawing.Color.Green;
                     lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
@@ -485,6 +488,8 @@ namespace MaterialSkinExample
 
             }
         }
+
+
         private void createTransection()
         {
             //Write Hex into the RFID card
@@ -502,11 +507,30 @@ namespace MaterialSkinExample
             cmd.ExecuteNonQuery();
             conn.Close();
             //MessageBox.Show("Silent Insert completely");
+           
         }
 
 
         private void updateTransection()
         {
+        }
+
+        private void getValueFromDatabase()
+        {
+            
+            string sql = "Select * From tb_transports WHERE tp_id = '1'";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            //using (SqlDataReader sdr = cmd.ExecuteReader())
+            SqlDataReader sdr = cmd.ExecuteReader();
+            if (sdr.Read())
+            {
+                lb_previousStatus.Text = sdr["tp_status"].ToString();
+            }
+            
+            conn.Close();
+
+
 
         }
 
@@ -731,6 +755,8 @@ namespace MaterialSkinExample
             lb_statusNow.Text = "ไม่พบการทำรายการ";
             lb_tp_vehicle.Text = "Car license";
             lb_dateTime.Text = "Date time";
+            lb_previousStatus.Text = "Previous status";
+            lb_curStation.Text = "Current Station";
         }
 
         private void insertData()
@@ -875,11 +901,15 @@ namespace MaterialSkinExample
             }
             Hex_transectionID = "";
         }
-        
 
+        private void lb_previousStation_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void lb_previousStatus_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace MaterialSkinExample
     {
         private String Hex_transectionID = "";
         private int needToNew = 0;
-        private string String_transectionID = null;
+        private string String_transactionID = null;
+        private string String_transactionStatus = null;
         private readonly MaterialSkinManager materialSkinManager;
         public MainForm()
         {
@@ -475,7 +476,7 @@ namespace MaterialSkinExample
                     //Update data (มี Transaction ที่ยังไม่เสร็จในระบบ) 
 
                     readPrimaryKeyFromRFID();
-                    getValueFromDatabase(String_transectionID);
+                    getValueFromDatabase(String_transactionID);
                     updateTransection();
                     lb_statusNow.ForeColor = System.Drawing.Color.Green;
                     lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
@@ -515,7 +516,15 @@ namespace MaterialSkinExample
 
         private void updateTransection()
         {
-            
+            int int_transactionStatus = Int32.Parse(String_transactionStatus);
+            int_transactionStatus += 1;
+            string sql = "UPDATE tb_transports SET tp_time_get_finish = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID +"' ;";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            String_transactionID = null;
+            String_transactionStatus = null;
+            conn.Close();
         }
 
         //get values from database for display in textboxs
@@ -529,6 +538,7 @@ namespace MaterialSkinExample
             if (sdr.Read())
             {
                 lb_previousStatus.Text = translateStatus(sdr["tp_status"].ToString());
+                String_transactionStatus = sdr["tp_status"].ToString();
             }
 
             conn.Close();
@@ -899,7 +909,7 @@ namespace MaterialSkinExample
                     Hex_transectionID += buffer[0 + i].ToString("X2") + " ";
                 }
                 //MessageBox.Show(Hex_transectionID);
-                String_transectionID = HexStringToString(Hex_transectionID, Encoding.UTF8);
+                String_transactionID = HexStringToString(Hex_transectionID, Encoding.UTF8);
                 //MessageBox.Show(String_transectionID);
             }
             Hex_transectionID = "";

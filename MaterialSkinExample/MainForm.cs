@@ -20,7 +20,8 @@ namespace MaterialSkinExample
     public partial class MainForm : MaterialForm
     {
         private String Hex_transectionID = "";
-        private int needToNew = 0;  
+        private int needToNew = 0;
+        private string String_transectionID = null;
         private readonly MaterialSkinManager materialSkinManager;
         public MainForm()
         {
@@ -463,21 +464,22 @@ namespace MaterialSkinExample
                     createTransection();
                     needToNew = 0;
                     lb_statusNow.ForeColor = System.Drawing.Color.Green;
-                    lb_previousStation.Text = "NULL";
+                    lb_previousStation.Text = "----";
                     lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
-                    await Task.Delay(5000);         //set for doing something
+                    await Task.Delay(10000);         //set for doing something
                     lb_statusNow.ForeColor = System.Drawing.Color.Red;
                     resetRabel();
                 }
                 else if (needToNew == 0)
                 {
                     //Update data (มี Transaction ที่ยังไม่เสร็จในระบบ) 
-                    
-                    getValueFromDatabase();
+
+                    readPrimaryKeyFromRFID();
+                    getValueFromDatabase(String_transectionID);
                     updateTransection();
                     lb_statusNow.ForeColor = System.Drawing.Color.Green;
                     lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
-                    await Task.Delay(5000);         //set for doing something
+                    await Task.Delay(10000);         //set for doing something
                     lb_statusNow.ForeColor = System.Drawing.Color.Red;
                     resetRabel();
                 }
@@ -513,25 +515,39 @@ namespace MaterialSkinExample
 
         private void updateTransection()
         {
+            
         }
 
-        private void getValueFromDatabase()
+        //get values from database for display in textboxs
+        private void getValueFromDatabase(string primarykey)
         {
-            
-            string sql = "Select * From tb_transports WHERE tp_id = '1'";
+            string sql = "Select * From tb_transports WHERE tp_id = '" + primarykey + "' ";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             //using (SqlDataReader sdr = cmd.ExecuteReader())
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-                lb_previousStatus.Text = sdr["tp_status"].ToString();
+                lb_previousStatus.Text = translateStatus(sdr["tp_status"].ToString());
             }
-            
+
             conn.Close();
+        }
 
-
-
+        private string translateStatus(string OriginString)
+        {
+            string translatedStatus;
+            if (OriginString == "1")
+                translatedStatus = "รับวัตถุดิบจากแหล่ง";
+            else if (OriginString == "2")
+                translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+            else if (OriginString == "3")
+                translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+            else if (OriginString == "4")
+                translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+            else
+                translatedStatus = "เกิดข้อผิดพลาด";
+            return translatedStatus;
         }
 
         private void writeRFID(string sector, string block, string Hax_text){
@@ -738,7 +754,7 @@ namespace MaterialSkinExample
                 lb_statusNow.ForeColor = System.Drawing.Color.Green;
                 lb_statusNow.Text = "บันทึกสำเร็จ";
                 MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
-                await Task.Delay(5000);         //set for doing something
+                await Task.Delay(10000);         //set for doing something
                 lb_statusNow.ForeColor = System.Drawing.Color.Red;
                 resetRabel();
 
@@ -846,6 +862,47 @@ namespace MaterialSkinExample
         private void bt_checkDropDown_Click(object sender, EventArgs e)
         {
             MessageBox.Show(comboBox_station.SelectedValue.ToString());
+        }
+
+
+        private void readPrimaryKeyFromRFID()
+        {
+            byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte("8", 16);
+            byte num_blk = Convert.ToByte("1", 16);
+
+
+            byte[] snr = new byte[6];
+            snr = convertSNR(readKey.Text, 6);
+            if (snr == null)
+            {
+                MessageBox.Show("Invalid Serial Number!", "ERROR");
+                return;
+            }
+            byte[] buffer = new byte[16 * num_blk];
+            int nRet = Reader.MF_Read(mode, blk_add, num_blk, snr, buffer);
+            //ใช้แสดงสถานะว่าอ่านสำเร็จหรือไม่
+
+            if (nRet != 0)
+            {
+                showStatue(buffer[0]);
+            }
+            else
+            {
+                //แสดงผล
+                //e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 FF FF FF FF//12
+                //32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF//14
+                for (int i = 0; i < 14 * num_blk; i++)  // 14 is the length of the key
+                {
+                    Hex_transectionID += buffer[0 + i].ToString("X2") + " ";
+                }
+                //MessageBox.Show(Hex_transectionID);
+                String_transectionID = HexStringToString(Hex_transectionID, Encoding.UTF8);
+                //MessageBox.Show(String_transectionID);
+            }
+            Hex_transectionID = "";
         }
 
 

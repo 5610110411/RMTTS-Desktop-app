@@ -113,7 +113,6 @@ namespace MaterialSkinExample
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
-            this.lb_statusValidTran = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1126,7 +1125,6 @@ namespace MaterialSkinExample
             this.comboBox_station.Name = "comboBox_station";
             this.comboBox_station.Size = new System.Drawing.Size(121, 21);
             this.comboBox_station.TabIndex = 6;
-            this.comboBox_station.Text = "เหมืองดินเหลือง";
             this.comboBox_station.ValueMember = "station_id";
             // 
             // tbstationsBindingSource
@@ -1223,7 +1221,7 @@ namespace MaterialSkinExample
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(366, 523);
+            this.label5.Location = new System.Drawing.Point(13, 527);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 28);
             this.label5.TabIndex = 3;
@@ -1236,7 +1234,7 @@ namespace MaterialSkinExample
             this.lb_statusNow.AutoSize = true;
             this.lb_statusNow.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_statusNow.ForeColor = System.Drawing.Color.Red;
-            this.lb_statusNow.Location = new System.Drawing.Point(441, 523);
+            this.lb_statusNow.Location = new System.Drawing.Point(78, 527);
             this.lb_statusNow.Name = "lb_statusNow";
             this.lb_statusNow.Size = new System.Drawing.Size(158, 28);
             this.lb_statusNow.TabIndex = 3;
@@ -1246,25 +1244,12 @@ namespace MaterialSkinExample
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
-            // lb_statusValidTran
-            // 
-            this.lb_statusValidTran.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_statusValidTran.AutoSize = true;
-            this.lb_statusValidTran.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_statusValidTran.ForeColor = System.Drawing.Color.Red;
-            this.lb_statusValidTran.Location = new System.Drawing.Point(12, 523);
-            this.lb_statusValidTran.Name = "lb_statusValidTran";
-            this.lb_statusValidTran.Size = new System.Drawing.Size(158, 28);
-            this.lb_statusValidTran.TabIndex = 19;
-            this.lb_statusValidTran.Text = "ไม่พบการทำรายการ";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(833, 564);
-            this.Controls.Add(this.lb_statusValidTran);
             this.Controls.Add(this.lb_statusNow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.materialTabSelector1);
@@ -1378,6 +1363,5 @@ namespace MaterialSkinExample
         private Label label14;
         private MaterialRaisedButton bt_checkDropDown;
         private MaterialRaisedButton bt_writeRFiD;
-        private Label lb_statusValidTran;
     }
 }

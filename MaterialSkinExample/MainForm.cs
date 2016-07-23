@@ -20,7 +20,7 @@ namespace MaterialSkinExample
     public partial class MainForm : MaterialForm
     {
         private String Hex_transectionID = "";
-        private int IsNewLoop = 0;
+        private int needToNew = 0;  
         private readonly MaterialSkinManager materialSkinManager;
         public MainForm()
         {
@@ -409,14 +409,14 @@ namespace MaterialSkinExample
         }
 
         //ปุ่มกดอ่าน RFID
-        private void bt_readRfid_Click(object sender, EventArgs e)
+        private async void bt_readRfid_Click(object sender, EventArgs e)
         {
             byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode = (byte)((mode1 << 1) | mode2);
             byte blk_add = Convert.ToByte(readStart.Text, 16);
             byte num_blk = Convert.ToByte(readNum.Text, 16);
-          
+
 
             byte[] snr = new byte[6];
             snr = convertSNR(readKey.Text, 6);
@@ -457,17 +457,30 @@ namespace MaterialSkinExample
                 currStation();
                 //เช็คว่าต้อง Update or Insert
                 setNewLoop();
-                if (IsNewLoop == 1)
+                if (needToNew == 1)
                 {
-                    //Insert
+                    //Insert data (ยังไม่มีข้อมูลในระบบ หรือ อาจจะเริ่มต้น Transaction ใหม่)
                     createTransection();
-                    IsNewLoop = 0;
-                    MessageBox.Show("set IsNewLoop =" + IsNewLoop.ToString());
-
+                    needToNew = 0;
+                    lb_statusNow.ForeColor = System.Drawing.Color.Green;
+                    lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
+                    await Task.Delay(5000);         //set for doing something
+                    lb_statusNow.ForeColor = System.Drawing.Color.Red;
+                    resetRabel();
                 }
-                else {
-                    MessageBox.Show("do else");
+                else if (needToNew == 0)
+                {
+                    //Update data (มี Transaction ที่ยังไม่เสร็จในระบบ) 
                     updateTransection();
+                    lb_statusNow.ForeColor = System.Drawing.Color.Green;
+                    lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
+                    await Task.Delay(5000);         //set for doing something
+                    lb_statusNow.ForeColor = System.Drawing.Color.Red;
+                    resetRabel();
+                }
+                else
+                {
+                    MessageBox.Show("ข้อมูลในบัตรผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
                 }
 
             }
@@ -488,8 +501,9 @@ namespace MaterialSkinExample
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             conn.Close();
-            MessageBox.Show("Silent Insert completely");
+            //MessageBox.Show("Silent Insert completely");
         }
+
 
         private void updateTransection()
         {
@@ -845,20 +859,21 @@ namespace MaterialSkinExample
                 }
                 //MessageBox.Show(Hex_transectionID);
                 String String_transectionID = HexStringToString(Hex_transectionID, Encoding.UTF8);
-                materialSingleLineTextField9.Text = String_transectionID;
                 //MessageBox.Show(String_transectionID);
                 bool IsNumberTransection = checkValidTransaction(String_transectionID);
                 if (IsNumberTransection)
                 {
                     //MessageBox.Show("It is a number");
-                    IsNewLoop = 0; // Update the database
+                    needToNew = 0; // Update the database
                 }
                 else
                 {
                     //MessageBox.Show("It is a text");
-                    IsNewLoop = 1;  // Create new transation by insert into the database
+                    needToNew = 1;  // Create new transation by insert into the database
                 }
+
             }
+            Hex_transectionID = "";
         }
         
 

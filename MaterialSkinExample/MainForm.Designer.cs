@@ -41,6 +41,21 @@ namespace MaterialSkinExample
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.writeData = new System.Windows.Forms.TextBox();
+            this.writeKey = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.writeNum = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.writeStart = new System.Windows.Forms.ComboBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.writeKeyA = new System.Windows.Forms.RadioButton();
+            this.writeKeyB = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.writeIdle = new System.Windows.Forms.RadioButton();
+            this.writeAll = new System.Windows.Forms.RadioButton();
+            this.lb_curStation = new System.Windows.Forms.Label();
             this.lb_timeTag = new System.Windows.Forms.Label();
             this.lb_dateTime = new System.Windows.Forms.Label();
             this.lb_tp_vehicle = new System.Windows.Forms.Label();
@@ -69,7 +84,6 @@ namespace MaterialSkinExample
             this.label9 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField6 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label7 = new System.Windows.Forms.Label();
-            this.txt_tp_station = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label3 = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -85,6 +99,10 @@ namespace MaterialSkinExample
             this.dataGridView_transport = new System.Windows.Forms.DataGridView();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bt_checkDropDown = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.comboBox_station = new System.Windows.Forms.ComboBox();
+            this.tbstationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
             this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label4 = new System.Windows.Forms.Label();
             this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -93,22 +111,20 @@ namespace MaterialSkinExample
             this.label_setportrfid = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
-            this.comboBox_station = new System.Windows.Forms.ComboBox();
-            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
-            this.tbstationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
-            this.bt_checkDropDown = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.lb_curStation = new System.Windows.Forms.Label();
+            this.bt_writeRFiD = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -178,9 +194,9 @@ namespace MaterialSkinExample
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(70, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(516, 56);
+            this.label2.Size = new System.Drawing.Size(524, 56);
             this.label2.TabIndex = 20;
-            this.label2.Text = "โปรแกรมจัดการการขนส่งวัตถุดิบ";
+            this.label2.Text = "โปรแกรมติดตามการขนส่งวัตถุดิบ";
             // 
             // label1
             // 
@@ -200,6 +216,17 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.bt_writeRFiD);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.writeData);
+            this.tabPage2.Controls.Add(this.writeKey);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.writeNum);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.writeStart);
+            this.tabPage2.Controls.Add(this.groupBox6);
+            this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.lb_curStation);
             this.tabPage2.Controls.Add(this.lb_timeTag);
             this.tabPage2.Controls.Add(this.lb_dateTime);
@@ -225,7 +252,6 @@ namespace MaterialSkinExample
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.materialSingleLineTextField6);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.txt_tp_station);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label_name);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -235,6 +261,226 @@ namespace MaterialSkinExample
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ข้อมูลการขนส่ง";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(598, 342);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 13);
+            this.label17.TabIndex = 39;
+            this.label17.Text = "Data to Write";
+            // 
+            // writeData
+            // 
+            this.writeData.Location = new System.Drawing.Point(292, 339);
+            this.writeData.Name = "writeData";
+            this.writeData.Size = new System.Drawing.Size(300, 20);
+            this.writeData.TabIndex = 38;
+            this.writeData.Text = "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+            // 
+            // writeKey
+            // 
+            this.writeKey.FormattingEnabled = true;
+            this.writeKey.Items.AddRange(new object[] {
+            "A0 A1 A2 A3 A4 A5",
+            "B0 B1 B2 B3 B4 B5",
+            "FF FF FF FF FF FF"});
+            this.writeKey.Location = new System.Drawing.Point(6, 341);
+            this.writeKey.Name = "writeKey";
+            this.writeKey.Size = new System.Drawing.Size(152, 21);
+            this.writeKey.TabIndex = 37;
+            this.writeKey.Text = "FF FF FF FF FF FF";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(164, 345);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(115, 13);
+            this.label14.TabIndex = 36;
+            this.label14.Text = "The 6 Bytes Block Key";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(205, 318);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(91, 13);
+            this.label15.TabIndex = 35;
+            this.label15.Text = "Number of Blocks";
+            // 
+            // writeNum
+            // 
+            this.writeNum.FormattingEnabled = true;
+            this.writeNum.Items.AddRange(new object[] {
+            "01",
+            "02",
+            "03",
+            "04"});
+            this.writeNum.Location = new System.Drawing.Point(159, 315);
+            this.writeNum.Name = "writeNum";
+            this.writeNum.Size = new System.Drawing.Size(40, 21);
+            this.writeNum.TabIndex = 34;
+            this.writeNum.Text = "01";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(52, 318);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.TabIndex = 33;
+            this.label16.Text = "Starting Block";
+            // 
+            // writeStart
+            // 
+            this.writeStart.FormattingEnabled = true;
+            this.writeStart.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "0A",
+            "0B",
+            "0C",
+            "0D",
+            "0E",
+            "0F",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "1A",
+            "1B",
+            "1C",
+            "1D",
+            "1E",
+            "1F",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "2A",
+            "2B",
+            "2C",
+            "2D",
+            "2E",
+            "2F",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "3A",
+            "3B",
+            "3C",
+            "3D",
+            "3E",
+            "3F"});
+            this.writeStart.Location = new System.Drawing.Point(6, 315);
+            this.writeStart.Name = "writeStart";
+            this.writeStart.Size = new System.Drawing.Size(40, 21);
+            this.writeStart.TabIndex = 32;
+            this.writeStart.Text = "10";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.writeKeyA);
+            this.groupBox6.Controls.Add(this.writeKeyB);
+            this.groupBox6.Location = new System.Drawing.Point(118, 275);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(112, 34);
+            this.groupBox6.TabIndex = 31;
+            this.groupBox6.TabStop = false;
+            // 
+            // writeKeyA
+            // 
+            this.writeKeyA.AutoSize = true;
+            this.writeKeyA.Checked = true;
+            this.writeKeyA.Location = new System.Drawing.Point(6, 12);
+            this.writeKeyA.Name = "writeKeyA";
+            this.writeKeyA.Size = new System.Drawing.Size(50, 17);
+            this.writeKeyA.TabIndex = 0;
+            this.writeKeyA.TabStop = true;
+            this.writeKeyA.Text = "KeyA";
+            this.writeKeyA.UseVisualStyleBackColor = true;
+            // 
+            // writeKeyB
+            // 
+            this.writeKeyB.AutoSize = true;
+            this.writeKeyB.Location = new System.Drawing.Point(59, 12);
+            this.writeKeyB.Name = "writeKeyB";
+            this.writeKeyB.Size = new System.Drawing.Size(50, 17);
+            this.writeKeyB.TabIndex = 1;
+            this.writeKeyB.Text = "KeyB";
+            this.writeKeyB.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.writeIdle);
+            this.groupBox7.Controls.Add(this.writeAll);
+            this.groupBox7.Location = new System.Drawing.Point(6, 275);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(106, 34);
+            this.groupBox7.TabIndex = 30;
+            this.groupBox7.TabStop = false;
+            // 
+            // writeIdle
+            // 
+            this.writeIdle.AutoSize = true;
+            this.writeIdle.Checked = true;
+            this.writeIdle.Location = new System.Drawing.Point(6, 12);
+            this.writeIdle.Name = "writeIdle";
+            this.writeIdle.Size = new System.Drawing.Size(42, 17);
+            this.writeIdle.TabIndex = 0;
+            this.writeIdle.TabStop = true;
+            this.writeIdle.Text = "Idle";
+            this.writeIdle.UseVisualStyleBackColor = true;
+            // 
+            // writeAll
+            // 
+            this.writeAll.AutoSize = true;
+            this.writeAll.Location = new System.Drawing.Point(59, 12);
+            this.writeAll.Name = "writeAll";
+            this.writeAll.Size = new System.Drawing.Size(36, 17);
+            this.writeAll.TabIndex = 1;
+            this.writeAll.Text = "All";
+            this.writeAll.UseVisualStyleBackColor = true;
+            // 
+            // lb_curStation
+            // 
+            this.lb_curStation.AutoSize = true;
+            this.lb_curStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_curStation.ForeColor = System.Drawing.Color.Silver;
+            this.lb_curStation.Location = new System.Drawing.Point(194, 73);
+            this.lb_curStation.Name = "lb_curStation";
+            this.lb_curStation.Size = new System.Drawing.Size(152, 28);
+            this.lb_curStation.TabIndex = 29;
+            this.lb_curStation.Text = "Current station";
             // 
             // lb_timeTag
             // 
@@ -583,7 +829,7 @@ namespace MaterialSkinExample
             // 
             this.txt_tp_material.Depth = 0;
             this.txt_tp_material.Hint = "";
-            this.txt_tp_material.Location = new System.Drawing.Point(193, 265);
+            this.txt_tp_material.Location = new System.Drawing.Point(199, 41);
             this.txt_tp_material.MaxLength = 32767;
             this.txt_tp_material.MouseState = MaterialSkin.MouseState.HOVER;
             this.txt_tp_material.Name = "txt_tp_material";
@@ -636,24 +882,6 @@ namespace MaterialSkinExample
             this.label7.TabIndex = 4;
             this.label7.Text = "สถานะการขนส่งเดิม";
             this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // txt_tp_station
-            // 
-            this.txt_tp_station.Depth = 0;
-            this.txt_tp_station.Hint = "";
-            this.txt_tp_station.Location = new System.Drawing.Point(193, 294);
-            this.txt_tp_station.MaxLength = 32767;
-            this.txt_tp_station.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txt_tp_station.Name = "txt_tp_station";
-            this.txt_tp_station.PasswordChar = '\0';
-            this.txt_tp_station.SelectedText = "";
-            this.txt_tp_station.SelectionLength = 0;
-            this.txt_tp_station.SelectionStart = 0;
-            this.txt_tp_station.Size = new System.Drawing.Size(262, 23);
-            this.txt_tp_station.TabIndex = 3;
-            this.txt_tp_station.TabStop = false;
-            this.txt_tp_station.UseSystemPasswordChar = false;
-            this.txt_tp_station.Click += new System.EventHandler(this.materialSingleLineTextField5_Click);
             // 
             // label3
             // 
@@ -862,6 +1090,40 @@ namespace MaterialSkinExample
             this.tabPage4.Text = "การตั้งค่า";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
+            // bt_checkDropDown
+            // 
+            this.bt_checkDropDown.Depth = 0;
+            this.bt_checkDropDown.Location = new System.Drawing.Point(467, 151);
+            this.bt_checkDropDown.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_checkDropDown.Name = "bt_checkDropDown";
+            this.bt_checkDropDown.Primary = true;
+            this.bt_checkDropDown.Size = new System.Drawing.Size(157, 38);
+            this.bt_checkDropDown.TabIndex = 7;
+            this.bt_checkDropDown.Text = "Check DropDown";
+            this.bt_checkDropDown.UseVisualStyleBackColor = true;
+            this.bt_checkDropDown.Click += new System.EventHandler(this.bt_checkDropDown_Click);
+            // 
+            // comboBox_station
+            // 
+            this.comboBox_station.DataSource = this.tbstationsBindingSource;
+            this.comboBox_station.DisplayMember = "station_name";
+            this.comboBox_station.FormattingEnabled = true;
+            this.comboBox_station.Location = new System.Drawing.Point(176, 111);
+            this.comboBox_station.Name = "comboBox_station";
+            this.comboBox_station.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_station.TabIndex = 6;
+            this.comboBox_station.ValueMember = "station_id";
+            // 
+            // tbstationsBindingSource
+            // 
+            this.tbstationsBindingSource.DataMember = "tb_stations";
+            this.tbstationsBindingSource.DataSource = this.rMTTSDataSet;
+            // 
+            // rMTTSDataSet
+            // 
+            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
+            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // materialSingleLineTextField3
             // 
             this.materialSingleLineTextField3.Depth = 0;
@@ -965,55 +1227,22 @@ namespace MaterialSkinExample
             this.lb_statusNow.TabIndex = 3;
             this.lb_statusNow.Text = "ไม่พบการทำรายการ";
             // 
-            // comboBox_station
-            // 
-            this.comboBox_station.DataSource = this.tbstationsBindingSource;
-            this.comboBox_station.DisplayMember = "station_name";
-            this.comboBox_station.FormattingEnabled = true;
-            this.comboBox_station.Location = new System.Drawing.Point(176, 111);
-            this.comboBox_station.Name = "comboBox_station";
-            this.comboBox_station.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_station.TabIndex = 6;
-            this.comboBox_station.Text = "เหมืองดินเหลือง";
-            this.comboBox_station.ValueMember = "station_id";
-            // 
-            // rMTTSDataSet
-            // 
-            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
-            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tbstationsBindingSource
-            // 
-            this.tbstationsBindingSource.DataMember = "tb_stations";
-            this.tbstationsBindingSource.DataSource = this.rMTTSDataSet;
-            // 
             // tb_stationsTableAdapter
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
-            // bt_checkDropDown
+            // bt_writeRFiD
             // 
-            this.bt_checkDropDown.Depth = 0;
-            this.bt_checkDropDown.Location = new System.Drawing.Point(467, 151);
-            this.bt_checkDropDown.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bt_checkDropDown.Name = "bt_checkDropDown";
-            this.bt_checkDropDown.Primary = true;
-            this.bt_checkDropDown.Size = new System.Drawing.Size(157, 38);
-            this.bt_checkDropDown.TabIndex = 7;
-            this.bt_checkDropDown.Text = "Check DropDown";
-            this.bt_checkDropDown.UseVisualStyleBackColor = true;
-            this.bt_checkDropDown.Click += new System.EventHandler(this.bt_checkDropDown_Click);
-            // 
-            // lb_curStation
-            // 
-            this.lb_curStation.AutoSize = true;
-            this.lb_curStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_curStation.ForeColor = System.Drawing.Color.Silver;
-            this.lb_curStation.Location = new System.Drawing.Point(194, 73);
-            this.lb_curStation.Name = "lb_curStation";
-            this.lb_curStation.Size = new System.Drawing.Size(152, 28);
-            this.lb_curStation.TabIndex = 29;
-            this.lb_curStation.Text = "Current station";
+            this.bt_writeRFiD.Depth = 0;
+            this.bt_writeRFiD.Location = new System.Drawing.Point(328, 260);
+            this.bt_writeRFiD.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_writeRFiD.Name = "bt_writeRFiD";
+            this.bt_writeRFiD.Primary = true;
+            this.bt_writeRFiD.Size = new System.Drawing.Size(115, 49);
+            this.bt_writeRFiD.TabIndex = 19;
+            this.bt_writeRFiD.Text = "WRITE RFID";
+            this.bt_writeRFiD.UseVisualStyleBackColor = true;
+            this.bt_writeRFiD.Click += new System.EventHandler(this.bt_writeRFiD_Click);
             // 
             // MainForm
             // 
@@ -1034,6 +1263,10 @@ namespace MaterialSkinExample
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1043,8 +1276,8 @@ namespace MaterialSkinExample
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1072,7 +1305,6 @@ namespace MaterialSkinExample
         private Label lb_statusNow;
         private Label label4;
         private MaterialSingleLineTextField materialSingleLineTextField3;
-        private MaterialSingleLineTextField txt_tp_station;
         private MaterialSingleLineTextField materialSingleLineTextField6;
         private Label label9;
         private MaterialRaisedButton materialRaisedButton1;
@@ -1114,7 +1346,22 @@ namespace MaterialSkinExample
         private RMTTSDataSet rMTTSDataSet;
         private BindingSource tbstationsBindingSource;
         private RMTTSDataSetTableAdapters.tb_stationsTableAdapter tb_stationsTableAdapter;
-        private MaterialRaisedButton bt_checkDropDown;
         private Label lb_curStation;
+        private Label label15;
+        private ComboBox writeNum;
+        private Label label16;
+        private ComboBox writeStart;
+        private GroupBox groupBox6;
+        private RadioButton writeKeyA;
+        private RadioButton writeKeyB;
+        private GroupBox groupBox7;
+        private RadioButton writeIdle;
+        private RadioButton writeAll;
+        private Label label17;
+        private TextBox writeData;
+        private ComboBox writeKey;
+        private Label label14;
+        private MaterialRaisedButton bt_checkDropDown;
+        private MaterialRaisedButton bt_writeRFiD;
     }
 }

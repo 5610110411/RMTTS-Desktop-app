@@ -341,7 +341,6 @@ namespace MaterialSkinExample
         }
 
         //แสดงข้อมูล
-
         private void showData(string text, byte[] data, int s, int e)
         {
 
@@ -502,48 +501,93 @@ namespace MaterialSkinExample
             conn.Close();
         }
 
+        private void autoGenKey()
+        {
+            SqlCommand cmdDate = new SqlCommand("select getdate()", conn);
+            conn.Open();
+            DataSet ds = new DataSet();
+            DateTime strDatetime = (DateTime)cmdDate.ExecuteScalar();
+
+            //get year month day
+            int thaiYear = new ThaiBuddhistCalendar().GetYear(strDatetime);
+            int thaiMonth = new ThaiBuddhistCalendar().GetMonth(strDatetime);
+            int thaiDay = new ThaiBuddhistCalendar().GetDayOfMonth(strDatetime);
+            int thaiHour = new ThaiBuddhistCalendar().GetHour(strDatetime);
+            int thaiMinute = new ThaiBuddhistCalendar().GetMinute(strDatetime);
+            int thaiSecond = new ThaiBuddhistCalendar().GetSecond(strDatetime);
+
+            String autoKey = ""+ thaiYear.ToString() + thaiMonth.ToString() + thaiDay.ToString() + thaiHour.ToString() + thaiMinute.ToString() + thaiSecond.ToString();
+
+            MessageBox.Show(autoKey);
+            //return autoKey;
+        }
+
         /*MF_Write_Func*/
-        /* private void btn_MF_Write_Click(object sender, EventArgs e)
-         {
-             byte mode1 = (writeKeyB.Checked) ? (byte)0x01 : (byte)0x00;
-             byte mode2 = (writeAll.Checked) ? (byte)0x01 : (byte)0x00;
-             byte mode = (byte)((mode1 << 1) | mode2);
-             byte blk_add = Convert.ToByte(writeStart.Text, 16);
-             byte num_blk = Convert.ToByte(writeNum.Text, 16);
+        private void bt_writeRFiD_Click(object sender, EventArgs e)
+        {
+            byte mode1 = (writeKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (writeAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte(writeStart.Text, 16);
+            byte num_blk = Convert.ToByte(writeNum.Text, 16);
 
-             byte[] snr = new byte[6];
-             snr = convertSNR(writeKey.Text, 16);
-             if (snr == null)
-             {
-                 MessageBox.Show("Invalid Serial Number!", "ERROR");
-                 return;
-             }
+            byte[] snr = new byte[6];
+            snr = convertSNR(writeKey.Text, 16);
+            if (snr == null)
+            {
+                MessageBox.Show("Invalid Serial Number!", "ERROR");
+                return;
+            }
 
-             byte[] buffer = new byte[16 * num_blk];
-             string bufferStr = formatStr(writeData.Text, num_blk);
-             if (bufferStr == null)
-             {
-                 MessageBox.Show("Invalid Serial Number!", "ERROR");
-                 return;
-             }
-             convertStr(buffer, bufferStr, 16 * num_blk);
+            byte[] buffer = new byte[16 * num_blk];
+            string bufferStr = formatStr(writeData.Text, num_blk);
+            if (bufferStr == null)
+            {
+                MessageBox.Show("Invalid Serial Number!", "ERROR");
+                return;
+            }
+            convertStr(buffer, bufferStr, 16 * num_blk);
 
-             int nRet = Reader.MF_Write(mode, blk_add, num_blk, snr, buffer);
-             //string strErrorCode;
+            int nRet = Reader.MF_Write(mode, blk_add, num_blk, snr, buffer);
+            //string strErrorCode;
 
-             showStatue(nRet);
-             if (nRet != 0)
-             {
-                 //strErrorCode = FormatErrorCode(buffer);
-                 //WriteLog("Failed:", nRet, strErrorCode);
-                 showStatue(buffer[0]);
-             }
-             else
-             {
-                 showData("CardNumber:", snr, 0, 4);
-             }
-         }
-         */
+            showStatue(nRet);
+            if (nRet != 0)
+            {
+                //strErrorCode = FormatErrorCode(buffer);
+                //WriteLog("Failed:", nRet, strErrorCode);
+                showStatue(buffer[0]);
+            }
+            else
+            {
+                showData("CardNumber:", snr, 0, 4);
+            }
+        }
+
+        private string formatStr(string str, int num_blk)
+        {
+
+            string tmp = Regex.Replace(str, "[^a-fA-F0-9]", "");
+            //长度不对直接报错
+            //num_blk==-1指示不用检查位数
+            if (num_blk == -1) return tmp;
+            //num_blk==其它负数，为-1/num_blk
+            if (num_blk < -1)
+            {
+                if (tmp.Length != -16 / num_blk * 2) return null;
+                else return tmp;
+            }
+            if (tmp.Length != 16 * num_blk * 2) return null;
+            else return tmp;
+        }
+
+        private void convertStr(byte[] after, string before, int length)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                after[i] = Convert.ToByte(before.Substring(2 * i, 2), 16);
+            }
+        }
 
         /*get time from web
         public static DateTime GetNistTime()
@@ -672,5 +716,7 @@ namespace MaterialSkinExample
         {
             MessageBox.Show(comboBox_station.SelectedValue.ToString());
         }
+
+        
     }
 }

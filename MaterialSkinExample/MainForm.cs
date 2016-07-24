@@ -50,6 +50,8 @@ namespace MaterialSkinExample
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'rMTTSDataSet.tb_materials' table. You can move, or remove it, as needed.
+            this.tb_materialsTableAdapter.Fill(this.rMTTSDataSet.tb_materials);
             // TODO: This line of code loads data into the 'rMTTSDataSet.tb_stations' table. You can move, or remove it, as needed.
             this.tb_stationsTableAdapter.Fill(this.rMTTSDataSet.tb_stations);
             //comboBox_station.SelectedText = "เหมืองดินดำ";
@@ -58,7 +60,31 @@ namespace MaterialSkinExample
 
         private void Showdata()
         {
-            string sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id";
+            string sql = null;
+            //MessageBox.Show(comboBox_material.Text);
+            string where = "";
+            if (!string.IsNullOrWhiteSpace(txt_searhCar.Text))
+            {
+                where += "WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
+            }
+            if (!string.IsNullOrWhiteSpace(comboBox_material.Text) && comboBox_material.Text != "--ALL--")
+            {
+                if (string.IsNullOrWhiteSpace(txt_searhCar.Text))
+                    where += "WHERE tp_material = '" + comboboxMaterialtoNUM(comboBox_material.Text) + "' ";
+                else if (!string.IsNullOrWhiteSpace(txt_searhCar.Text))
+                {
+                    where += " AND tp_material = '" + comboboxMaterialtoNUM(comboBox_material.Text) +  "' ";
+                }
+            }
+
+            //if (string.IsNullOrWhiteSpace(txt_searhCar.Text) && (string.IsNullOrWhiteSpace(comboBox_material.Text) || comboBox_material.Text == "--ALL--") )
+            //{
+                //sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
+               // sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id";
+            //}
+            MessageBox.Show(where);
+            sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id " + where +"";
+            //string sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
             SqlCommand com = new SqlCommand(sql, conn);
             SqlDataReader dr = com.ExecuteReader();
 
@@ -87,6 +113,18 @@ namespace MaterialSkinExample
             dr.Close();
         }
 
+        private string comboboxMaterialtoNUM(string st)
+        {
+            string tmp = null;
+            if (st == "ดินเหลือง") {
+                tmp = "1";
+            }
+            else if (st == "ดินดำ")
+            {
+                tmp = "2";
+            }
+            return tmp;
+        }
 
         private void materialListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1133,6 +1171,11 @@ namespace MaterialSkinExample
             writeRFID("8", "1", "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF");
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "ลบข้อมูลการทำรายการเสร็จสิ้น";
+        }
+
+        private void comboBox_material_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox_material.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

@@ -61,13 +61,12 @@ namespace MaterialSkinExample
             this.bt_search = new MaterialSkin.Controls.MaterialRaisedButton();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.materialSingleLineTextField7 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.dataGridView_transport = new System.Windows.Forms.DataGridView();
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txt_searhCar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.writeData = new System.Windows.Forms.TextBox();
@@ -109,6 +108,9 @@ namespace MaterialSkinExample
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
             this.bt_deleteCard = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.comboBox_material = new System.Windows.Forms.ComboBox();
+            this.tbmaterialsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tb_materialsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_materialsTableAdapter();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -121,6 +123,7 @@ namespace MaterialSkinExample
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbmaterialsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -435,16 +438,16 @@ namespace MaterialSkinExample
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
+            this.tabPage3.Controls.Add(this.comboBox_material);
             this.tabPage3.Controls.Add(this.bt_search);
             this.tabPage3.Controls.Add(this.dateTimePicker2);
             this.tabPage3.Controls.Add(this.dateTimePicker1);
-            this.tabPage3.Controls.Add(this.materialSingleLineTextField7);
             this.tabPage3.Controls.Add(this.materialLabel4);
             this.tabPage3.Controls.Add(this.materialLabel3);
             this.tabPage3.Controls.Add(this.materialLabel2);
             this.tabPage3.Controls.Add(this.materialLabel1);
             this.tabPage3.Controls.Add(this.dataGridView_transport);
-            this.tabPage3.Controls.Add(this.materialSingleLineTextField1);
+            this.tabPage3.Controls.Add(this.txt_searhCar);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -480,24 +483,6 @@ namespace MaterialSkinExample
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 30;
-            // 
-            // materialSingleLineTextField7
-            // 
-            this.materialSingleLineTextField7.BackColor = System.Drawing.Color.White;
-            this.materialSingleLineTextField7.Depth = 0;
-            this.materialSingleLineTextField7.Hint = "Raw material";
-            this.materialSingleLineTextField7.Location = new System.Drawing.Point(117, 46);
-            this.materialSingleLineTextField7.MaxLength = 32767;
-            this.materialSingleLineTextField7.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField7.Name = "materialSingleLineTextField7";
-            this.materialSingleLineTextField7.PasswordChar = '\0';
-            this.materialSingleLineTextField7.SelectedText = "";
-            this.materialSingleLineTextField7.SelectionLength = 0;
-            this.materialSingleLineTextField7.SelectionStart = 0;
-            this.materialSingleLineTextField7.Size = new System.Drawing.Size(147, 28);
-            this.materialSingleLineTextField7.TabIndex = 29;
-            this.materialSingleLineTextField7.TabStop = false;
-            this.materialSingleLineTextField7.UseSystemPasswordChar = false;
             // 
             // materialLabel4
             // 
@@ -558,32 +543,31 @@ namespace MaterialSkinExample
             this.dataGridView_transport.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_transport.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_transport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_transport.Location = new System.Drawing.Point(10, 87);
+            this.dataGridView_transport.Location = new System.Drawing.Point(10, 109);
             this.dataGridView_transport.Name = "dataGridView_transport";
             this.dataGridView_transport.ReadOnly = true;
-            this.dataGridView_transport.Size = new System.Drawing.Size(972, 503);
+            this.dataGridView_transport.Size = new System.Drawing.Size(972, 481);
             this.dataGridView_transport.TabIndex = 20;
             this.dataGridView_transport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // materialSingleLineTextField1
+            // txt_searhCar
             // 
-            this.materialSingleLineTextField1.BackColor = System.Drawing.Color.White;
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Hint = "Car number";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(117, 6);
-            this.materialSingleLineTextField1.MaxLength = 32767;
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(147, 28);
-            this.materialSingleLineTextField1.TabIndex = 19;
-            this.materialSingleLineTextField1.TabStop = false;
-            this.materialSingleLineTextField1.Text = "Car license";
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField1.Click += new System.EventHandler(this.materialSingleLineTextField1_Click);
+            this.txt_searhCar.BackColor = System.Drawing.Color.White;
+            this.txt_searhCar.Depth = 0;
+            this.txt_searhCar.Hint = "Car number";
+            this.txt_searhCar.Location = new System.Drawing.Point(117, 6);
+            this.txt_searhCar.MaxLength = 32767;
+            this.txt_searhCar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txt_searhCar.Name = "txt_searhCar";
+            this.txt_searhCar.PasswordChar = '\0';
+            this.txt_searhCar.SelectedText = "";
+            this.txt_searhCar.SelectionLength = 0;
+            this.txt_searhCar.SelectionStart = 0;
+            this.txt_searhCar.Size = new System.Drawing.Size(131, 28);
+            this.txt_searhCar.TabIndex = 19;
+            this.txt_searhCar.TabStop = false;
+            this.txt_searhCar.UseSystemPasswordChar = false;
+            this.txt_searhCar.Click += new System.EventHandler(this.materialSingleLineTextField1_Click);
             // 
             // tabPage4
             // 
@@ -1199,6 +1183,28 @@ namespace MaterialSkinExample
             this.bt_deleteCard.UseVisualStyleBackColor = true;
             this.bt_deleteCard.Click += new System.EventHandler(this.bt_deleteCard_Click);
             // 
+            // comboBox_material
+            // 
+            this.comboBox_material.FormattingEnabled = true;
+            this.comboBox_material.Items.AddRange(new object[] {
+            "--ALL--",
+            "ดินดำ",
+            "ดินเหลือง"});
+            this.comboBox_material.Location = new System.Drawing.Point(117, 50);
+            this.comboBox_material.Name = "comboBox_material";
+            this.comboBox_material.Size = new System.Drawing.Size(131, 21);
+            this.comboBox_material.TabIndex = 33;
+            this.comboBox_material.SelectedIndexChanged += new System.EventHandler(this.comboBox_material_SelectedIndexChanged);
+            // 
+            // tbmaterialsBindingSource
+            // 
+            this.tbmaterialsBindingSource.DataMember = "tb_materials";
+            this.tbmaterialsBindingSource.DataSource = this.rMTTSDataSet;
+            // 
+            // tb_materialsTableAdapter
+            // 
+            this.tb_materialsTableAdapter.ClearBeforeFill = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1233,6 +1239,7 @@ namespace MaterialSkinExample
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbmaterialsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1250,7 +1257,7 @@ namespace MaterialSkinExample
         private Label label_setdatabase;
         private TabPage tabPage3;
         private DataGridView dataGridView_transport;
-        private MaterialSingleLineTextField materialSingleLineTextField1;
+        private MaterialSingleLineTextField txt_searhCar;
         private MaterialSingleLineTextField materialSingleLineTextField2;
         private Label label_name;
         private Label label3;
@@ -1262,7 +1269,6 @@ namespace MaterialSkinExample
         private MaterialLabel materialLabel2;
         private MaterialLabel materialLabel1;
         private MaterialLabel materialLabel4;
-        private MaterialSingleLineTextField materialSingleLineTextField7;
         private DateTimePicker dateTimePicker2;
         private DateTimePicker dateTimePicker1;
         private Label label7;
@@ -1314,5 +1320,8 @@ namespace MaterialSkinExample
         private MaterialRaisedButton bt_search;
         private Label lb_rawMat;
         private MaterialRaisedButton bt_deleteCard;
+        private ComboBox comboBox_material;
+        private BindingSource tbmaterialsBindingSource;
+        private RMTTSDataSetTableAdapters.tb_materialsTableAdapter tb_materialsTableAdapter;
     }
 }

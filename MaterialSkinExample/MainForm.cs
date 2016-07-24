@@ -61,8 +61,12 @@ namespace MaterialSkinExample
         private void Showdata()
         {
             string sql = null;
+            //string dateTime = convertDateTime(dateTimePicker_from.Text);
             //MessageBox.Show(comboBox_material.Text);
+            string theDateFrom = convertYear(dateTimePicker_from.Value.ToString("yyyy-MM-dd"));
+            string theDateTo = convertYear(dateTimePicker_to.Value.ToString("yyyy-MM-dd"));
             string where = "";
+
             if (!string.IsNullOrWhiteSpace(txt_searhCar.Text))
             {
                 where += "WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
@@ -76,14 +80,15 @@ namespace MaterialSkinExample
                     where += " AND tp_material = '" + comboboxMaterialtoNUM(comboBox_material.Text) +  "' ";
                 }
             }
+            where += " AND (tp_time_set_finish BETWEEN '"+ theDateFrom + " 00:00:00.0000000' AND '" + theDateTo + " 23:59:59.9999999')";
 
-            //if (string.IsNullOrWhiteSpace(txt_searhCar.Text) && (string.IsNullOrWhiteSpace(comboBox_material.Text) || comboBox_material.Text == "--ALL--") )
-            //{
-                //sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
-               // sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id";
-            //}
-            MessageBox.Show(where);
-            sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id " + where +"";
+
+               
+            //MessageBox.Show(where);
+
+            //MessageBox.Show(theDateFrom);
+            sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id " + where + "";
+            // AND (tp_time_set_finish BETWEEN '2016-01-23 00:00:00.0000000' AND '2016-01-25 23:59:59.9999999'
             //string sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id WHERE tp_vehicle = '" + txt_searhCar.Text + "' ";
             SqlCommand com = new SqlCommand(sql, conn);
             SqlDataReader dr = com.ExecuteReader();
@@ -124,6 +129,19 @@ namespace MaterialSkinExample
                 tmp = "2";
             }
             return tmp;
+        }
+
+
+        //convert 2559-01-21  ->> 2016-01-21
+        private string convertYear(string st){
+            string tmp = st;
+            string strDate = st;
+            tmp = tmp.Substring(0,4);
+            int intDate = Int32.Parse(tmp) - 543;
+            //MessageBox.Show(strDate.Substring(4));
+            strDate = intDate.ToString() + strDate.Substring(4);
+            //MessageBox.Show(strDate);
+            return strDate;
         }
 
         private void materialListView1_SelectedIndexChanged(object sender, EventArgs e)

@@ -25,6 +25,7 @@ namespace MaterialSkinExample
         private string String_transactionID = null;
         private string String_transactionStatus;
         private string Laststation = null;
+        private string rawMaterial = null;
         
 
         private readonly MaterialSkinManager materialSkinManager;
@@ -548,6 +549,10 @@ namespace MaterialSkinExample
 
             lb_previousStation.ForeColor = System.Drawing.Color.Green;
             lb_previousStation.Text = Laststation;
+
+            lb_rawMat.ForeColor = System.Drawing.Color.Green;
+            lb_rawMat.Text = rawMaterial.Substring(6);
+
             resetRegis();
             conn.Close();
         }
@@ -572,6 +577,7 @@ namespace MaterialSkinExample
                 lb_previousStatus.Text = translateStatus(sdr["tp_status"].ToString());
                 String_transactionStatus = sdr["tp_status"].ToString();
                 Laststation = translateStation(sdr["tp_from"].ToString());
+                rawMaterial = translateStation(sdr["tp_from"].ToString());
             }
 
             conn.Close();

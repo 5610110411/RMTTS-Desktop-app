@@ -45,7 +45,8 @@ namespace MaterialSkinExample
         {
             // TODO: This line of code loads data into the 'rMTTSDataSet.tb_stations' table. You can move, or remove it, as needed.
             this.tb_stationsTableAdapter.Fill(this.rMTTSDataSet.tb_stations);
-            
+            //comboBox_station.SelectedText = "เหมืองดินดำ";
+            //comboBox_station.Items.("เหมืองดินดำ").Selected = true;
         }
 
         private void Showdata()
@@ -70,9 +71,7 @@ namespace MaterialSkinExample
                 dataGridView_transport.Columns[6].HeaderText = "รับวัตถุดิบเสร็จสิ้น";
                 dataGridView_transport.Columns[7].HeaderText = "ส่งวัตถุดิบเข้า";
                 dataGridView_transport.Columns[8].HeaderText = "เทวัตถุดิบเสร็จสิ้น";
-                
-                
-
+               
             }
             else
             {
@@ -496,8 +495,11 @@ namespace MaterialSkinExample
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
-            lb_previousStation.Text = "----";
+            lb_previousStation.Text = "ไม่สามารถตรวจสอบได้";
+            lb_curStation.Text = "ไม่สามารถตรวจสอบได้";
+            lb_curStatus.Text = "รับวัตถุดิบจากแหล่ง";
             lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
+            resetRegis();
             conn.Close();
             //MessageBox.Show("Silent Insert completely");
 
@@ -524,10 +526,14 @@ namespace MaterialSkinExample
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
             lb_curStatus.Text = translateStatus(int_transactionStatus.ToString());
+            resetRegis();
+            conn.Close();
+        }
+
+        private void resetRegis() {
             timeRegis = null;
             String_transactionID = null;
             String_transactionStatus = null;
-            conn.Close();
         }
 
         //get values from database for display in textboxs
@@ -554,6 +560,7 @@ namespace MaterialSkinExample
             {
                 translatedStatus = "รับวัตถุดิบจากแหล่ง";
                 timeRegis = "tp_time_get_finish";
+
             }
             else if (OriginString == "2")
             {

@@ -52,7 +52,6 @@ namespace MaterialSkinExample
             this.bt_readRfid = new MaterialSkin.Controls.MaterialRaisedButton();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.txt_tp_material = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -108,6 +107,7 @@ namespace MaterialSkinExample
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
+            this.lb_rawMat = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -208,6 +208,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.lb_rawMat);
             this.tabPage2.Controls.Add(this.bt_clear);
             this.tabPage2.Controls.Add(this.lb_curStatus);
             this.tabPage2.Controls.Add(this.lb_previousStatus);
@@ -219,7 +220,6 @@ namespace MaterialSkinExample
             this.tabPage2.Controls.Add(this.bt_readRfid);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.txt_tp_material);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label3);
@@ -252,7 +252,7 @@ namespace MaterialSkinExample
             this.lb_curStatus.AutoSize = true;
             this.lb_curStatus.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_curStatus.ForeColor = System.Drawing.Color.Silver;
-            this.lb_curStatus.Location = new System.Drawing.Point(421, 209);
+            this.lb_curStatus.Location = new System.Drawing.Point(421, 202);
             this.lb_curStatus.Name = "lb_curStatus";
             this.lb_curStatus.Size = new System.Drawing.Size(147, 28);
             this.lb_curStatus.TabIndex = 42;
@@ -278,7 +278,7 @@ namespace MaterialSkinExample
             this.lb_previousStation.AutoSize = true;
             this.lb_previousStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_previousStation.ForeColor = System.Drawing.Color.Silver;
-            this.lb_previousStation.Location = new System.Drawing.Point(421, 115);
+            this.lb_previousStation.Location = new System.Drawing.Point(421, 108);
             this.lb_previousStation.Name = "lb_previousStation";
             this.lb_previousStation.Size = new System.Drawing.Size(164, 28);
             this.lb_previousStation.TabIndex = 40;
@@ -291,7 +291,7 @@ namespace MaterialSkinExample
             this.lb_curStation.AutoSize = true;
             this.lb_curStation.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_curStation.ForeColor = System.Drawing.Color.Silver;
-            this.lb_curStation.Location = new System.Drawing.Point(421, 160);
+            this.lb_curStation.Location = new System.Drawing.Point(421, 153);
             this.lb_curStation.Name = "lb_curStation";
             this.lb_curStation.Size = new System.Drawing.Size(152, 28);
             this.lb_curStation.TabIndex = 29;
@@ -302,7 +302,7 @@ namespace MaterialSkinExample
             this.lb_timeTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_timeTag.AutoSize = true;
             this.lb_timeTag.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_timeTag.Location = new System.Drawing.Point(220, 252);
+            this.lb_timeTag.Location = new System.Drawing.Point(220, 245);
             this.lb_timeTag.Name = "lb_timeTag";
             this.lb_timeTag.Size = new System.Drawing.Size(142, 32);
             this.lb_timeTag.TabIndex = 28;
@@ -314,7 +314,7 @@ namespace MaterialSkinExample
             this.lb_dateTime.AutoSize = true;
             this.lb_dateTime.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_dateTime.ForeColor = System.Drawing.Color.Silver;
-            this.lb_dateTime.Location = new System.Drawing.Point(421, 256);
+            this.lb_dateTime.Location = new System.Drawing.Point(421, 249);
             this.lb_dateTime.Name = "lb_dateTime";
             this.lb_dateTime.Size = new System.Drawing.Size(103, 28);
             this.lb_dateTime.TabIndex = 27;
@@ -352,7 +352,7 @@ namespace MaterialSkinExample
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(220, 112);
+            this.label10.Location = new System.Drawing.Point(220, 105);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(99, 32);
             this.label10.TabIndex = 10;
@@ -363,36 +363,18 @@ namespace MaterialSkinExample
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(220, 205);
+            this.label8.Location = new System.Drawing.Point(220, 198);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(136, 32);
             this.label8.TabIndex = 8;
             this.label8.Text = "สถานะปัจจุบัน";
-            // 
-            // txt_tp_material
-            // 
-            this.txt_tp_material.Depth = 0;
-            this.txt_tp_material.Hint = "";
-            this.txt_tp_material.Location = new System.Drawing.Point(579, 68);
-            this.txt_tp_material.MaxLength = 32767;
-            this.txt_tp_material.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txt_tp_material.Name = "txt_tp_material";
-            this.txt_tp_material.PasswordChar = '\0';
-            this.txt_tp_material.SelectedText = "";
-            this.txt_tp_material.SelectionLength = 0;
-            this.txt_tp_material.SelectionStart = 0;
-            this.txt_tp_material.Size = new System.Drawing.Size(181, 23);
-            this.txt_tp_material.TabIndex = 7;
-            this.txt_tp_material.TabStop = false;
-            this.txt_tp_material.UseSystemPasswordChar = false;
-            this.txt_tp_material.Click += new System.EventHandler(this.materialSingleLineTextField8_Click);
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(220, 68);
+            this.label9.Location = new System.Drawing.Point(220, 61);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(151, 32);
             this.label9.TabIndex = 6;
@@ -417,7 +399,7 @@ namespace MaterialSkinExample
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(220, 157);
+            this.label3.Location = new System.Drawing.Point(220, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 32);
             this.label3.TabIndex = 1;
@@ -1188,6 +1170,18 @@ namespace MaterialSkinExample
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
+            // lb_rawMat
+            // 
+            this.lb_rawMat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_rawMat.AutoSize = true;
+            this.lb_rawMat.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rawMat.ForeColor = System.Drawing.Color.Silver;
+            this.lb_rawMat.Location = new System.Drawing.Point(421, 64);
+            this.lb_rawMat.Name = "lb_rawMat";
+            this.lb_rawMat.Size = new System.Drawing.Size(135, 28);
+            this.lb_rawMat.TabIndex = 44;
+            this.lb_rawMat.Text = "Raw material";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1259,7 +1253,6 @@ namespace MaterialSkinExample
         private Label label10;
         private MaterialRaisedButton bt_readRfid;
         private Label lb_tp_vehicle;
-        private MaterialSingleLineTextField txt_tp_material;
         private Label lb_timeTag;
         private Label lb_dateTime;
         private ComboBox comboBox_station;
@@ -1302,5 +1295,6 @@ namespace MaterialSkinExample
         private RadioButton writeAll;
         private TextBox textResponse;
         private MaterialRaisedButton bt_search;
+        private Label lb_rawMat;
     }
 }

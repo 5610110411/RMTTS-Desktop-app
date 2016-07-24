@@ -190,10 +190,6 @@ namespace MaterialSkinExample
 
         }
 
-        private void materialSingleLineTextField8_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void materialSingleLineTextField7_Click(object sender, EventArgs e)
         {
@@ -371,6 +367,7 @@ namespace MaterialSkinExample
             //textResponse.Text += "\r\n\r\n";
             //textResponse.Text = "e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35";
             //Display car license
+            lb_tp_vehicle.ForeColor = System.Drawing.Color.Green;
             lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
         }
 
@@ -508,10 +505,19 @@ namespace MaterialSkinExample
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
-            lb_previousStation.Text = "ไม่สามารถตรวจสอบได้";
-            lb_curStation.Text = "ไม่สามารถตรวจสอบได้";
-            lb_curStatus.Text = "รับวัตถุดิบจากแหล่ง";
             lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
+
+            lb_previousStation.ForeColor = System.Drawing.Color.Green;
+            lb_previousStation.Text = "ไม่สามารถตรวจสอบได้";
+
+            lb_curStation.ForeColor = System.Drawing.Color.Green;
+            lb_curStation.Text = "ไม่สามารถตรวจสอบได้";
+
+            lb_curStatus.ForeColor = System.Drawing.Color.Green;
+            lb_curStatus.Text = "รับวัตถุดิบจากแหล่ง";
+
+            lb_rawMat.ForeColor = System.Drawing.Color.Green;
+            lb_rawMat.Text = translateStation(comboBox_station.SelectedValue.ToString()).Substring(6);  //แสดงชือวัตถุดิบของสถานีนั้นๆ (ใช้ได้เฉพาะต้องสร้าง Transactionใหม่เท่านั้น)
             resetRegis();
             conn.Close();
             //MessageBox.Show("Silent Insert completely");
@@ -530,16 +536,17 @@ namespace MaterialSkinExample
                 createTransection();
                 return;
             }
-            if (timeRegis == null)
-                timeRegis = "tp_time_set";
-            //MessageBox.Show(timeRegis.ToString());
             string sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "บันทึกข้อมูลเสร็จสิ้น";
+
+            lb_curStatus.ForeColor = System.Drawing.Color.Green;
             lb_curStatus.Text = translateStatus(int_transactionStatus.ToString());
+
+            lb_previousStation.ForeColor = System.Drawing.Color.Green;
             lb_previousStation.Text = Laststation;
             resetRegis();
             conn.Close();
@@ -668,6 +675,7 @@ namespace MaterialSkinExample
         //Display current station
         private void currStation()
         {
+            lb_curStation.ForeColor = System.Drawing.Color.Green;
             lb_curStation.Text = comboBox_station.Text;
         }
 
@@ -696,6 +704,7 @@ namespace MaterialSkinExample
             */
             DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
             //MessageBox.Show(thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            lb_dateTime.ForeColor = System.Drawing.Color.Green;
             lb_dateTime.Text = thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss");
             conn.Close();
         }
@@ -782,7 +791,7 @@ namespace MaterialSkinExample
         {
             try
             {
-                insertData();
+                //insertData();
                 lb_statusNow.ForeColor = System.Drawing.Color.Green;
                 lb_statusNow.Text = "บันทึกสำเร็จ";
                 MessageBox.Show("การบันทึกข้อมูลเสร็จสิ้น");
@@ -802,14 +811,35 @@ namespace MaterialSkinExample
         {
             lb_statusNow.ForeColor = System.Drawing.Color.Red;
             lb_statusNow.Text = "ไม่พบการทำรายการ";
-            lb_tp_vehicle.Text = "Car license";
-            lb_dateTime.Text = "Date time";
-            lb_previousStatus.Text = "Previous status";
-            lb_curStation.Text = "Current station";
-            lb_curStatus.Text = "Current status";
-            
-        }
 
+            lb_tp_vehicle.ForeColor = System.Drawing.Color.Gray;
+            lb_tp_vehicle.Text = "Car license";
+
+            lb_dateTime.ForeColor = System.Drawing.Color.Gray;
+            lb_dateTime.Text = "Date time";
+
+            lb_tp_vehicle.ForeColor = System.Drawing.Color.Gray;
+            lb_tp_vehicle.Text = "Previous status";
+
+            lb_previousStatus.ForeColor = System.Drawing.Color.Gray;
+            lb_previousStatus.Text = "Previous status";
+
+            lb_curStation.ForeColor = System.Drawing.Color.Gray;
+            lb_curStation.Text = "Current station";
+
+            lb_curStatus.ForeColor = System.Drawing.Color.Gray;
+            lb_curStatus.Text = "Current status";
+
+            lb_rawMat.ForeColor = System.Drawing.Color.Gray;
+            lb_rawMat.Text = "Raw material";
+
+            lb_previousStation.ForeColor = System.Drawing.Color.Gray;
+            lb_previousStation.Text = "Previous staion";
+
+
+        }
+        
+        /*
         private void insertData()
         {
             string sql = "INSERT INTO tb_transports (tp_vehicle, tp_material, tp_time_get) VALUES('" + lb_tp_vehicle.Text + "', '" + txt_tp_material.Text + "', '" + lb_dateTime.Text + "')";
@@ -819,7 +849,7 @@ namespace MaterialSkinExample
             conn.Close();
 
 
-        }
+        }*/
 
         private void rMTTSDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
         {

@@ -82,7 +82,6 @@ namespace MaterialSkinExample
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.writeIdle = new System.Windows.Forms.RadioButton();
             this.writeAll = new System.Windows.Forms.RadioButton();
-            this.textResponse = new System.Windows.Forms.TextBox();
             this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
             this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
             this.bt_saveData = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -111,6 +110,7 @@ namespace MaterialSkinExample
             this.comboBox_material = new System.Windows.Forms.ComboBox();
             this.tbmaterialsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tb_materialsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_materialsTableAdapter();
+            this.textResponse = new System.Windows.Forms.TextBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -212,6 +212,7 @@ namespace MaterialSkinExample
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.textResponse);
             this.tabPage2.Controls.Add(this.lb_rawMat);
             this.tabPage2.Controls.Add(this.bt_clear);
             this.tabPage2.Controls.Add(this.lb_curStatus);
@@ -443,10 +444,10 @@ namespace MaterialSkinExample
             this.tabPage3.Controls.Add(this.dateTimePicker_to);
             this.tabPage3.Controls.Add(this.dateTimePicker_from);
             this.tabPage3.Controls.Add(this.materialLabel4);
+            this.tabPage3.Controls.Add(this.dataGridView_transport);
             this.tabPage3.Controls.Add(this.materialLabel3);
             this.tabPage3.Controls.Add(this.materialLabel2);
             this.tabPage3.Controls.Add(this.materialLabel1);
-            this.tabPage3.Controls.Add(this.dataGridView_transport);
             this.tabPage3.Controls.Add(this.txt_searhCar);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -543,10 +544,10 @@ namespace MaterialSkinExample
             this.dataGridView_transport.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_transport.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_transport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_transport.Location = new System.Drawing.Point(10, 109);
+            this.dataGridView_transport.Location = new System.Drawing.Point(0, 96);
             this.dataGridView_transport.Name = "dataGridView_transport";
             this.dataGridView_transport.ReadOnly = true;
-            this.dataGridView_transport.Size = new System.Drawing.Size(972, 481);
+            this.dataGridView_transport.Size = new System.Drawing.Size(970, 460);
             this.dataGridView_transport.TabIndex = 20;
             this.dataGridView_transport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -583,7 +584,6 @@ namespace MaterialSkinExample
             this.tabPage4.Controls.Add(this.writeStart);
             this.tabPage4.Controls.Add(this.groupBox6);
             this.tabPage4.Controls.Add(this.groupBox7);
-            this.tabPage4.Controls.Add(this.textResponse);
             this.tabPage4.Controls.Add(this.bt_toSting);
             this.tabPage4.Controls.Add(this.bt_toString);
             this.tabPage4.Controls.Add(this.bt_saveData);
@@ -825,16 +825,6 @@ namespace MaterialSkinExample
             this.writeAll.TabIndex = 1;
             this.writeAll.Text = "All";
             this.writeAll.UseVisualStyleBackColor = true;
-            // 
-            // textResponse
-            // 
-            this.textResponse.Location = new System.Drawing.Point(482, 133);
-            this.textResponse.Multiline = true;
-            this.textResponse.Name = "textResponse";
-            this.textResponse.Size = new System.Drawing.Size(298, 94);
-            this.textResponse.TabIndex = 40;
-            this.textResponse.Visible = false;
-            this.textResponse.TextChanged += new System.EventHandler(this.textResponse_TextChanged);
             // 
             // bt_toSting
             // 
@@ -1205,6 +1195,15 @@ namespace MaterialSkinExample
             // 
             this.tb_materialsTableAdapter.ClearBeforeFill = true;
             // 
+            // textResponse
+            // 
+            this.textResponse.Location = new System.Drawing.Point(635, 33);
+            this.textResponse.Multiline = true;
+            this.textResponse.Name = "textResponse";
+            this.textResponse.Size = new System.Drawing.Size(298, 94);
+            this.textResponse.TabIndex = 45;
+            this.textResponse.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1316,12 +1315,12 @@ namespace MaterialSkinExample
         private GroupBox groupBox7;
         private RadioButton writeIdle;
         private RadioButton writeAll;
-        private TextBox textResponse;
         private MaterialRaisedButton bt_search;
         private Label lb_rawMat;
         private MaterialRaisedButton bt_deleteCard;
         private ComboBox comboBox_material;
         private BindingSource tbmaterialsBindingSource;
         private RMTTSDataSetTableAdapters.tb_materialsTableAdapter tb_materialsTableAdapter;
+        private TextBox textResponse;
     }
 }

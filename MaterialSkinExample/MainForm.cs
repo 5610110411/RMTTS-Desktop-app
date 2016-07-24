@@ -477,6 +477,13 @@ namespace MaterialSkinExample
         //ปุ่มกดอ่าน RFID
         private void bt_readRfid_Click(object sender, EventArgs e)
         {
+            if (IsRegisCard() == 0)
+            {
+                resetRegis();
+                resetRabel();
+                MessageBox.Show("ไม่พบข้อมูลบัตร กรุณาลงทะเบียนก่อนการใช้งาน");
+                return;
+            }
             byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode = (byte)((mode1 << 1) | mode2);
@@ -508,11 +515,11 @@ namespace MaterialSkinExample
             else
             {
                 //ส่งเสียง
-                /*byte[] buffer_bff = new byte[1];
-                int nRetf = Reader.ControlBuzzer(14, 1, buffer_bff);
-                showStatue(nRet);
-                showStatue(buffer_bff[0]);
-                */
+                //byte[] buffer_bff = new byte[1];
+                //int nRetf = Reader.ControlBuzzer(14, 1, buffer_bff);
+                //showStatue(nRet);
+                //showStatue(buffer_bff[0]);
+                
                 //แสดงผล
                 //showData("CardNumber: ", snr, 0, 4);
                 //showData("Data: ", buffer, 0, 12 * num_blk);
@@ -1194,6 +1201,51 @@ namespace MaterialSkinExample
         private void comboBox_material_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_material.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private int IsRegisCard() {
+            int IsRegiscard = 0;
+            byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte("10", 16);
+            byte num_blk = Convert.ToByte("1", 16);
+
+
+            byte[] snr = new byte[6];
+            snr = convertSNR(readKey.Text, 6);
+            
+
+            byte[] buffer = new byte[16 * num_blk];
+
+            int nRet = Reader.MF_Read(mode, blk_add, num_blk, snr, buffer);
+            
+            //Clear value in label
+            textResponse.Text = "";
+
+            //showData("Data: ", buffer, 0);
+            //(string text, byte[] data, int s)
+            for (int i = 3; i < 7; i++)
+            {
+                textResponse.Text += buffer[0 + i].ToString("X2") + " ";
+            }
+            string strText = HexStringToString(textResponse.Text, Encoding.UTF8);
+            bool IsValidCard = checkValidTransaction(strText);
+            //MessageBox.Show(textResponse.Text);
+            if (IsValidCard == true || textResponse.Text == "00 00 00 00")
+            {
+                //MessageBox.Show("It is a number");
+                IsRegiscard = 1; // ลงทะเบียนแล้ว
+            }
+            else
+            {
+                //MessageBox.Show("It is a text");
+                IsRegiscard = 0;  // ไม่ลงทะเบียนที
+                
+            }
+            textResponse.Text = "";
+            return IsRegiscard;
+
         }
     }
 }

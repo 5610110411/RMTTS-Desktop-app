@@ -22,11 +22,13 @@ namespace MaterialSkinExample
         private String Hex_transectionID = "";
         private int needToNew = 0;      // 0 : ไม่ต้องสร้าง Transaction ใหม่ & 1 : วนส่งครบรอบ เริ่มนับรอบใหม่
         private int materialValue = 2;  // ช่วงของรายชื่อสถานีจาก database ที่เป็นสถานีรับวัตถุดิบ
+        private int IsTimeToSet = 0;    // ถึงเวลาแล้วที่ต้องอัพเดตdatabase tp_to 
         private string String_transactionID = null;
         private string String_transactionStatus;
         private string Laststation = null;
         private string rawMaterial = null;
         
+
 
         private readonly MaterialSkinManager materialSkinManager;
         private string timeRegis = null;
@@ -537,7 +539,16 @@ namespace MaterialSkinExample
                 createTransection();
                 return;
             }
-            string sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
+
+            string sql = null;
+            if (IsTimeToSet == 0)
+            {
+                sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
+            }
+            else if (IsTimeToSet == 1)
+            {
+                sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "', tp_to = '" + comboBox_station.SelectedValue.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
+            }
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
@@ -562,6 +573,7 @@ namespace MaterialSkinExample
             String_transactionID = null;
             String_transactionStatus = null;
             Laststation = null;
+            IsTimeToSet = 0;
         }
 
         //get values from database for display in textboxs
@@ -601,6 +613,7 @@ namespace MaterialSkinExample
             {
                 translatedStatus = "ส่งวัตถุดิบเข้า";
                 timeRegis = "tp_time_set_finish";
+                IsTimeToSet = 1;
             }
             else if (OriginString == "4")
             { 

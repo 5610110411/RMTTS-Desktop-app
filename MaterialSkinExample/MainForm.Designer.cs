@@ -59,8 +59,8 @@ namespace MaterialSkinExample
             this.label_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.bt_search = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -440,8 +440,8 @@ namespace MaterialSkinExample
             this.tabPage3.BackColor = System.Drawing.Color.White;
             this.tabPage3.Controls.Add(this.comboBox_material);
             this.tabPage3.Controls.Add(this.bt_search);
-            this.tabPage3.Controls.Add(this.dateTimePicker2);
-            this.tabPage3.Controls.Add(this.dateTimePicker1);
+            this.tabPage3.Controls.Add(this.dateTimePicker_to);
+            this.tabPage3.Controls.Add(this.dateTimePicker_from);
             this.tabPage3.Controls.Add(this.materialLabel4);
             this.tabPage3.Controls.Add(this.materialLabel3);
             this.tabPage3.Controls.Add(this.materialLabel2);
@@ -470,19 +470,19 @@ namespace MaterialSkinExample
             this.bt_search.UseVisualStyleBackColor = true;
             this.bt_search.Click += new System.EventHandler(this.bt_search_Click);
             // 
-            // dateTimePicker2
+            // dateTimePicker_to
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(356, 50);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 31;
+            this.dateTimePicker_to.Location = new System.Drawing.Point(367, 50);
+            this.dateTimePicker_to.Name = "dateTimePicker_to";
+            this.dateTimePicker_to.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker_to.TabIndex = 31;
             // 
-            // dateTimePicker1
+            // dateTimePicker_from
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(356, 10);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 30;
+            this.dateTimePicker_from.Location = new System.Drawing.Point(367, 10);
+            this.dateTimePicker_from.Name = "dateTimePicker_from";
+            this.dateTimePicker_from.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker_from.TabIndex = 30;
             // 
             // materialLabel4
             // 
@@ -1269,8 +1269,8 @@ namespace MaterialSkinExample
         private MaterialLabel materialLabel2;
         private MaterialLabel materialLabel1;
         private MaterialLabel materialLabel4;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker_to;
+        private DateTimePicker dateTimePicker_from;
         private Label label7;
         private Label label8;
         private Label label10;

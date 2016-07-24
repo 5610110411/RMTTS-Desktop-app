@@ -343,25 +343,14 @@ namespace MaterialSkinExample
             return result;
         }
 
-        //แสดงข้อมูล
+        //อ่านข้อมูลทะเบียนรถ(Old)
+        /*
         private void showData(string text, byte[] data, int s, int e)
         {
 
             //Clear value in label
             textResponse.Text = "";
-            /*for (int i = 0; i < e; i++)
-            {
-                if (data[s + i] < 0)
-                    data[s + i] = Convert.ToByte(Convert.ToInt32(data[s + i]) + 256);
-            }
-            textResponse.Text += text;*/
-
-            //for (int i = s; i < e; i++)
-            //{
-            //    textResponse.Text += data[i].ToString("X2")+" ";
-            //}
-            //textResponse.Text += "\r\n";
-
+          
             for (int i = 0; i < e; i++)
             {
                 textResponse.Text += data[s + i].ToString("X2") + " ";
@@ -373,6 +362,26 @@ namespace MaterialSkinExample
             lb_tp_vehicle.ForeColor = System.Drawing.Color.Green;
             lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
         }
+        */
+
+        //อ่านข้อมูลทะเบียนรถ(New e.g. 74-811 = 37 34 2d 37 38 31 31 FF FF FF FF FF FF FF FF FF)
+
+        private void showData(string text, byte[] data, int s)
+        {
+
+            //Clear value in label
+            textResponse.Text = "";
+          
+            for (int i = 0; i < 7; i++)
+            {
+                textResponse.Text += data[s + i].ToString("X2") + " ";
+            }
+            lb_tp_vehicle.ForeColor = System.Drawing.Color.Green;
+            lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
+            //MessageBox.Show(lb_tp_vehicle.Text);
+        }
+        
+
 
         private DateTime getDateTime()
         {
@@ -450,8 +459,8 @@ namespace MaterialSkinExample
                 */
                 //แสดงผล
                 //showData("CardNumber: ", snr, 0, 4);
-                showData("Data: ", buffer, 0, 12 * num_blk);
-
+                //showData("Data: ", buffer, 0, 12 * num_blk);
+                showData("Data: ", buffer, 0);
                 //Display current time
                 currTime();
                 //Display current station
@@ -499,14 +508,23 @@ namespace MaterialSkinExample
             string str_autokey = autoGenKey();
             string Hex_autokey = StringToHexString(str_autokey, Encoding.UTF8);
             //MessageBox.Show(Hex_autokey + " FF FF");
-            writeRFID("8", "1", Hex_autokey + " FF FF");
+            
             //format 32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF
             //MessageBox.Show(comboBox_station.SelectedValue.ToString());
             
             string sql = "INSERT INTO tb_transports (tp_id, tp_vehicle, tp_time_get, tp_status, tp_from, tp_material) VALUES('" + str_autokey + "' ,'" + lb_tp_vehicle.Text + "', '" + lb_dateTime.Text + "', '1', '" + comboBox_station.SelectedValue + "', '" + str_materialNumber + "')";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                lb_statusNow.Text = "การบันทึกผิดพลาดในการบันทึกข้อมูล (" + ex.Message + ")";
+            }
+
+            //cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "เริ่มต้นการทำรายการใหม่";
 
@@ -521,6 +539,7 @@ namespace MaterialSkinExample
 
             lb_rawMat.ForeColor = System.Drawing.Color.Green;
             lb_rawMat.Text = translateStation(comboBox_station.SelectedValue.ToString()).Substring(6);  //แสดงชือวัตถุดิบของสถานีนั้นๆ (ใช้ได้เฉพาะต้องสร้าง Transactionใหม่เท่านั้น)
+            writeRFID("8", "1", Hex_autokey + " FF FF");
             resetRegis();
             conn.Close();
             //MessageBox.Show("Silent Insert completely");
@@ -529,7 +548,18 @@ namespace MaterialSkinExample
 
         private void updateTransection()
         {
-            int int_transactionStatus = Int32.Parse(String_transactionStatus);
+            int int_transactionStatus = 1;
+            try
+            {
+                int_transactionStatus = Int32.Parse(String_transactionStatus);
+            }
+            catch (Exception ex)
+            {
+                lb_statusNow.Text = "การบันทึกผิดพลาดในการอ่านบัตร (" + ex.Message + ")";
+            }
+
+            //int int_transactionStatus = Int32.Parse(String_transactionStatus);
+
             if (int_transactionStatus < 4)
             {
                 int_transactionStatus += 1;
@@ -551,7 +581,15 @@ namespace MaterialSkinExample
             }
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                lb_statusNow.Text = "การบันทึกผิดพลาดในการอัพเดตข้อมูล (" + ex.Message + ")";
+            }
+            //cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "บันทึกข้อมูลเสร็จสิ้น";
 
@@ -562,7 +600,18 @@ namespace MaterialSkinExample
             lb_previousStation.Text = Laststation;
 
             lb_rawMat.ForeColor = System.Drawing.Color.Green;
-            lb_rawMat.Text = rawMaterial.Substring(6);
+            try
+            {
+                lb_rawMat.Text = rawMaterial.Substring(6);
+            }
+            catch (Exception ex)
+            {
+                resetRegis();
+                resetRabel();
+                MessageBox.Show("ข้อมูลในบัตรเสียหาย กรุณาติดต่อเจ้าหน้าที่");
+            }
+
+            //lb_rawMat.Text = rawMaterial.Substring(6);
 
             resetRegis();
             conn.Close();
@@ -1077,6 +1126,13 @@ namespace MaterialSkinExample
             {
                 //MessageBox.Show("การเชื่อมต่อฐานข้อมูลผิดพลาด");
             }
+        }
+
+        private void bt_deleteCard_Click(object sender, EventArgs e)
+        {
+            writeRFID("8", "1", "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF");
+            lb_statusNow.ForeColor = System.Drawing.Color.Green;
+            lb_statusNow.Text = "ลบข้อมูลการทำรายการเสร็จสิ้น";
         }
     }
 }

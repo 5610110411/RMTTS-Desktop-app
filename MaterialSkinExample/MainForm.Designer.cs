@@ -108,6 +108,7 @@ namespace MaterialSkinExample
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
+            this.bt_deleteCard = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -587,6 +588,7 @@ namespace MaterialSkinExample
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.Controls.Add(this.bt_deleteCard);
             this.tabPage4.Controls.Add(this.label17);
             this.tabPage4.Controls.Add(this.writeData);
             this.tabPage4.Controls.Add(this.writeKey);
@@ -1183,6 +1185,20 @@ namespace MaterialSkinExample
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
+            // bt_deleteCard
+            // 
+            this.bt_deleteCard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_deleteCard.Depth = 0;
+            this.bt_deleteCard.Location = new System.Drawing.Point(841, 317);
+            this.bt_deleteCard.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_deleteCard.Name = "bt_deleteCard";
+            this.bt_deleteCard.Primary = true;
+            this.bt_deleteCard.Size = new System.Drawing.Size(102, 41);
+            this.bt_deleteCard.TabIndex = 51;
+            this.bt_deleteCard.Text = "ลบข้อมูลบัตร";
+            this.bt_deleteCard.UseVisualStyleBackColor = true;
+            this.bt_deleteCard.Click += new System.EventHandler(this.bt_deleteCard_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1297,5 +1313,6 @@ namespace MaterialSkinExample
         private TextBox textResponse;
         private MaterialRaisedButton bt_search;
         private Label lb_rawMat;
+        private MaterialRaisedButton bt_deleteCard;
     }
 }

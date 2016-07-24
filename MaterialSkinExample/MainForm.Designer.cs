@@ -62,37 +62,12 @@ namespace MaterialSkinExample
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.materialSingleLineTextField7 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.dataGridView_transport = new System.Windows.Forms.DataGridView();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.comboBox_station = new System.Windows.Forms.ComboBox();
-            this.tbstationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
-            this.label4 = new System.Windows.Forms.Label();
-            this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.label_setdatabase = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lb_statusNow = new System.Windows.Forms.Label();
-            this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
-            this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.bt_saveData = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.readKey = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.readNum = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.readStart = new System.Windows.Forms.ComboBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.readKeyA = new System.Windows.Forms.RadioButton();
-            this.readKeyB = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.readIdle = new System.Windows.Forms.RadioButton();
-            this.readAll = new System.Windows.Forms.RadioButton();
             this.label17 = new System.Windows.Forms.Label();
             this.writeData = new System.Windows.Forms.TextBox();
             this.writeKey = new System.Windows.Forms.ComboBox();
@@ -108,18 +83,43 @@ namespace MaterialSkinExample
             this.writeIdle = new System.Windows.Forms.RadioButton();
             this.writeAll = new System.Windows.Forms.RadioButton();
             this.textResponse = new System.Windows.Forms.TextBox();
+            this.bt_toSting = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.bt_toString = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.bt_saveData = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.readKey = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.readNum = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.readStart = new System.Windows.Forms.ComboBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.readKeyA = new System.Windows.Forms.RadioButton();
+            this.readKeyB = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.readIdle = new System.Windows.Forms.RadioButton();
+            this.readAll = new System.Windows.Forms.RadioButton();
+            this.comboBox_station = new System.Windows.Forms.ComboBox();
+            this.tbstationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rMTTSDataSet = new MaterialSkinExample.RMTTSDataSet();
+            this.label4 = new System.Windows.Forms.Label();
+            this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.label_setdatabase = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lb_statusNow = new System.Windows.Forms.Label();
+            this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
+            this.bt_search = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // materialDivider1
@@ -440,11 +440,11 @@ namespace MaterialSkinExample
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
+            this.tabPage3.Controls.Add(this.bt_search);
             this.tabPage3.Controls.Add(this.dateTimePicker2);
             this.tabPage3.Controls.Add(this.dateTimePicker1);
             this.tabPage3.Controls.Add(this.materialSingleLineTextField7);
             this.tabPage3.Controls.Add(this.materialLabel4);
-            this.tabPage3.Controls.Add(this.materialRaisedButton1);
             this.tabPage3.Controls.Add(this.materialLabel3);
             this.tabPage3.Controls.Add(this.materialLabel2);
             this.tabPage3.Controls.Add(this.materialLabel1);
@@ -502,19 +502,6 @@ namespace MaterialSkinExample
             this.materialLabel4.Size = new System.Drawing.Size(19, 19);
             this.materialLabel4.TabIndex = 28;
             this.materialLabel4.Text = "ถึง";
-            // 
-            // materialRaisedButton1
-            // 
-            this.materialRaisedButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialRaisedButton1.Depth = 0;
-            this.materialRaisedButton1.Location = new System.Drawing.Point(672, 10);
-            this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRaisedButton1.Name = "materialRaisedButton1";
-            this.materialRaisedButton1.Primary = true;
-            this.materialRaisedButton1.Size = new System.Drawing.Size(107, 38);
-            this.materialRaisedButton1.TabIndex = 26;
-            this.materialRaisedButton1.Text = "Search";
-            this.materialRaisedButton1.UseVisualStyleBackColor = true;
             // 
             // materialLabel3
             // 
@@ -625,96 +612,234 @@ namespace MaterialSkinExample
             this.tabPage4.Text = "การตั้งค่า";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // comboBox_station
+            // label17
             // 
-            this.comboBox_station.DataSource = this.tbstationsBindingSource;
-            this.comboBox_station.DisplayMember = "station_name";
-            this.comboBox_station.FormattingEnabled = true;
-            this.comboBox_station.Location = new System.Drawing.Point(176, 111);
-            this.comboBox_station.Name = "comboBox_station";
-            this.comboBox_station.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_station.TabIndex = 6;
-            this.comboBox_station.Text = "เหมืองดินเหลือง";
-            this.comboBox_station.ValueMember = "station_id";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(262, 289);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 13);
+            this.label17.TabIndex = 50;
+            this.label17.Text = "Data to Write";
+            this.label17.Visible = false;
             // 
-            // tbstationsBindingSource
+            // writeData
             // 
-            this.tbstationsBindingSource.DataMember = "tb_stations";
-            this.tbstationsBindingSource.DataSource = this.rMTTSDataSet;
+            this.writeData.Location = new System.Drawing.Point(6, 285);
+            this.writeData.Name = "writeData";
+            this.writeData.Size = new System.Drawing.Size(250, 20);
+            this.writeData.TabIndex = 49;
+            this.writeData.Text = "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
+            this.writeData.Visible = false;
             // 
-            // rMTTSDataSet
+            // writeKey
             // 
-            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
-            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.writeKey.FormattingEnabled = true;
+            this.writeKey.Items.AddRange(new object[] {
+            "A0 A1 A2 A3 A4 A5",
+            "B0 B1 B2 B3 B4 B5",
+            "FF FF FF FF FF FF"});
+            this.writeKey.Location = new System.Drawing.Point(7, 337);
+            this.writeKey.Name = "writeKey";
+            this.writeKey.Size = new System.Drawing.Size(152, 21);
+            this.writeKey.TabIndex = 48;
+            this.writeKey.Text = "FF FF FF FF FF FF";
+            this.writeKey.Visible = false;
             // 
-            // label4
+            // label14
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label4.Location = new System.Drawing.Point(33, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 24);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "ชื่อสถานี";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(165, 341);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(115, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "The 6 Bytes Block Key";
+            this.label14.Visible = false;
             // 
-            // materialSingleLineTextField2
+            // label15
             // 
-            this.materialSingleLineTextField2.Depth = 0;
-            this.materialSingleLineTextField2.Hint = "Connection string";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(176, 64);
-            this.materialSingleLineTextField2.MaxLength = 32767;
-            this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
-            this.materialSingleLineTextField2.PasswordChar = '\0';
-            this.materialSingleLineTextField2.SelectedText = "";
-            this.materialSingleLineTextField2.SelectionLength = 0;
-            this.materialSingleLineTextField2.SelectionStart = 0;
-            this.materialSingleLineTextField2.Size = new System.Drawing.Size(448, 23);
-            this.materialSingleLineTextField2.TabIndex = 3;
-            this.materialSingleLineTextField2.TabStop = false;
-            this.materialSingleLineTextField2.UseSystemPasswordChar = false;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(206, 314);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(91, 13);
+            this.label15.TabIndex = 46;
+            this.label15.Text = "Number of Blocks";
+            this.label15.Visible = false;
             // 
-            // label_setdatabase
+            // writeNum
             // 
-            this.label_setdatabase.AutoSize = true;
-            this.label_setdatabase.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_setdatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label_setdatabase.Location = new System.Drawing.Point(33, 64);
-            this.label_setdatabase.Name = "label_setdatabase";
-            this.label_setdatabase.Size = new System.Drawing.Size(134, 24);
-            this.label_setdatabase.TabIndex = 2;
-            this.label_setdatabase.Text = "การเชื่อมต่อฐานข้อมูล";
-            this.label_setdatabase.Click += new System.EventHandler(this.label_setdatabase_Click);
+            this.writeNum.FormattingEnabled = true;
+            this.writeNum.Items.AddRange(new object[] {
+            "01",
+            "02",
+            "03",
+            "04"});
+            this.writeNum.Location = new System.Drawing.Point(160, 311);
+            this.writeNum.Name = "writeNum";
+            this.writeNum.Size = new System.Drawing.Size(40, 21);
+            this.writeNum.TabIndex = 45;
+            this.writeNum.Text = "01";
+            this.writeNum.Visible = false;
             // 
-            // label5
+            // label16
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(13, 527);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 28);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "สถานะ :";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(53, 314);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.TabIndex = 44;
+            this.label16.Text = "Starting Block";
+            this.label16.Visible = false;
             // 
-            // lb_statusNow
+            // writeStart
             // 
-            this.lb_statusNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_statusNow.AutoSize = true;
-            this.lb_statusNow.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_statusNow.ForeColor = System.Drawing.Color.Red;
-            this.lb_statusNow.Location = new System.Drawing.Point(78, 527);
-            this.lb_statusNow.Name = "lb_statusNow";
-            this.lb_statusNow.Size = new System.Drawing.Size(158, 28);
-            this.lb_statusNow.TabIndex = 3;
-            this.lb_statusNow.Text = "ไม่พบการทำรายการ";
+            this.writeStart.FormattingEnabled = true;
+            this.writeStart.Items.AddRange(new object[] {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "0A",
+            "0B",
+            "0C",
+            "0D",
+            "0E",
+            "0F",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "1A",
+            "1B",
+            "1C",
+            "1D",
+            "1E",
+            "1F",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "2A",
+            "2B",
+            "2C",
+            "2D",
+            "2E",
+            "2F",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "3A",
+            "3B",
+            "3C",
+            "3D",
+            "3E",
+            "3F"});
+            this.writeStart.Location = new System.Drawing.Point(7, 311);
+            this.writeStart.Name = "writeStart";
+            this.writeStart.Size = new System.Drawing.Size(40, 21);
+            this.writeStart.TabIndex = 43;
+            this.writeStart.Text = "10";
+            this.writeStart.Visible = false;
             // 
-            // tb_stationsTableAdapter
+            // groupBox6
             // 
-            this.tb_stationsTableAdapter.ClearBeforeFill = true;
+            this.groupBox6.Controls.Add(this.writeKeyA);
+            this.groupBox6.Controls.Add(this.writeKeyB);
+            this.groupBox6.Location = new System.Drawing.Point(138, 245);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(112, 34);
+            this.groupBox6.TabIndex = 42;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Visible = false;
+            // 
+            // writeKeyA
+            // 
+            this.writeKeyA.AutoSize = true;
+            this.writeKeyA.Checked = true;
+            this.writeKeyA.Location = new System.Drawing.Point(6, 12);
+            this.writeKeyA.Name = "writeKeyA";
+            this.writeKeyA.Size = new System.Drawing.Size(50, 17);
+            this.writeKeyA.TabIndex = 0;
+            this.writeKeyA.TabStop = true;
+            this.writeKeyA.Text = "KeyA";
+            this.writeKeyA.UseVisualStyleBackColor = true;
+            // 
+            // writeKeyB
+            // 
+            this.writeKeyB.AutoSize = true;
+            this.writeKeyB.Location = new System.Drawing.Point(59, 12);
+            this.writeKeyB.Name = "writeKeyB";
+            this.writeKeyB.Size = new System.Drawing.Size(50, 17);
+            this.writeKeyB.TabIndex = 1;
+            this.writeKeyB.Text = "KeyB";
+            this.writeKeyB.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.writeIdle);
+            this.groupBox7.Controls.Add(this.writeAll);
+            this.groupBox7.Location = new System.Drawing.Point(7, 245);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(106, 34);
+            this.groupBox7.TabIndex = 41;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Visible = false;
+            // 
+            // writeIdle
+            // 
+            this.writeIdle.AutoSize = true;
+            this.writeIdle.Checked = true;
+            this.writeIdle.Location = new System.Drawing.Point(6, 12);
+            this.writeIdle.Name = "writeIdle";
+            this.writeIdle.Size = new System.Drawing.Size(42, 17);
+            this.writeIdle.TabIndex = 0;
+            this.writeIdle.TabStop = true;
+            this.writeIdle.Text = "Idle";
+            this.writeIdle.UseVisualStyleBackColor = true;
+            // 
+            // writeAll
+            // 
+            this.writeAll.AutoSize = true;
+            this.writeAll.Location = new System.Drawing.Point(59, 12);
+            this.writeAll.Name = "writeAll";
+            this.writeAll.Size = new System.Drawing.Size(36, 17);
+            this.writeAll.TabIndex = 1;
+            this.writeAll.Text = "All";
+            this.writeAll.UseVisualStyleBackColor = true;
+            // 
+            // textResponse
+            // 
+            this.textResponse.Location = new System.Drawing.Point(482, 133);
+            this.textResponse.Multiline = true;
+            this.textResponse.Name = "textResponse";
+            this.textResponse.Size = new System.Drawing.Size(298, 94);
+            this.textResponse.TabIndex = 40;
+            this.textResponse.Visible = false;
+            this.textResponse.TextChanged += new System.EventHandler(this.textResponse_TextChanged);
             // 
             // bt_toSting
             // 
@@ -959,234 +1084,108 @@ namespace MaterialSkinExample
             this.readAll.UseVisualStyleBackColor = true;
             this.readAll.Visible = false;
             // 
-            // label17
+            // comboBox_station
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(262, 289);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 13);
-            this.label17.TabIndex = 50;
-            this.label17.Text = "Data to Write";
-            this.label17.Visible = false;
+            this.comboBox_station.DataSource = this.tbstationsBindingSource;
+            this.comboBox_station.DisplayMember = "station_name";
+            this.comboBox_station.FormattingEnabled = true;
+            this.comboBox_station.Location = new System.Drawing.Point(176, 111);
+            this.comboBox_station.Name = "comboBox_station";
+            this.comboBox_station.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_station.TabIndex = 6;
+            this.comboBox_station.ValueMember = "station_id";
             // 
-            // writeData
+            // tbstationsBindingSource
             // 
-            this.writeData.Location = new System.Drawing.Point(6, 285);
-            this.writeData.Name = "writeData";
-            this.writeData.Size = new System.Drawing.Size(250, 20);
-            this.writeData.TabIndex = 49;
-            this.writeData.Text = "FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF";
-            this.writeData.Visible = false;
+            this.tbstationsBindingSource.DataMember = "tb_stations";
+            this.tbstationsBindingSource.DataSource = this.rMTTSDataSet;
             // 
-            // writeKey
+            // rMTTSDataSet
             // 
-            this.writeKey.FormattingEnabled = true;
-            this.writeKey.Items.AddRange(new object[] {
-            "A0 A1 A2 A3 A4 A5",
-            "B0 B1 B2 B3 B4 B5",
-            "FF FF FF FF FF FF"});
-            this.writeKey.Location = new System.Drawing.Point(7, 337);
-            this.writeKey.Name = "writeKey";
-            this.writeKey.Size = new System.Drawing.Size(152, 21);
-            this.writeKey.TabIndex = 48;
-            this.writeKey.Text = "FF FF FF FF FF FF";
-            this.writeKey.Visible = false;
+            this.rMTTSDataSet.DataSetName = "RMTTSDataSet";
+            this.rMTTSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // label14
+            // label4
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(165, 341);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(115, 13);
-            this.label14.TabIndex = 47;
-            this.label14.Text = "The 6 Bytes Block Key";
-            this.label14.Visible = false;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label4.Location = new System.Drawing.Point(33, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 24);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "ชื่อสถานี";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label15
+            // materialSingleLineTextField2
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(206, 314);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(91, 13);
-            this.label15.TabIndex = 46;
-            this.label15.Text = "Number of Blocks";
-            this.label15.Visible = false;
+            this.materialSingleLineTextField2.Depth = 0;
+            this.materialSingleLineTextField2.Hint = "Connection string";
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(176, 64);
+            this.materialSingleLineTextField2.MaxLength = 32767;
+            this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
+            this.materialSingleLineTextField2.PasswordChar = '\0';
+            this.materialSingleLineTextField2.SelectedText = "";
+            this.materialSingleLineTextField2.SelectionLength = 0;
+            this.materialSingleLineTextField2.SelectionStart = 0;
+            this.materialSingleLineTextField2.Size = new System.Drawing.Size(448, 23);
+            this.materialSingleLineTextField2.TabIndex = 3;
+            this.materialSingleLineTextField2.TabStop = false;
+            this.materialSingleLineTextField2.UseSystemPasswordChar = false;
             // 
-            // writeNum
+            // label_setdatabase
             // 
-            this.writeNum.FormattingEnabled = true;
-            this.writeNum.Items.AddRange(new object[] {
-            "01",
-            "02",
-            "03",
-            "04"});
-            this.writeNum.Location = new System.Drawing.Point(160, 311);
-            this.writeNum.Name = "writeNum";
-            this.writeNum.Size = new System.Drawing.Size(40, 21);
-            this.writeNum.TabIndex = 45;
-            this.writeNum.Text = "01";
-            this.writeNum.Visible = false;
+            this.label_setdatabase.AutoSize = true;
+            this.label_setdatabase.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_setdatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label_setdatabase.Location = new System.Drawing.Point(33, 64);
+            this.label_setdatabase.Name = "label_setdatabase";
+            this.label_setdatabase.Size = new System.Drawing.Size(134, 24);
+            this.label_setdatabase.TabIndex = 2;
+            this.label_setdatabase.Text = "การเชื่อมต่อฐานข้อมูล";
+            this.label_setdatabase.Click += new System.EventHandler(this.label_setdatabase_Click);
             // 
-            // label16
+            // label5
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(53, 314);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
-            this.label16.TabIndex = 44;
-            this.label16.Text = "Starting Block";
-            this.label16.Visible = false;
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(13, 527);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 28);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "สถานะ :";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // writeStart
+            // lb_statusNow
             // 
-            this.writeStart.FormattingEnabled = true;
-            this.writeStart.Items.AddRange(new object[] {
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "0A",
-            "0B",
-            "0C",
-            "0D",
-            "0E",
-            "0F",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "1A",
-            "1B",
-            "1C",
-            "1D",
-            "1E",
-            "1F",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "2A",
-            "2B",
-            "2C",
-            "2D",
-            "2E",
-            "2F",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "3A",
-            "3B",
-            "3C",
-            "3D",
-            "3E",
-            "3F"});
-            this.writeStart.Location = new System.Drawing.Point(7, 311);
-            this.writeStart.Name = "writeStart";
-            this.writeStart.Size = new System.Drawing.Size(40, 21);
-            this.writeStart.TabIndex = 43;
-            this.writeStart.Text = "10";
-            this.writeStart.Visible = false;
+            this.lb_statusNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_statusNow.AutoSize = true;
+            this.lb_statusNow.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_statusNow.ForeColor = System.Drawing.Color.Red;
+            this.lb_statusNow.Location = new System.Drawing.Point(78, 527);
+            this.lb_statusNow.Name = "lb_statusNow";
+            this.lb_statusNow.Size = new System.Drawing.Size(158, 28);
+            this.lb_statusNow.TabIndex = 3;
+            this.lb_statusNow.Text = "ไม่พบการทำรายการ";
             // 
-            // groupBox6
+            // tb_stationsTableAdapter
             // 
-            this.groupBox6.Controls.Add(this.writeKeyA);
-            this.groupBox6.Controls.Add(this.writeKeyB);
-            this.groupBox6.Location = new System.Drawing.Point(138, 245);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(112, 34);
-            this.groupBox6.TabIndex = 42;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Visible = false;
+            this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
-            // writeKeyA
+            // bt_search
             // 
-            this.writeKeyA.AutoSize = true;
-            this.writeKeyA.Checked = true;
-            this.writeKeyA.Location = new System.Drawing.Point(6, 12);
-            this.writeKeyA.Name = "writeKeyA";
-            this.writeKeyA.Size = new System.Drawing.Size(50, 17);
-            this.writeKeyA.TabIndex = 0;
-            this.writeKeyA.TabStop = true;
-            this.writeKeyA.Text = "KeyA";
-            this.writeKeyA.UseVisualStyleBackColor = true;
-            // 
-            // writeKeyB
-            // 
-            this.writeKeyB.AutoSize = true;
-            this.writeKeyB.Location = new System.Drawing.Point(59, 12);
-            this.writeKeyB.Name = "writeKeyB";
-            this.writeKeyB.Size = new System.Drawing.Size(50, 17);
-            this.writeKeyB.TabIndex = 1;
-            this.writeKeyB.Text = "KeyB";
-            this.writeKeyB.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.writeIdle);
-            this.groupBox7.Controls.Add(this.writeAll);
-            this.groupBox7.Location = new System.Drawing.Point(7, 245);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(106, 34);
-            this.groupBox7.TabIndex = 41;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Visible = false;
-            // 
-            // writeIdle
-            // 
-            this.writeIdle.AutoSize = true;
-            this.writeIdle.Checked = true;
-            this.writeIdle.Location = new System.Drawing.Point(6, 12);
-            this.writeIdle.Name = "writeIdle";
-            this.writeIdle.Size = new System.Drawing.Size(42, 17);
-            this.writeIdle.TabIndex = 0;
-            this.writeIdle.TabStop = true;
-            this.writeIdle.Text = "Idle";
-            this.writeIdle.UseVisualStyleBackColor = true;
-            // 
-            // writeAll
-            // 
-            this.writeAll.AutoSize = true;
-            this.writeAll.Location = new System.Drawing.Point(59, 12);
-            this.writeAll.Name = "writeAll";
-            this.writeAll.Size = new System.Drawing.Size(36, 17);
-            this.writeAll.TabIndex = 1;
-            this.writeAll.Text = "All";
-            this.writeAll.UseVisualStyleBackColor = true;
-            // 
-            // textResponse
-            // 
-            this.textResponse.Location = new System.Drawing.Point(482, 133);
-            this.textResponse.Multiline = true;
-            this.textResponse.Name = "textResponse";
-            this.textResponse.Size = new System.Drawing.Size(298, 94);
-            this.textResponse.TabIndex = 40;
-            this.textResponse.Visible = false;
-            this.textResponse.TextChanged += new System.EventHandler(this.textResponse_TextChanged);
+            this.bt_search.Depth = 0;
+            this.bt_search.Location = new System.Drawing.Point(665, 10);
+            this.bt_search.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_search.Name = "bt_search";
+            this.bt_search.Primary = true;
+            this.bt_search.Size = new System.Drawing.Size(121, 43);
+            this.bt_search.TabIndex = 32;
+            this.bt_search.Text = "SEARCH";
+            this.bt_search.UseVisualStyleBackColor = true;
+            this.bt_search.Click += new System.EventHandler(this.bt_search_Click);
             // 
             // MainForm
             // 
@@ -1212,16 +1211,16 @@ namespace MaterialSkinExample
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_transport)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbstationsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rMTTSDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1247,7 +1246,6 @@ namespace MaterialSkinExample
         private Label lb_statusNow;
         private Label label4;
         private Label label9;
-        private MaterialRaisedButton materialRaisedButton1;
         private MaterialLabel materialLabel3;
         private MaterialLabel materialLabel2;
         private MaterialLabel materialLabel1;
@@ -1302,5 +1300,6 @@ namespace MaterialSkinExample
         private RadioButton writeIdle;
         private RadioButton writeAll;
         private TextBox textResponse;
+        private MaterialRaisedButton bt_search;
     }
 }

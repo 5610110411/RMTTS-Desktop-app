@@ -22,8 +22,9 @@ namespace MaterialSkinExample
         private String Hex_transectionID = "";
         private int needToNew = 0;
         private string String_transactionID = null;
-        private string String_transactionStatus = null;
+        private string String_transactionStatus;
         private readonly MaterialSkinManager materialSkinManager;
+        private string timeRegis = null;
         public MainForm()
         {
             InitializeComponent();
@@ -35,13 +36,6 @@ namespace MaterialSkinExample
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        //DataSet ds = new DataSet(); // create ds
-        //string cn = "Data Source =.; Initial Catalog = RMTTS; User ID = Nineza; Password = 1234";
-        //SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=RMTTS; Trusted_Connection=True;");
-        //good//SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
-        //Data Source = NEXT - GCDLTNPKUF\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine
-        //SqlConnection con = new SqlConnection("Server=.\\SQLEXPRESS;Initial Catalog = RMTTS; Persist Security Info=True;User ID = newnine; Password=ninenine;");
-
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
 
@@ -51,25 +45,12 @@ namespace MaterialSkinExample
         {
             // TODO: This line of code loads data into the 'rMTTSDataSet.tb_stations' table. You can move, or remove it, as needed.
             this.tb_stationsTableAdapter.Fill(this.rMTTSDataSet.tb_stations);
-
-            
-            try
-            {
-                conn.Open();
-                Showdata();
-            }
-            catch
-            {
-                MessageBox.Show("การเชื่อมต่อฐานข้อมูลผิดพลาด");
-            }
             
         }
 
         private void Showdata()
         {
             string sql = "SELECT tb_transports.tp_vehicle, tb_vehicles.vehicle_number,tb_materials.material_name, tb_stations.station_name, tb_status.status_describe, tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish  FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_stations ON tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id";
-            //string sql = "SELECT tb_transports.tp_vehicle, tb_materials.material_name, tb_status.status_describe, tb_transports.tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish, tb_vehicles.vehicle_number FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_stations ON tb_transports.tp_from = tb_stations.station_id AND tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id";
-            //string sql = "SELECT tb_transports.tp_vehicle, tb_materials.material_name, tb_status.status_describe, tb_transports.tp_time_get, tb_transports.tp_time_get_finish, tb_transports.tp_time_set, tb_transports.tp_time_set_finish, tb_vehicles.vehicle_number FROM tb_transports INNER JOIN tb_materials ON tb_transports.tp_material = tb_materials.material_id INNER JOIN tb_stations ON tb_transports.tp_from = tb_stations.station_id AND tb_transports.tp_to = tb_stations.station_id INNER JOIN tb_status ON tb_transports.tp_status = tb_status.status_id INNER JOIN tb_vehicles ON tb_transports.tp_vehicle = tb_vehicles.vehicle_id WHERE tb_transports.tp_vehicle = 'บม1312' ";
             SqlCommand com = new SqlCommand(sql, conn);
             SqlDataReader dr = com.ExecuteReader();
 
@@ -523,7 +504,7 @@ namespace MaterialSkinExample
         }
 
 
-        private async void updateTransection()
+        private void updateTransection()
         {
             int int_transactionStatus = Int32.Parse(String_transactionStatus);
             if (int_transactionStatus < 4)
@@ -536,14 +517,14 @@ namespace MaterialSkinExample
                 return;
             }
 
-            string sql = "UPDATE tb_transports SET tp_time_get_finish = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
+            string sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
             lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
             lb_curStatus.Text = translateStatus(int_transactionStatus.ToString());
-           
+            timeRegis = null;
             String_transactionID = null;
             String_transactionStatus = null;
             conn.Close();
@@ -570,13 +551,25 @@ namespace MaterialSkinExample
         {
             string translatedStatus;
             if (OriginString == "1")
+            {
                 translatedStatus = "รับวัตถุดิบจากแหล่ง";
+                timeRegis = "tp_time_get_finish";
+            }
             else if (OriginString == "2")
+            {
                 translatedStatus = "รับวัตถุดิบเสร็จสิ้น";
+                timeRegis = "tp_time_set";
+            }
             else if (OriginString == "3")
+            {
                 translatedStatus = "ส่งวัตถุดิบเข้า";
+                timeRegis = "tp_time_set_finish";
+            }
             else if (OriginString == "4")
+            { 
                 translatedStatus = "เทวัตถุดิบเสร็จสิ้น";
+                timeRegis = "tp_time_set";
+            }
             else
                 translatedStatus = "เกิดข้อผิดพลาด";
             return translatedStatus;
@@ -974,5 +967,18 @@ namespace MaterialSkinExample
 
         }
 
+        private void bt_search_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                Showdata();
+                conn.Close();
+            }
+            catch
+            {
+                //MessageBox.Show("การเชื่อมต่อฐานข้อมูลผิดพลาด");
+            }
+        }
     }
 }

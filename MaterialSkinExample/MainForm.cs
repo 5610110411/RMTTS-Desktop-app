@@ -20,9 +20,13 @@ namespace MaterialSkinExample
     public partial class MainForm : MaterialForm
     {
         private String Hex_transectionID = "";
-        private int needToNew = 0;
+        private int needToNew = 0;      // 0 : ไม่ต้องสร้าง Transaction ใหม่ & 1 : วนส่งครบรอบ เริ่มนับรอบใหม่
+        private int materialValue = 2;  // ช่วงของรายชื่อสถานีจาก database ที่เป็นสถานีรับวัตถุดิบ
         private string String_transactionID = null;
         private string String_transactionStatus;
+        private string Laststation = null;
+        
+
         private readonly MaterialSkinManager materialSkinManager;
         private string timeRegis = null;
         public MainForm()
@@ -459,7 +463,8 @@ namespace MaterialSkinExample
                     //Insert data (ยังไม่มีข้อมูลในระบบ หรือ อาจจะเริ่มต้น Transaction ใหม่)
                     createTransection();
                     needToNew = 0;
-                    
+                   
+
                 }
                 else if (needToNew == 0)
                 {
@@ -468,7 +473,8 @@ namespace MaterialSkinExample
                     readPrimaryKeyFromRFID();
                     getValueFromDatabase(String_transactionID);
                     updateTransection();
-                    
+                   
+
                 }
                 else
                 {
@@ -481,16 +487,23 @@ namespace MaterialSkinExample
 
         private void createTransection()
         {
+            string str_materialNumber = comboBox_station.SelectedValue.ToString();
+            int int_materialNumber = Int32.Parse(str_materialNumber);
+            if (int_materialNumber > materialValue)
+            {
+                MessageBox.Show("กรุณาเลือกสถานีที่เมนูตั้งค่าให้ถูกต้อง");
+                return;
+            }
             //Write Hex into the RFID card
+            //int materialValue =comboBox_station.SelectedValue);
             string str_autokey = autoGenKey();
             string Hex_autokey = StringToHexString(str_autokey, Encoding.UTF8);
             //MessageBox.Show(Hex_autokey + " FF FF");
             writeRFID("8", "1", Hex_autokey + " FF FF");
             //format 32 35 35 39 31 37 33 33 32 34 33 35 32 36 FF FF
-
-            //Insert String into the database
-            //card for test: e0 b8 95 e0 b8 a5 e0 b8 81 35 35 35 FF FF FF FF
-            string sql = "INSERT INTO tb_transports (tp_id, tp_vehicle, tp_time_get, tp_status, tp_from, tp_material) VALUES('" + str_autokey + "' ,'" + lb_tp_vehicle.Text + "', '" + lb_dateTime.Text + "', '1', '" + comboBox_station.SelectedValue + "', '" + comboBox_station.SelectedValue + "')";
+            //MessageBox.Show(comboBox_station.SelectedValue.ToString());
+            
+            string sql = "INSERT INTO tb_transports (tp_id, tp_vehicle, tp_time_get, tp_status, tp_from, tp_material) VALUES('" + str_autokey + "' ,'" + lb_tp_vehicle.Text + "', '" + lb_dateTime.Text + "', '1', '" + comboBox_station.SelectedValue + "', '" + str_materialNumber + "')";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
@@ -505,7 +518,6 @@ namespace MaterialSkinExample
 
         }
 
-
         private void updateTransection()
         {
             int int_transactionStatus = Int32.Parse(String_transactionStatus);
@@ -518,14 +530,17 @@ namespace MaterialSkinExample
                 createTransection();
                 return;
             }
-
+            if (timeRegis == null)
+                timeRegis = "tp_time_set";
+            //MessageBox.Show(timeRegis.ToString());
             string sql = "UPDATE tb_transports SET " + timeRegis + " = '" + lb_dateTime.Text + "', tp_status = '" + int_transactionStatus.ToString() + "' WHERE tp_id = '" + String_transactionID + "' ;";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             lb_statusNow.ForeColor = System.Drawing.Color.Green;
-            lb_statusNow.Text = "อัพเดตข้อมูลใหม่";
+            lb_statusNow.Text = "บันทึกข้อมูลเสร็จสิ้น";
             lb_curStatus.Text = translateStatus(int_transactionStatus.ToString());
+            lb_previousStation.Text = Laststation;
             resetRegis();
             conn.Close();
         }
@@ -534,6 +549,7 @@ namespace MaterialSkinExample
             timeRegis = null;
             String_transactionID = null;
             String_transactionStatus = null;
+            Laststation = null;
         }
 
         //get values from database for display in textboxs
@@ -548,6 +564,7 @@ namespace MaterialSkinExample
             {
                 lb_previousStatus.Text = translateStatus(sdr["tp_status"].ToString());
                 String_transactionStatus = sdr["tp_status"].ToString();
+                Laststation = translateStation(sdr["tp_from"].ToString());
             }
 
             conn.Close();
@@ -580,6 +597,31 @@ namespace MaterialSkinExample
             else
                 translatedStatus = "เกิดข้อผิดพลาด";
             return translatedStatus;
+        }
+
+        private string translateStation(string OriginString)
+        {
+            string translatedStation;
+            if (OriginString == "1")
+            {
+                translatedStation = "เหมืองดินเหลือง";
+
+            }
+            else if (OriginString == "2")
+            {
+                translatedStation = "เหมืองดินดำ";
+            }
+            else if (OriginString == "3")
+            {
+                translatedStation = "อ่างดิน C1";
+            }
+            else if (OriginString == "4")
+            {
+                translatedStation = "อ่างดินเขาวง";
+            }
+            else
+                translatedStation = "เกิดข้อผิดพลาด";
+            return translatedStation;
         }
 
         private void writeRFID(string sector, string block, string Hax_text){

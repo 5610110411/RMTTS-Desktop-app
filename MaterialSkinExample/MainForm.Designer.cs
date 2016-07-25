@@ -41,6 +41,7 @@ namespace MaterialSkinExample
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textResponse = new System.Windows.Forms.TextBox();
             this.lb_rawMat = new System.Windows.Forms.Label();
             this.bt_clear = new MaterialSkin.Controls.MaterialRaisedButton();
             this.lb_curStatus = new System.Windows.Forms.Label();
@@ -58,16 +59,18 @@ namespace MaterialSkinExample
             this.label3 = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBox_material = new System.Windows.Forms.ComboBox();
             this.bt_search = new MaterialSkin.Controls.MaterialRaisedButton();
             this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.dataGridView_transport = new System.Windows.Forms.DataGridView();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.dataGridView_transport = new System.Windows.Forms.DataGridView();
             this.txt_searhCar = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bt_deleteCard = new MaterialSkin.Controls.MaterialRaisedButton();
             this.label17 = new System.Windows.Forms.Label();
             this.writeData = new System.Windows.Forms.TextBox();
             this.writeKey = new System.Windows.Forms.ComboBox();
@@ -106,11 +109,8 @@ namespace MaterialSkinExample
             this.label5 = new System.Windows.Forms.Label();
             this.lb_statusNow = new System.Windows.Forms.Label();
             this.tb_stationsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_stationsTableAdapter();
-            this.bt_deleteCard = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.comboBox_material = new System.Windows.Forms.ComboBox();
             this.tbmaterialsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tb_materialsTableAdapter = new MaterialSkinExample.RMTTSDataSetTableAdapters.tb_materialsTableAdapter();
-            this.textResponse = new System.Windows.Forms.TextBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -236,6 +236,15 @@ namespace MaterialSkinExample
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ข้อมูลการขนส่ง";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // textResponse
+            // 
+            this.textResponse.Location = new System.Drawing.Point(635, 33);
+            this.textResponse.Multiline = true;
+            this.textResponse.Name = "textResponse";
+            this.textResponse.Size = new System.Drawing.Size(298, 94);
+            this.textResponse.TabIndex = 45;
+            this.textResponse.Visible = false;
             // 
             // lb_rawMat
             // 
@@ -457,6 +466,19 @@ namespace MaterialSkinExample
             this.tabPage3.Text = "ประวัติการขนส่ง";
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
+            // comboBox_material
+            // 
+            this.comboBox_material.FormattingEnabled = true;
+            this.comboBox_material.Items.AddRange(new object[] {
+            "--ALL--",
+            "ดินดำ",
+            "ดินเหลือง"});
+            this.comboBox_material.Location = new System.Drawing.Point(117, 50);
+            this.comboBox_material.Name = "comboBox_material";
+            this.comboBox_material.Size = new System.Drawing.Size(131, 21);
+            this.comboBox_material.TabIndex = 33;
+            this.comboBox_material.SelectedIndexChanged += new System.EventHandler(this.comboBox_material_SelectedIndexChanged);
+            // 
             // bt_search
             // 
             this.bt_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -498,6 +520,20 @@ namespace MaterialSkinExample
             this.materialLabel4.TabIndex = 28;
             this.materialLabel4.Text = "ถึง";
             // 
+            // dataGridView_transport
+            // 
+            this.dataGridView_transport.AllowUserToAddRows = false;
+            this.dataGridView_transport.AllowUserToDeleteRows = false;
+            this.dataGridView_transport.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_transport.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView_transport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_transport.Location = new System.Drawing.Point(0, 96);
+            this.dataGridView_transport.Name = "dataGridView_transport";
+            this.dataGridView_transport.ReadOnly = true;
+            this.dataGridView_transport.Size = new System.Drawing.Size(970, 460);
+            this.dataGridView_transport.TabIndex = 20;
+            this.dataGridView_transport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
             // materialLabel3
             // 
             this.materialLabel3.AutoSize = true;
@@ -536,20 +572,6 @@ namespace MaterialSkinExample
             this.materialLabel1.Size = new System.Drawing.Size(90, 24);
             this.materialLabel1.TabIndex = 23;
             this.materialLabel1.Text = "เลขทะเบียนรถ";
-            // 
-            // dataGridView_transport
-            // 
-            this.dataGridView_transport.AllowUserToAddRows = false;
-            this.dataGridView_transport.AllowUserToDeleteRows = false;
-            this.dataGridView_transport.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView_transport.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView_transport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_transport.Location = new System.Drawing.Point(0, 96);
-            this.dataGridView_transport.Name = "dataGridView_transport";
-            this.dataGridView_transport.ReadOnly = true;
-            this.dataGridView_transport.Size = new System.Drawing.Size(970, 460);
-            this.dataGridView_transport.TabIndex = 20;
-            this.dataGridView_transport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // txt_searhCar
             // 
@@ -606,6 +628,20 @@ namespace MaterialSkinExample
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "การตั้งค่า";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
+            // 
+            // bt_deleteCard
+            // 
+            this.bt_deleteCard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_deleteCard.Depth = 0;
+            this.bt_deleteCard.Location = new System.Drawing.Point(841, 317);
+            this.bt_deleteCard.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bt_deleteCard.Name = "bt_deleteCard";
+            this.bt_deleteCard.Primary = true;
+            this.bt_deleteCard.Size = new System.Drawing.Size(102, 41);
+            this.bt_deleteCard.TabIndex = 51;
+            this.bt_deleteCard.Text = "ลบข้อมูลบัตร";
+            this.bt_deleteCard.UseVisualStyleBackColor = true;
+            this.bt_deleteCard.Click += new System.EventHandler(this.bt_deleteCard_Click);
             // 
             // label17
             // 
@@ -1159,33 +1195,6 @@ namespace MaterialSkinExample
             // 
             this.tb_stationsTableAdapter.ClearBeforeFill = true;
             // 
-            // bt_deleteCard
-            // 
-            this.bt_deleteCard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_deleteCard.Depth = 0;
-            this.bt_deleteCard.Location = new System.Drawing.Point(841, 317);
-            this.bt_deleteCard.MouseState = MaterialSkin.MouseState.HOVER;
-            this.bt_deleteCard.Name = "bt_deleteCard";
-            this.bt_deleteCard.Primary = true;
-            this.bt_deleteCard.Size = new System.Drawing.Size(102, 41);
-            this.bt_deleteCard.TabIndex = 51;
-            this.bt_deleteCard.Text = "ลบข้อมูลบัตร";
-            this.bt_deleteCard.UseVisualStyleBackColor = true;
-            this.bt_deleteCard.Click += new System.EventHandler(this.bt_deleteCard_Click);
-            // 
-            // comboBox_material
-            // 
-            this.comboBox_material.FormattingEnabled = true;
-            this.comboBox_material.Items.AddRange(new object[] {
-            "--ALL--",
-            "ดินดำ",
-            "ดินเหลือง"});
-            this.comboBox_material.Location = new System.Drawing.Point(117, 50);
-            this.comboBox_material.Name = "comboBox_material";
-            this.comboBox_material.Size = new System.Drawing.Size(131, 21);
-            this.comboBox_material.TabIndex = 33;
-            this.comboBox_material.SelectedIndexChanged += new System.EventHandler(this.comboBox_material_SelectedIndexChanged);
-            // 
             // tbmaterialsBindingSource
             // 
             this.tbmaterialsBindingSource.DataMember = "tb_materials";
@@ -1194,15 +1203,6 @@ namespace MaterialSkinExample
             // tb_materialsTableAdapter
             // 
             this.tb_materialsTableAdapter.ClearBeforeFill = true;
-            // 
-            // textResponse
-            // 
-            this.textResponse.Location = new System.Drawing.Point(635, 33);
-            this.textResponse.Multiline = true;
-            this.textResponse.Name = "textResponse";
-            this.textResponse.Size = new System.Drawing.Size(298, 94);
-            this.textResponse.TabIndex = 45;
-            this.textResponse.Visible = false;
             // 
             // MainForm
             // 

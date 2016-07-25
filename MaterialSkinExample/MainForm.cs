@@ -27,6 +27,7 @@ namespace MaterialSkinExample
         private string String_transactionStatus;
         private string Laststation = null;
         private string rawMaterial = null;
+        private string getTextFromHidenbox = null; //ดึงข้อมูลจากกล่องข้อความที่ซ่อนไว้ไปประมวลผลว่าแตะการ์ดหรือไม่
         
 
 
@@ -56,6 +57,7 @@ namespace MaterialSkinExample
             this.tb_stationsTableAdapter.Fill(this.rMTTSDataSet.tb_stations);
             //comboBox_station.SelectedText = "เหมืองดินดำ";
             //comboBox_station.Items.("เหมืองดินดำ").Selected = true;
+            InitTimer();
         }
 
         private void Showdata()
@@ -433,6 +435,7 @@ namespace MaterialSkinExample
                 textResponse.Text += data[s + i].ToString("X2") + " ";
             }
             lb_tp_vehicle.ForeColor = System.Drawing.Color.Green;
+            getTextFromHidenbox = textResponse.Text;  //เอาข้อมูลสถานะมาเก็บไว้เอาไปเช็คต่อได้ว่าแตะการ์ดยัง
             lb_tp_vehicle.Text = HexStringToString(textResponse.Text, Encoding.UTF8);
             //MessageBox.Show(lb_tp_vehicle.Text);
         }
@@ -477,6 +480,13 @@ namespace MaterialSkinExample
         //ปุ่มกดอ่าน RFID
         private void bt_readRfid_Click(object sender, EventArgs e)
         {
+            /*
+            if (IsReadCard() == 1)
+            {
+                return;
+            }
+
+            
             if (IsRegisCard() == 0)
             {
                 resetRegis();
@@ -484,6 +494,8 @@ namespace MaterialSkinExample
                 MessageBox.Show("ไม่พบข้อมูลบัตร กรุณาลงทะเบียนก่อนการใช้งาน");
                 return;
             }
+            */
+            
             byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
             byte mode = (byte)((mode1 << 1) | mode2);
@@ -511,12 +523,106 @@ namespace MaterialSkinExample
                 //strErrorCode = FormatErrorCode(buffer);
                 //WriteLog("Failed: ", nRet, strErrorCode);
                 showStatue(buffer[0]);
+                //MessageBox.Show("ทำตรงนี้");
             }
             else
             {
                 //ส่งเสียง
-                //byte[] buffer_bff = new byte[1];
-                //int nRetf = Reader.ControlBuzzer(14, 1, buffer_bff);
+                byte[] buffer_bff = new byte[1];
+                int nRetf = Reader.ControlBuzzer(10, 1, buffer_bff);
+                //showStatue(nRet);
+                //showStatue(buffer_bff[0]);
+
+                //แสดงผล
+                //showData("CardNumber: ", snr, 0, 4);
+                //showData("Data: ", buffer, 0, 12 * num_blk);
+                showData("Data: ", buffer, 0);
+                //Display current time
+                currTime();
+                //Display current station
+                currStation();
+                //เช็คว่าต้อง Update or Insert
+                setNewLoop();
+                if (needToNew == 1)
+                {
+                    //Insert data (ยังไม่มีข้อมูลในระบบ หรือ อาจจะเริ่มต้น Transaction ใหม่)
+                    createTransection();
+                    needToNew = 0;
+
+
+                }
+                else if (needToNew == 0)
+                {
+                    //Update data (มี Transaction ที่ยังไม่เสร็จในระบบ) 
+
+                    readPrimaryKeyFromRFID();
+                    getValueFromDatabase(String_transactionID);
+                    updateTransection();
+
+
+                }
+                else
+                {
+                    MessageBox.Show("ข้อมูลในบัตรผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
+                }
+
+            }
+        }
+
+      
+        
+        //อ่าน RFID auto
+        private void Auto_readRfid()
+        {
+            if (IsReadCard() == 1)
+            {
+
+                return;
+            }
+
+            /*
+            if (IsRegisCard() == 0)
+            {
+                resetRegis();
+                resetRabel();
+                MessageBox.Show("ไม่พบข้อมูลบัตร กรุณาลงทะเบียนก่อนการใช้งาน");
+                return;
+            }
+            */
+            byte mode1 = (readKeyB.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode2 = (readAll.Checked) ? (byte)0x01 : (byte)0x00;
+            byte mode = (byte)((mode1 << 1) | mode2);
+            byte blk_add = Convert.ToByte(readStart.Text, 16);
+            byte num_blk = Convert.ToByte(readNum.Text, 16);
+
+
+            byte[] snr = new byte[6];
+            snr = convertSNR(readKey.Text, 6);
+            if (snr == null)
+            {
+                MessageBox.Show("Invalid Serial Number! from read Rfid button", "ERROR");
+                return;
+            }
+
+            byte[] buffer = new byte[16 * num_blk];
+
+            int nRet = Reader.MF_Read(mode, blk_add, num_blk, snr, buffer);
+            //string strErrorCode;
+
+            //ใช้แสดงสถานะว่าอ่านสำเร็จหรือไม่
+            //showStatue(nRet);
+            if (nRet != 0)
+            {
+                //strErrorCode = FormatErrorCode(buffer);
+                //WriteLog("Failed: ", nRet, strErrorCode);
+                showStatue(buffer[0]);
+                //MessageBox.Show("ทำตรงนี้");
+            }
+            else
+            {
+                //ส่งเสียง
+                byte[] buffer_bff = new byte[1];
+                int nRetf = Reader.ControlBuzzer(10, 1, buffer_bff);
                 //showStatue(nRet);
                 //showStatue(buffer_bff[0]);
                 
@@ -833,7 +939,7 @@ namespace MaterialSkinExample
             MessageBox.Show(thaiMonth.ToString());
             MessageBox.Show(thaiDay.ToString());
             */
-            DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
+        DateTime thaiDateTime = new DateTime(thaiYear, thaiMonth, thaiDay, thaiHour, thaiMinute, thaiSecond);
             //MessageBox.Show(thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
             lb_dateTime.ForeColor = System.Drawing.Color.Green;
             lb_dateTime.Text = thaiDateTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -1245,7 +1351,39 @@ namespace MaterialSkinExample
             }
             textResponse.Text = "";
             return IsRegiscard;
-
         }
+        
+        private int IsReadCard() {
+            int tmp = 0;
+            if (getTextFromHidenbox == "The card does not exist.....")
+            {
+                tmp = 1;
+                return tmp;
+            }
+            else
+            {
+                tmp = 0;
+                return tmp;
+            }
+        }
+
+        private System.Windows.Forms.Timer timer1;
+        public void InitTimer()
+        {
+            timer1 = new System.Windows.Forms.Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 2000; // in miliseconds
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //MessageBox.Show("123");
+            Auto_readRfid();
+        }
+
+       
+
+        
     }
 }
